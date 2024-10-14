@@ -3,14 +3,14 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-multi-carousel/lib/styles.css";
 import Slider from "react-slick";
 
-export default function Carousels(props) {
+export default function Carousels() {
   const SlickArrowRight = () => {
     return <></>;
   };
 
-  const SlickArrowLeft = () => {
-    return <></>;
-  };
+  // const SlickArrowLeft = () => {
+  //   return <></>;
+  // };
 
   const customLayout = localStorage.getItem("v-data2") ? JSON.parse(localStorage.getItem("v-data2")) : '';
 

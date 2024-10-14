@@ -12,7 +12,7 @@ interface FormData {
 
 export default function PlnForm() {
   const { handleSubmit, control, formState: { errors } } = useForm<FormData>();
-  const [productType, setProductType] = useState<string>('Token Listrik');
+  // const [productType, setProductType] = useState<string>('Token Listrik');
   const [selectedMailingList, setSelectedMailingList] = useState<string | null>(null);
   const toaster = useToaster();
 
@@ -27,10 +27,10 @@ export default function PlnForm() {
       console.log(formValue);
       const result = await checkPlnPostpaid(formValue.registrationNumber);
       console.log(result);
-    } catch (error:any) {
+    } catch (error) {
       toaster.push(
         <Message type="error" duration={4000}>
-          {`An error occurred: ${error.message}`}
+          {`An error occurred: ${error}`}
         </Message>,
         { placement: 'topEnd' }
       );
