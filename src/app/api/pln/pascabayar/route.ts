@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(data); // Send successful response
-  } catch (error: any) {
+  } catch (error) {
     console.error('PLN API Error:', error);
     return new NextResponse(
       JSON.stringify({ message: 'Internal Server Error' }),
