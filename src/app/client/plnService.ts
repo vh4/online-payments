@@ -1,10 +1,7 @@
-// src/app/api/plnService.ts
 import axios from 'axios';
 
-const LOCAL_API = '/api/plnProxy';
-
-const checkPln = async (idpel: string) => {
-  const response = await axios.post(LOCAL_API, {
+export const checkPlnPostpaid = async (idpel: string) => {
+  const response = await axios.post('/api/pln/pascabayar', {
     method: 'cek',
     uid: 'SP300203',
     pin: '085648',
@@ -12,11 +9,12 @@ const checkPln = async (idpel: string) => {
     idpel,
     ref1: '',
   });
+
   return response.data;
 };
 
-const payPln = async (idpel: string) => {
-  const response = await axios.post(LOCAL_API, {
+export const payPlnPostpaid = async (idpel: string) => {
+  const response = await axios.post('/api/pln/pascabayar', {
     method: 'bayar',
     uid: 'SP300203',
     pin: '085648',
@@ -24,7 +22,6 @@ const payPln = async (idpel: string) => {
     idpel,
     ref1: '',
   });
+
   return response.data;
 };
-
-export { checkPln, payPln };

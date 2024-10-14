@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Radio, Button, Input, Message, useToaster, Form, Stack } from 'rsuite';
+import { Radio, Button, Input, Message, useToaster, Form } from 'rsuite';
 import { Controller, useForm } from 'react-hook-form';
 import { FaCheckCircle } from 'react-icons/fa';
-import { checkPln, payPln } from '../../api/plnService';
+import { checkPlnPostpaid, payPlnPostpaid } from '../../client/plnService';
 
 interface FormData {
   registrationNumber: string;
@@ -24,23 +24,9 @@ export default function PlnForm() {
 
   const onSubmit = async (formValue: FormData) => {
     try {
-      const result = await checkPln(formValue.registrationNumber);
-      if (result.keterangan === 'Sukses') {
-        const payment = await payPln(formValue.registrationNumber);
-        toaster.push(
-          <Message type="success" duration={4000}>
-            {`Payment for ${productType} was successful. Customer: ${payment.subscribername}, Amount: ${payment.total_bayar}`}
-          </Message>,
-          { placement: 'topEnd' }
-        );
-      } else {
-        toaster.push(
-          <Message type="error" duration={4000}>
-            {`Check failed: ${result.keterangan}`}
-          </Message>,
-          { placement: 'topEnd' }
-        );
-      }
+      console.log(formValue);
+      const result = await checkPlnPostpaid(formValue.registrationNumber);
+      console.log(result);
     } catch (error:any) {
       toaster.push(
         <Message type="error" duration={4000}>
@@ -52,9 +38,9 @@ export default function PlnForm() {
   };
 
   return (
-    <div className="mx-auto px-10 py-4 bg-white rounded-lg">
-      <h2 className="text-lg font-semibold mb-6 text-gray-800">
-        Purchase Token or Pay Electricity Bill
+    <div className="text-gray-700 mx-auto px-16 py-4 bg-white rounded-lg">
+      <h2 className="text-lg font-bold mb-6 text-gray-600">
+        Purchase Token or Pay Electricity Bill.
       </h2>
 
       <Form

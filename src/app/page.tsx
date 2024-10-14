@@ -34,15 +34,15 @@ export default function Home() {
         </div> */}
       </div>      
       {/* Menu Sidebar... */}
-      <div className="xl:-mt-16">
+      <div className="xl:-mt-20">
           <div className="relative container mx-auto mb-6">
-            <div className="-mt-4 md:mt-0 z-10 xl:bg-white mx-0 lg:mx-12 xl:mx-32 2xl:mx-36">
+            <div className="-mt-4 md:mt-0 z-10">
               <div className={`block md:flex xl:flex 2xl:flex justify-start`}>
-                <div className="hidden md:flex justify-start px-10">
+                <div className="">
                   <Sidebar nameMenu={nameMenu} setNameMenu={setNameMenu} />
                 </div>
               </div>
-              <div className="block mt-2 pb-12 px-4">
+              <div className="mt-4 block mt-2 pb-12 px-4">
                 <div className="w-full">
                   {/* menu fitur  */}
                   {nameMenu == "pln" ? (
