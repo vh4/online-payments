@@ -1,9 +1,14 @@
-import { AiFillDollarCircle, AiFillProduct } from "react-icons/ai";
+import { AiFillProduct } from "react-icons/ai";
 import { FaFaucetDrip } from "react-icons/fa6";
-import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
+import { GiPayMoney } from "react-icons/gi";
 import { MdElectricBolt } from "react-icons/md";
 
-export default function Sidebar({ nameMenu, setNameMenu } : any) {
+interface SidebarProps {
+    nameMenu: string;
+    setNameMenu: (menu: string) => void;
+}
+
+export default function Sidebar({ nameMenu, setNameMenu } : SidebarProps) {
   return (
     <aside className="w-full" aria-label="Sidebar">
     {/* <div className="px-4">

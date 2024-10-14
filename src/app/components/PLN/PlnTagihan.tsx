@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Radio, Button, Input, Message, useToaster, Form } from 'rsuite';
+import { Button, Input, Message, useToaster, Form } from 'rsuite';
 import { Controller, useForm } from 'react-hook-form';
 import { FaCheckCircle } from 'react-icons/fa';
-import { checkPlnPostpaid, payPlnPostpaid } from '../../client/plnService';
+import { checkPlnPostpaid } from '../../client/plnService';
 
 interface FormData {
   registrationNumber: string;

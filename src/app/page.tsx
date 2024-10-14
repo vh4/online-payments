@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Sidebar from "./components/desktop/Sidebar";
-import Carousel from "./components/carousels/Carousel";
-import { UserOutlined } from "@ant-design/icons";
+// import Carousel from "./components/carousels/Carousel";
+// import { UserOutlined } from "@ant-design/icons";
 import Header from './components/desktop/Header'
 import PLN from './components/PLN/PlnTagihan'
 

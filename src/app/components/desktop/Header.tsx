@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+// import { useState } from "react";
 import { UserOutlined } from "@ant-design/icons"; // Correct import from Ant Design
-import { AiOutlineHome, AiOutlineAppstore } from "react-icons/ai";
-import { Button } from "rsuite";
+// import { AiOutlineHome, AiOutlineAppstore } from "react-icons/ai";
+// import { Button } from "rsuite";
 
 export default function Navbar() {
   return (
