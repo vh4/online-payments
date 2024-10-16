@@ -64,7 +64,7 @@ export default function PaymentPage() {
   // Helper component for skeleton loader
   const Skeleton = ({ width }: { width: string }) => (
     <div className={`bg-gray-200 animate-pulse`} style={{ width, height: '10px' }} />
-  );1
+  );
 
   return (
     <div className="flex justify-center mt-4">
