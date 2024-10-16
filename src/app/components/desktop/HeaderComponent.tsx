@@ -11,8 +11,8 @@ export default function Navbar() {
       <div className="">
         <nav
           style={{
-            // backgroundColor: "#0f172a",
-            // color: "#ffff",
+            // backgroundColor: "#2563eb",
+            // color:"#ffff"
           }}
           className="text-gray-700 px-2 sm:px-4 py-5 block sticky top-0 w-full z-50 left-0 border-b"
         >
@@ -58,7 +58,7 @@ export default function Navbar() {
                     }}
                   >
                     <button
-                      className="border border-gray-400 text-sm w-32 px-2 py-1 rounded-md hover:border-blue-500 hover:text-blue-500"
+                      className="border border-gray-600 text-sm w-32 px-2 py-1 rounded-md hover:border-blue-500 hover:text-blue-500"
                       key="submit"
                       style={
                         {

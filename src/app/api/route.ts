@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const API_URL = 'https://c-dev-api.rajabiller.com/api_partnerlink.php';
 
-// Handle POST requests
 export async function POST(req: Request) {
   if (req.method !== 'POST') {
     return new NextResponse(
@@ -14,13 +13,12 @@ export async function POST(req: Request) {
   }
 
   try {
-    const body = await req.json(); // Parse request body
+    const body = await req.json();
 
     const { data } = await axios.post(API_URL, body, {
       headers: { 'Content-Type': 'application/json' },
     });
-
-    return NextResponse.json(data); // Send successful response
+    return NextResponse.json(data);
   } catch (error) {
     console.error('PLN API Error:', error);
     return new NextResponse(

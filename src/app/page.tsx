@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "./components/desktop/Sidebar";
-// import Carousel from "./components/carousels/Carousel";
-// import { UserOutlined } from "@ant-design/icons";
-import Header from './components/desktop/Header'
-import PLN from './components/PLN/PlnTagihan'
+import Sidebar from "./components/desktop/SidebarComponent";
+import Carousel from "./components/carousels/CarouselComponent";
+import PLN from './components/menu/pln/plnComponent'
 
 export default function Home() {
   const [nameMenu, setNameMenu] = useState<string>("pln"); // State for selected menu
@@ -15,46 +13,46 @@ export default function Home() {
       <div
         style={{
           // backgroundColor: customLayout?.color?.secondary?.background || '#0f172a',
-          // backgroundColor: "#2563eb",
+          backgroundColor: "#14b8a6",
+          color:"#ffff"
         }}
-        className="rounded-b-[40px] pb-12 xl:pb-20 xl:mb-0 xl:rounded-b-[120px]"
+        className="pb-12 xl:pb-20"
       >
-        {/* Header */}
-        <div>
-          <Header />
-        </div>
-
         {/* Carousel */}
-        {/* <div
-          className={`hidden 2xl:block py-4 md:py-8 relative z-10 container mx-auto `}
+        <div
+          className={`hidden 2xl:block py-4 relative z-10 container mx-auto `}
         >
           <div className="mx-0 lg:mx-12 xl:mx-0 2xl:mx-0">
             <Carousel />
           </div>
-        </div> */}
+        </div>
       </div>      
       {/* Menu Sidebar... */}
-      <div className="xl:-mt-20">
+      <div className="xl:-mt-12">
           <div className="relative container mx-auto mb-6">
-            <div className="-mt-4 md:mt-0 z-10">
-              <div className={`block md:flex xl:flex 2xl:flex justify-start`}>
-                <div className="">
-                  <Sidebar nameMenu={nameMenu} setNameMenu={setNameMenu} />
+            <div className="md:mt-0 z-10">
+              <div className="">
+                <div className="relative container mx-auto mb-6">
+                  <div className="md:mt-0 z-10 xl:bg-white mx-0 lg:mx-12 xl:mx-32 2xl:mx-36 md:border shadow">
+                    <div className={`block md:flex xl:flex 2xl:flex justify-start`}>
+                      <div className="hidden md:flex justify-start px-10 py-4">
+                        <Sidebar nameMenu={nameMenu} setNameMenu={setNameMenu} />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="mt-4 block mt-2 pb-12 px-4">
-                <div className="w-full">
-                  {/* menu fitur  */}
-                  {nameMenu == "pln" ? (
-                    <><div><PLN /></div></>
-                  ) : nameMenu == "pdam" ? (
-                    <><div>pdam</div></>
-                  ) : nameMenu == "multifinance" ? (
-                    <><div>multifinance</div></>
-                  )  : (
-                    <></>
-                  )}
-                </div>
+              <div className="container max-w-screen-2xl mx-auto px-24">
+                {/* Menu Content */}
+                {nameMenu === "pln" ? (
+                  <PLN />
+                ) : nameMenu === "pdam" ? (
+                  <div>pdam</div>
+                ) : nameMenu === "multifinance" ? (
+                  <div>multifinance</div>
+                ) : (
+                  <div>No menu selected</div>
+                )}
               </div>
             </div>
           </div>
