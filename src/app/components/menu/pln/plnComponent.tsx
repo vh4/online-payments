@@ -197,16 +197,7 @@ export default function PlnForm() {
             </>
           )
         }
-
-
-        {/* if 3 selct nontaglist */}        
-        {
-          pilih == 3 && (
-            <>
-            </>
-          )
-        }
-
+        
         {/* Submit Button */}
         <div className="flex justify-end">
           <Button
