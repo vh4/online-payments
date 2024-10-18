@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Sidebar from "./components/desktop/SidebarComponent";
 import Carousel from "./components/carousels/CarouselComponent";
-import PLN from './components/menu/pln/plnComponent'
+import PLN from './components/categories/pln/plnComponent'
 
 export default function Home() {
   const [nameMenu, setNameMenu] = useState<string>("pln"); // State for selected menu

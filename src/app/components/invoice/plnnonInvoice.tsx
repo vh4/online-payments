@@ -8,8 +8,9 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useEffect, useState } from 'react';
 import { IoIosArrowRoundBack } from 'react-icons/io';
+import moment from 'moment';
 
-export default function InvoicePLNPasch() {
+export default function InvoicePLNNon() {
   const PaymentData = useSelector((state: RootState) => state.payment);
   const router = useRouter();
 
@@ -54,10 +55,9 @@ export default function InvoicePLNPasch() {
             <th className='py-2 text-sm font-medium text-gray-600 px-4'></th>
             <th className='py-2 text-sm font-medium text-gray-600 px-4'>Idpel</th>
             <th className='py-2 text-sm font-medium text-gray-600 px-4'>Nama</th>
-            <th className='py-2 text-sm font-medium text-gray-600 px-4'>Tarif / Daya</th>
-            <th className='py-2 text-sm font-medium text-gray-600 px-4'>BL / TH</th>
+            <th className='py-2 text-sm font-medium text-gray-600 px-4'>Tanggal Reg.</th>
+            <th className='py-2 text-sm font-medium text-gray-600 px-4'>SReff</th>
             <th className='py-2 text-sm font-medium text-gray-600 px-4'>No.Reference</th>
-            <th className='py-2 text-sm font-medium text-gray-600 px-4'>Stand Meter</th>
             <th className='py-2 text-sm font-medium text-gray-600 px-4'>#</th>
           </tr>
         </thead>
@@ -72,23 +72,20 @@ export default function InvoicePLNPasch() {
             )}
             </td>
             <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={100} /> : PaymentData.subscriberid || 'N/A'}
+              {isLoading ? <Skeleton width={100} /> : PaymentData.registrationnumber || 'N/A'}
             </td>
             <td className='py-4 px-4'>
               {isLoading ? <Skeleton width={150} /> : PaymentData.subscribername || 'N/A'}
             </td>
             <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={120} /> : PaymentData.subscribersegmentation || 'N/A'} /{' '}
+              {isLoading ? <Skeleton width={120} /> : moment(PaymentData.registrationdate, 'YYYYMMDD').format('DD MMM YYYY') || 'N/A'}
               {isLoading ? <Skeleton width={80} /> : PaymentData.powerconsumingcategory}
             </td>
             <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={80} /> : PaymentData.blth1 || 'N/A'}
+              {isLoading ? <Skeleton width={80} /> : PaymentData.swrefnumber || 'N/A'}
             </td>
             <td className='py-4 px-4'>
               {isLoading ? <Skeleton width={100} /> : PaymentData.ref2 || 'N/A'}
-            </td>
-            <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={100} /> : `${PaymentData.slalwbp1} - ${PaymentData.sahlwbp1}`}
             </td>
             <td
               className="py-4 px-4 cursor-pointer"

@@ -8,6 +8,8 @@ import { checkPlnPostpaid } from '../../../api/client/plnpaschService';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { setInquiry } from '../../../store/index';
+import { checkPlnNonTag } from '@/app/api/client/plnnontagService';
+import { checkPlnPra } from '@/app/api/client/plnpra';
 
 interface FormData {
   registrationNumber: string;
@@ -20,7 +22,7 @@ export default function PlnForm() {
   const [pilih, setPilih] = useState<number|null>(1);
 
   //for prepaid nominal pick
-  const [nominal, setNominal] = useState<number|null>(null);
+  const [nominal, setNominal] = useState<number>(25000);
 
   const [selectedMailingList, setSelectedMailingList] = useState<string | null>('Prepaid');
   
@@ -47,6 +49,25 @@ export default function PlnForm() {
       //prepaid
       if(pilih == 1){
 
+
+        const result = await checkPlnPra(formValue.registrationNumber, nominal);
+        if(result.status != '00'){
+          
+          toaster.push(
+            <Notification className='m-4 pr-24' type="error" title='Failed' header="Failed">
+              {result.keterangan}
+            </Notification>,{
+              placement: 'topEnd'
+          }
+          );
+
+        }else{
+  
+          dispatch(setInquiry(result));
+          setLoading(false);
+          router.push(`/categories/plnpra`);
+        }
+
       //postpaid
       }else if(pilih == 2){
 
@@ -71,6 +92,25 @@ export default function PlnForm() {
 
        //nontaglist
       }else if(pilih == 3){
+
+        const result = await checkPlnNonTag(formValue.registrationNumber);
+  
+        if(result.status != '00'){
+          
+          toaster.push(
+            <Notification className='m-4 pr-24' type="error" title='Failed' header="Failed">
+              {result.keterangan}
+            </Notification>,{
+              placement: 'topEnd'
+          }
+          );
+
+        }else{
+  
+          dispatch(setInquiry(result));
+          setLoading(false);
+          router.push(`/categories/plnnon`);
+        }
 
       }
 

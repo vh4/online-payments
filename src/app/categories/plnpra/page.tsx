@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setPayment } from '../../store/index';
 import { Notification, toaster, Button, Loader } from 'rsuite';
-import { payPlnPostpaid } from '@/app/api/client/plnpaschService';
-import InvoicePLNPasch from '@/app/components/invoice/plnpaschInvoice';
 import Image from 'next/image';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import { useRouter } from 'next/navigation';
+import { payPlnPra } from '@/app/api/client/plnpra';
+import InvoicePLNPra from '@/app/components/invoice/plnpraInvoice';
 
 export default function PaymentPage() {
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ export default function PaymentPage() {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const result = await payPlnPostpaid(inquiryData.subscriberid);
+      const result = await payPlnPra(inquiryData.idpel1, parseInt(inquiryData.nominal));
       if (result.status !== '00') {
         toaster.push(
           <Notification className="pr-24" type="error" title="Failed" header="Failed">
@@ -73,7 +73,7 @@ export default function PaymentPage() {
     <div className="flex justify-center mt-4">
       <div className="container max-w-screen-2xl mx-auto px-6 lg:px-24 2xl:px-36 bg-white pt-4 pb-12">
         {success ? (
-          <InvoicePLNPasch />
+          <InvoicePLNPra />
         ) : (
           <>
             <div className="grid items-start pt-8 pb-16">
@@ -85,42 +85,22 @@ export default function PaymentPage() {
                 <table className="w-full text-left mt-8 text-xs">
                   <tbody>
                     <tr>
-                      <td className="p-2 text-gray-600 font-medium">ID Pelanggan</td>
+                      <td className="p-2 text-gray-600 font-medium">Nomor Meter</td>
                       <td className="p-2 text-gray-800">
-                        {dataLoaded ? inquiryData.subscriberid : <Skeleton width="150px" />}
+                        {dataLoaded ? inquiryData.nomormeter : <Skeleton width="150px" />}
                       </td>
                     </tr>
                     <tr>
                       <td className="p-2 text-gray-600 font-medium">Nama Customer</td>
                       <td className="p-2 text-gray-800">
-                        {dataLoaded ? inquiryData.subscribername : <Skeleton width="200px" />}
+                        {dataLoaded ? inquiryData.namapelanggan : <Skeleton width="200px" />}
                       </td>
                     </tr>
                     <tr>
                       <td className="p-2 text-gray-600 font-medium">Tarif / Daya</td>
                       <td className="p-2 text-gray-800">
                         {dataLoaded ? (
-                          `${inquiryData.subscribersegmentation} / ${inquiryData.powerconsumingcategory}`
-                        ) : (
-                          <Skeleton width="180px" />
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="p-2 text-gray-600 font-medium">BL / TH</td>
-                      <td className="p-2 text-gray-800">
-                        {dataLoaded ? (
-                          `${inquiryData.blth1}`
-                        ) : (
-                          <Skeleton width="180px" />
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="p-2 text-gray-600 font-medium">Stand Meter</td>
-                      <td className="p-2 text-gray-800">
-                        {dataLoaded ? (
-                          `${inquiryData.slalwbp1} - ${inquiryData.sahlwbp1}`
+                          `${inquiryData.subscribersegmentation} / ${parseInt(inquiryData.powerconsumingcategory)}`
                         ) : (
                           <Skeleton width="180px" />
                         )}

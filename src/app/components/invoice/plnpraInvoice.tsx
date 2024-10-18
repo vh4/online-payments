@@ -9,7 +9,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { useEffect, useState } from 'react';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 
-export default function InvoicePLNPasch() {
+export default function InvoicePLNPra() {
   const PaymentData = useSelector((state: RootState) => state.payment);
   const router = useRouter();
 
@@ -52,12 +52,12 @@ export default function InvoicePLNPasch() {
         <thead>
           <tr className='border-b bg-gray-100'>
             <th className='py-2 text-sm font-medium text-gray-600 px-4'></th>
-            <th className='py-2 text-sm font-medium text-gray-600 px-4'>Idpel</th>
+            <th className='py-2 text-sm font-medium text-gray-600 px-4'>Nomor Meter</th>
             <th className='py-2 text-sm font-medium text-gray-600 px-4'>Nama</th>
             <th className='py-2 text-sm font-medium text-gray-600 px-4'>Tarif / Daya</th>
-            <th className='py-2 text-sm font-medium text-gray-600 px-4'>BL / TH</th>
             <th className='py-2 text-sm font-medium text-gray-600 px-4'>No.Reference</th>
-            <th className='py-2 text-sm font-medium text-gray-600 px-4'>Stand Meter</th>
+			      <th className='py-2 text-sm font-medium text-gray-600 px-4'>Token</th>
+            <th className='py-2 text-sm font-medium text-gray-600 px-4'>Jumlah Kwh</th>
             <th className='py-2 text-sm font-medium text-gray-600 px-4'>#</th>
           </tr>
         </thead>
@@ -72,23 +72,22 @@ export default function InvoicePLNPasch() {
             )}
             </td>
             <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={100} /> : PaymentData.subscriberid || 'N/A'}
+              {isLoading ? <Skeleton width={100} /> : PaymentData.nomormeter || 'N/A'}
             </td>
             <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={150} /> : PaymentData.subscribername || 'N/A'}
+              {isLoading ? <Skeleton width={150} /> : PaymentData.namapelanggan || 'N/A'}
             </td>
             <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={120} /> : PaymentData.subscribersegmentation || 'N/A'} /{' '}
-              {isLoading ? <Skeleton width={80} /> : PaymentData.powerconsumingcategory}
+              {isLoading ? <Skeleton width={120} /> : `${PaymentData.subscribersegmentation} / ${parseInt(PaymentData.powerconsumingcategory)}` || 'N/A'}
             </td>
             <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={80} /> : PaymentData.blth1 || 'N/A'}
+			{	isLoading ? <Skeleton width={80} /> : PaymentData.ref2 || 'N/A'}
             </td>
-            <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={100} /> : PaymentData.ref2 || 'N/A'}
+            <td className='py-4 px-4 font-bold text-md'>
+				{	isLoading ? <Skeleton width={80} /> : PaymentData.tokenpln || 'N/A'}
             </td>
-            <td className='py-4 px-4'>
-              {isLoading ? <Skeleton width={100} /> : `${PaymentData.slalwbp1} - ${PaymentData.sahlwbp1}`}
+            <td className='py-4 px-4 font-bold text-md'>
+				{	isLoading ? <Skeleton width={80} /> : (parseInt(PaymentData.purchasedkwhunit) / 100).toFixed(2).replace('.', ',') || 'N/A'}
             </td>
             <td
               className="py-4 px-4 cursor-pointer"
