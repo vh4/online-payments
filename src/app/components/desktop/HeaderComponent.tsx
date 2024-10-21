@@ -16,9 +16,9 @@ export default function Navbar() {
           }}
           className="text-gray-700 px-2 sm:px-4 py-5 block sticky top-0 w-full z-50 left-0 border-b"
         >
-          <div className="container mx-auto">
+          <div className="">
             <div
-              className={`flex justify-between items-center -mx-2 md:-mx-10 lg:-mx-0 -px-0 md:px-8 xl:px-24 no-underline`}
+              className={`flex justify-between items-center -mx-2 md:-mx-10 lg:-mx-0 -px-0 md:px-8 no-underline`}
             >
               <div className="">
                 {/* <Link to="/" className="flex items-center cursor-pointer no-underline"> */}
@@ -41,7 +41,7 @@ export default function Navbar() {
                       // color: custom ? '#0f172a' : customLayout?.color?.primary?.font_color || '#ffff',
                     }
                   }
-                  className="hidden md:flex space-x-4 items-center"
+                  className="flex space-x-4 items-center"
                 >
                   <div
                     className="flex space-x-2 items-center cursor-pointer hover:text-blue-500"
@@ -58,7 +58,7 @@ export default function Navbar() {
                     }}
                   >
                     <button
-                      className="border border-gray-600 text-sm w-32 px-2 py-1 rounded-md hover:border-blue-500 hover:text-blue-500"
+                      className="border mr-4 md:mr-0 border-gray-600 text-sm w-24 md:w-32 px-2 py-1 rounded-md hover:border-blue-500 hover:text-blue-500"
                       key="submit"
                       style={
                         {

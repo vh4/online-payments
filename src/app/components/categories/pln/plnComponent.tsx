@@ -129,7 +129,7 @@ export default function PlnForm() {
   };
 
   return (
-    <div className="text-gray-700 px-24 pt-6 pb-12 bg-white rounded-lg">
+    <div className="text-gray-700 px-4 md:px-24 lg:px-32 pt-6 pb-12 bg-white rounded-lg">
       <h2 className="mt-4 text-lg font-bold mb-6 text-gray-600">
         Purchase Token or Pay Electricity Bill.
       </h2>
@@ -216,7 +216,7 @@ export default function PlnForm() {
           pilih == 1 && (
             <>
               <div className="max-w-[60rem] mt-2 py-4">
-                <div className="grid grid-cols-5 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                   {prepaidList.map((data) => (
                     <div
                       key={data}
@@ -243,7 +243,7 @@ export default function PlnForm() {
           <Button
             type="submit"
             appearance="primary"
-            className="block w-[300px] mt-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+            className="block w-full md:w-[300px] mt-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition duration-300"
             disabled={loading} // Disable button during loading
           >
             {loading ? <Loader size="sm" content="Processing..." /> : 'Pay'}

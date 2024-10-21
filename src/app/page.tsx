@@ -12,47 +12,45 @@ export default function Home() {
     <div className="w-full">
       <div
         style={{
-          // backgroundColor: customLayout?.color?.secondary?.background || '#0f172a',
-          backgroundColor: "#14b8a6",
-          color:"#ffff"
+          // backgroundColor: "#14b8a6",
+          // color: "#ffff",
         }}
-        className="pb-12 xl:pb-20"
+        className="mt-12 mb-4 md:mb-20"
       >
-        {/* Carousel */}
-        <div
-          className={`hidden 2xl:block py-4 relative z-10 container mx-auto `}
-        >
-          <div className="mx-0 lg:mx-12 xl:mx-0 2xl:mx-0">
-            <Carousel />
-          </div>
+        {/* Carousel Wrapper */}
+        <div className="relative z-10 px-0">
+          <Carousel />
         </div>
-      </div>      
+      </div>
+          
       {/* Menu Sidebar... */}
       <div className="xl:-mt-12">
-          <div className="relative container mx-auto mb-6">
+          <div className="mx-auto mb-6">
             <div className="md:mt-0 z-10">
-              <div className="">
+              <div className="w-full">
                 <div className="relative container mx-auto mb-6">
-                  <div className="md:mt-0 z-10 xl:bg-white mx-0 lg:mx-12 xl:mx-32 2xl:mx-36 md:border shadow">
-                    <div className={`block md:flex xl:flex 2xl:flex justify-start`}>
-                      <div className="hidden md:flex justify-start px-10 py-4">
+                  <div className="md:mt-0 z-10 mx-0 md:border-t">
+                    <div className={`block md:flex xl:flex 2xl:flex justify-center`}>
+                      <div className="flex md:px-10 py-4">
                         <Sidebar nameMenu={nameMenu} setNameMenu={setNameMenu} />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="container max-w-screen-2xl mx-auto px-24">
-                {/* Menu Content */}
-                {nameMenu === "pln" ? (
-                  <PLN />
-                ) : nameMenu === "pdam" ? (
-                  <div>pdam</div>
-                ) : nameMenu === "multifinance" ? (
-                  <div>multifinance</div>
-                ) : (
-                  <div>No menu selected</div>
-                )}
+              <div className="container-fluid xl:container mx-auto">
+                <div className="w-full">
+                  {/* Menu Content */}
+                  {nameMenu === "pln" ? (
+                    <PLN />
+                  ) : nameMenu === "pdam" ? (
+                    <div>pdam</div>
+                  ) : nameMenu === "multifinance" ? (
+                    <div>multifinance</div>
+                  ) : (
+                    <div>No menu selected</div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
