@@ -76,7 +76,7 @@ export default function PaymentPage() {
           <InvoicePLNPra />
         ) : (
           <>
-            <div className="grid items-start pt-8 pb-16">
+            <div className="grid items-start pt-2 xl:pt-8 pb-16">
               <div className="w-full lg:w-2/3 mb-6 lg:mb-0">
                 <div className="flex items-center -ml-4">
                   <Image src={'/pln.png'} width={60} height={60} alt="pln.png" />
@@ -165,7 +165,7 @@ export default function PaymentPage() {
               <Button
                 type="submit"
                 appearance="primary"
-                className="block w-[300px] bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+                className="block w-[200px] md:w-[300px] bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition duration-300"
                 disabled={loading}
                 onClick={handleSubmit}
               >

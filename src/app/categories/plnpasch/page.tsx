@@ -76,7 +76,7 @@ export default function PaymentPage() {
           <InvoicePLNPasch />
         ) : (
           <>
-            <div className="grid items-start pt-8 pb-16">
+            <div className="grid items-start pt-2 xl:pt-8 pb-16">
               <div className="w-full lg:w-2/3 mb-6 lg:mb-0">
                 <div className="flex items-center -ml-4">
                   <Image src={'/pln.png'} width={60} height={60} alt="pln.png" />
@@ -172,20 +172,20 @@ export default function PaymentPage() {
                 </div>
               </div>
             </div>
-              <div className="max-w-full flex justify-end space-x-8 items-center">
+              <div className="max-w-full flex justify-end space-x-6 xl:space-x-8 items-center">
               <div
                 className="flex items-center space-x-2 cursor-pointer group"
                 onClick={() => router.push('/')}
               >
                 <IoIosArrowRoundBack size={28} className="text-gray-500 group-hover:text-blue-500" />
                 <div className="text-md text-gray-500 font-semibold group-hover:text-blue-500">
-                  Back to page
+                  Back Home
                 </div>
               </div>              
               <Button
                 type="submit"
                 appearance="primary"
-                className="block w-[300px] bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+                className="block w-[200px] md:w-[300px] bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition duration-300"
                 disabled={loading}
                 onClick={handleSubmit}
               >
