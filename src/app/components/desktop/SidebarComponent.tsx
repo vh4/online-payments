@@ -70,23 +70,10 @@ const menuItems = [
   { key: "pln", label: "PLN Token", icon: MdElectricBolt, iconColor: "text-yellow-500" },
   { key: "pdam", label: "PDAM Air", icon: FaFaucetDrip, iconColor: "text-blue-500" },
   { key: "multifinance", label: "Multifinance", icon: GiPayMoney, iconColor: "text-pink-500" },
-  { key: "pln", label: "PLN Token", icon: MdElectricBolt, iconColor: "text-yellow-500" },
-  { key: "pdam", label: "PDAM Air", icon: FaFaucetDrip, iconColor: "text-blue-500" },
-  { key: "multifinance", label: "Multifinance", icon: GiPayMoney, iconColor: "text-pink-500" },
-  { key: "pln", label: "PLN Token", icon: MdElectricBolt, iconColor: "text-yellow-500" },
-  { key: "pdam", label: "PDAM Air", icon: FaFaucetDrip, iconColor: "text-blue-500" },
-  { key: "multifinance", label: "Multifinance", icon: GiPayMoney, iconColor: "text-pink-500" },
-  { key: "pln", label: "PLN Token", icon: MdElectricBolt, iconColor: "text-yellow-500" },
-  { key: "pdam", label: "PDAM Air", icon: FaFaucetDrip, iconColor: "text-blue-500" },
-  { key: "multifinance", label: "Multifinance", icon: GiPayMoney, iconColor: "text-pink-500" },
   { key: "others", label: "Others", icon: AiFillProduct, iconColor: "text-green-500" },
 ];
 
 const menuMobile = [
-    { key: "multifinance", label: "Multifinance", icon: GiPayMoney, iconColor: "text-pink-500" },
-    { key: "pln", label: "PLN Token", icon: MdElectricBolt, iconColor: "text-yellow-500" },
-    { key: "pdam", label: "PDAM Air", icon: FaFaucetDrip, iconColor: "text-blue-500" },
-    { key: "multifinance", label: "Multifinance", icon: GiPayMoney, iconColor: "text-pink-500" },
     { key: "pln", label: "PLN Token", icon: MdElectricBolt, iconColor: "text-yellow-500" },
     { key: "pdam", label: "PDAM Air", icon: FaFaucetDrip, iconColor: "text-blue-500" },
     { key: "multifinance", label: "Multifinance", icon: GiPayMoney, iconColor: "text-pink-500" },
