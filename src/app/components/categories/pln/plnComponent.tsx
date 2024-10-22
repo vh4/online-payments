@@ -39,7 +39,7 @@ export default function PlnForm() {
   ];
 
   //for prepaid pln;
-  const prepaidList = [25000,50000, 100000,200000,500000,1000000,5000000,10000000, 50000000];
+  const prepaidList = [20000,50000, 100000,200000,500000,1000000,5000000,10000000, 50000000];
   const onSubmit = async (formValue: FormData) => {
     setLoading(true); 
 
