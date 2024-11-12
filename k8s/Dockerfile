@@ -1,4 +1,8 @@
-FROM node:18-alpine AS builder
+FROM node:18 AS builder
+
+ENV TZ=Asia/Jakarta
+RUN apt-get update && apt-get install -y tzdata && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /app
 COPY package*.json ./
