@@ -88,7 +88,7 @@ export default function InvoicePLNPasch() {
               <td className="py-4 px-4">
                 {isLoading ? <Skeleton width={100} /> : `${PaymentData.slalwbp1} - ${PaymentData.sahlwbp1}`}
               </td>
-              <td className="py-4 px-4 cursor-pointer" onClick={() => handlePrint(`https://c-dev-struk.rajabiller.com/index.php/service?id=${PaymentData.ref2}`)}>
+              <td className="py-4 px-4 cursor-pointer" onClick={() => handlePrint(`${process.env.RB_STRUK}/index.php/service?id=${PaymentData.ref2}`)}>
                 <SlPrinter size={18} className="text-gray-600" />
               </td>
             </tr>

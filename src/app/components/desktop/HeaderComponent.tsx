@@ -51,7 +51,7 @@ export default function Navbar() {
                     <div>Masuk</div>
                   </div>
                   <a
-                    href="https://www.rajabiller.com/register"
+                    href={`${process.env.LANDING_RB}/register`}
                     style={{
                       // color: custom ? '#0f172a' : customLayout?.color?.primary?.font_color || '#ffff',
                       fontSize: "15px",

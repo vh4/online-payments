@@ -91,7 +91,7 @@ export default function InvoicePLNPra() {
               <td
                 className="py-4 px-4 cursor-pointer"
                 onClick={() =>
-                  handlePrint(`https://c-dev-struk.rajabiller.com/index.php/service?id=${PaymentData.ref2}`)
+                  handlePrint(`${process.env.RB_STRUK}/index.php/service?id=${PaymentData.ref2}`)
                 }
               >
                 <SlPrinter size={18} className="text-gray-600" />
