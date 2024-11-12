@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: saas-ppob
-          image: asia.gcr.io/partnerlink-h2h/saas-ppob:latest-staging
+          image: asia.gcr.io/partnerlink-h2h/saas-ppob:staging-latest
           imagePullPolicy: "Always"
           ports:
             - containerPort: 3000
