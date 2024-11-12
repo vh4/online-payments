@@ -16,7 +16,7 @@ check:
     - sonar-scanner -X -Dproject.settings=$SONAR_PROPERTIES
   only:
     refs:
-      - main
+      - master
   allow_failure: false
   tags:
     - sonarrunner
@@ -34,7 +34,7 @@ build staging:
     - docker logout asia.gcr.io
   only:
     refs:
-      - main
+      - master
   needs: [check]
   allow_failure: false
   when: on_success
@@ -50,7 +50,7 @@ cluster staging:
     - gitlabrunner01
   only:
     refs:
-      - main
+      - master
   needs: [check, build staging]
   allow_failure: false
   when: on_success
@@ -69,7 +69,7 @@ deploy staging:
   needs: [check, build staging, cluster staging]
   only:
     refs:
-      - main
+      - master
 
 build prod:
   stage: build prod
@@ -86,7 +86,7 @@ build prod:
     - gitlabrunner01
   only:
     refs:
-      - main
+      - master
   when: manual
   needs: [check]
   allow_failure: false
@@ -100,7 +100,7 @@ cluster prod:
     - gitlabrunner01
   only:
     refs:
-      - main
+      - master
   needs: [check, build prod]
   when: on_success
   allow_failure: false
@@ -116,7 +116,7 @@ deploy prod:
     - kubectl rollout status deployment saas-ppob -n default --timeout=90s || exit 1
   only:
     refs:
-      - main
+      - master
   needs: [check, build prod, cluster prod]
   when: on_success
   allow_failure: false
