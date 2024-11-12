@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
 
-const API_URL = 'https://c-dev-api.rajabiller.com/api_partnerlink.php';
+const API_URL = process.env.RB_URL || '';
 
 export async function POST(req: Request) {
   if (req.method !== 'POST') {

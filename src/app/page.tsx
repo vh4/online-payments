@@ -24,10 +24,9 @@ export default function Home() {
       </div>
           
       {/* Menu Sidebar... */}
-      <div className="xl:-mt-12">
+      <div className="w-full xl:-mt-12">
           <div className="mx-auto mb-6">
             <div className="md:mt-0 z-10">
-              <div className="w-full">
                 <div className="relative container mx-auto mb-6">
                   <div className="md:mt-0 z-10 mx-0 md:border-t">
                     <div className={`block md:flex xl:flex 2xl:flex justify-center`}>
@@ -36,9 +35,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
-              <div className="container-fluid xl:container mx-auto">
                 <div className="w-full">
                   {/* Menu Content */}
                   {nameMenu === "pln" ? (
@@ -51,7 +48,6 @@ export default function Home() {
                     <div>No menu selected</div>
                   )}
                 </div>
-              </div>
             </div>
           </div>
         </div>

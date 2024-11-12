@@ -19,7 +19,7 @@ export default function RootLayout({
         <meta name="description" content="Pay PLN bills and purchase tokens easily." />
         <title>PLN Service Portal</title>
       </head>
-      <body className="min-h-screen text-sm bg-white">
+      <body className="min-h-screen text-sm bg-white px-0 md:px-36 lg:px-42 ">
         <Provider store={store}>
           <Header />
           <main className="">{children}</main>

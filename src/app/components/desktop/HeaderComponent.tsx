@@ -14,11 +14,11 @@ export default function Navbar() {
             // backgroundColor: "#2563eb",
             // color:"#ffff"
           }}
-          className="text-gray-700 px-2 sm:px-4 py-5 block sticky top-0 w-full z-50 left-0 border-b"
+          className="text-gray-700 py-5 block sticky top-0 w-full z-50 left-0 border-b"
         >
           <div className="">
             <div
-              className={`flex justify-between items-center -mx-2 md:-mx-10 lg:-mx-0 -px-0 md:px-8 no-underline`}
+              className={`flex justify-between items-center no-underline`}
             >
               <div className="">
                 {/* <Link to="/" className="flex items-center cursor-pointer no-underline"> */}

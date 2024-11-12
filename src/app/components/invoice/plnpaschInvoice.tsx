@@ -30,7 +30,7 @@ export default function InvoicePLNPasch() {
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="px-6">
       {/* Header */}
       <div
         className="mt-4 mb-8 flex items-center space-x-2 cursor-pointer group"

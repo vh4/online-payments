@@ -99,7 +99,7 @@ export default function Carousels() {
   };
 
   return (
-    <div className="container-fluid 2xl:container px-0 md:px-12 2xl:px-32 mx-auto w-full p-4">
+    <div className="w-full p-4">
       <Slider {...settings}>
         {["/slider-1.jpeg", "/slider-2.jpeg", "/slider-3.jpeg", "/slider-4.jpeg", "/slider-5.jpeg"].map(
           (src, index) => (

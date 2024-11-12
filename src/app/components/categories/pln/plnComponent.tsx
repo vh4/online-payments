@@ -128,7 +128,7 @@ export default function PlnForm() {
   };
 
   return (
-    <div className="text-gray-700 px-4 md:px-24 lg:px-32 pt-6 pb-12 bg-white rounded-lg">
+    <div className="text-gray-700 px-4 pt-6 pb-12 bg-white rounded-lg">
       <h2 className="mt-4 text-lg font-semibold md:font-bold mb-6 text-gray-800">
         Purchase Token or Pay Electricity Bill.
       </h2>

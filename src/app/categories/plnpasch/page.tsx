@@ -71,7 +71,7 @@ export default function PaymentPage() {
 
   return (
     <div className="flex justify-center mt-4">
-      <div className="container max-w-screen-2xl mx-auto px-6 lg:px-24 2xl:px-36 bg-white pt-4 pb-12">
+      <div className="w-full px-6 bg-white pt-4 pb-12">
         {success ? (
           <InvoicePLNPasch />
         ) : (
