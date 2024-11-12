@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saas-ppob
+  labels:
+    app: saas-ppob
+    stage: staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: saas-ppob
+  template:
+    metadata:
+      labels:
+        app: saas-ppob
+        stage: staging
+    spec:
+      containers:
+        - name: saas-ppob
+          image: asia.gcr.io/partnerlink-h2h/saas-ppob:latest-staging
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /_health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            successThreshold: 1
+      nodeSelector:
+        node-pool: staging
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-saas-ppob
+spec:
+  ports:
+  - name: svc-saas-ppob
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: saas-ppob
+  type: NodePort
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ing-saas-ppob
+spec:
+  tls:
+    - hosts:
+      - saas-ppob.bmstaging.id
+  rules:
+    - host: saas-ppob.bmstaging.id
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: svc-saas-ppob
+                port:
+                  number: 80
+  ingressClassName: nginx-public-ext-staging
