@@ -1,10 +1,11 @@
-'use client';
-
-import { Provider } from 'react-redux';
+"use client";
 import 'rsuite/dist/rsuite.min.css';
 import './globals.css'; // Custom global styles
-import Header from './components/desktop/HeaderComponent';
-import store from './store'; // Redux store import
+import { baselightTheme } from "@/utils/theme/DefaultColors";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Provider } from 'react-redux';
+import store from "./store";
 
 export default function RootLayout({
   children,
@@ -13,17 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Pay PLN bills and purchase tokens easily." />
-        <title>PLN Service Portal</title>
-      </head>
-      <body className="min-h-screen text-sm bg-white px-0 md:px-36 lg:px-42 ">
-        <Provider store={store}>
-          <Header />
-          <main className="">{children}</main>
-        </Provider>
+      <body>
+        <ThemeProvider theme={baselightTheme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Provider store={store}>
+            {children}
+          </Provider>
+        </ThemeProvider>
       </body>
     </html>
   );
