@@ -23,7 +23,6 @@ export class ErrorFilter<T> implements ExceptionFilter {
 
     let StatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
     let message: object;
-
     if (exception instanceof MainError) {
       StatusCode = HttpStatus.BAD_REQUEST;
       message = {

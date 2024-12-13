@@ -6,6 +6,6 @@ import { MessageService } from './message/message.service';
 @Global()
 @Module({
   providers: [HelpersService, ErrorFormatService, MessageService],
-  exports: [HelpersService, MessageService],
+  exports: [HelpersService, MessageService, ErrorFormatService],
 })
 export class HelpersModule {}
