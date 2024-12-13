@@ -7,12 +7,12 @@ import { MessageService } from 'src/helpers/message/message.service';
 
 @Controller('/api/auth')
 export class AuthController {
-  private success:{responseCode:string, responseMessage:string};
+  private success: { responseCode: string; responseMessage: string };
   constructor(
-	private readonly AuthServices:AuthService,
-	message:MessageService
+    private readonly AuthServices: AuthService,
+    message: MessageService,
   ) {
-	this.success = message.Success();
+    this.success = message.Success();
   }
 
   @Post()
@@ -23,11 +23,11 @@ export class AuthController {
     @Body() data: UserAuthDto,
     @ClientInfo() info: any,
   ) {
-	 const response = await this.AuthServices.authLoginPost(data, info);
-	 req.response = response;
-	 return {
-		...this.success,
-		...response
-	 }
+    const response = await this.AuthServices.authLoginPost(data, info);
+    req.response = response;
+    return {
+      ...this.success,
+      ...response,
+    };
   }
 }

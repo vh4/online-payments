@@ -27,8 +27,8 @@ export class HelpersService {
   async HitStukUrl(url: string, data: object | null): Promise<any> {
     try {
       const response: AxiosResponse = data
-        ? await axios.post(url, data, {timeout:60 * 1000})
-        : await axios.post(url, {timeout:60 * 1000});
+        ? await axios.post(url, data, { timeout: 60 * 1000 })
+        : await axios.post(url, { timeout: 60 * 1000 });
 
       return response.data;
     } catch (error: any) {

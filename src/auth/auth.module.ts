@@ -5,7 +5,7 @@ import { ErrorFormatService } from 'src/helpers/error-format/error-format.servic
 import { MessageService } from 'src/helpers/message/message.service';
 
 @Module({
-  imports:[],
+  imports: [],
   controllers: [AuthController],
   providers: [AuthService, ErrorFormatService, MessageService],
 })
