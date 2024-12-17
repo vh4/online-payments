@@ -6,8 +6,9 @@ RUN apt-get update && apt-get install -y tzdata && \
 
 WORKDIR /app
 COPY package*.json ./
+# Clean cache and force install
 RUN npm cache clean --force
-RUN npm install --legacy-peer-deps
+RUN npm install --legacy-peer-deps --force || cat /root/.npm/_logs/*.log
 COPY . .
 COPY envfile .env
 
