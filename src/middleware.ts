@@ -12,8 +12,7 @@ export default withAuth(
       return NextResponse.redirect(new URL('/login', url.origin))
     }
 
-    
-return NextResponse.next()
+    return NextResponse.next()
   },
   {
     callbacks: {
@@ -25,5 +24,5 @@ return NextResponse.next()
 )
 
 export const config = {
-  matcher: ['/home', '/pln']
+  matcher: ['/home', '/pln', '/pln/*']
 }
