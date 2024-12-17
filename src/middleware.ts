@@ -24,5 +24,5 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: ['/home', '/pln', '/pln/*']
+  matcher: ['/home', '/pln', '/pdam']
 }
