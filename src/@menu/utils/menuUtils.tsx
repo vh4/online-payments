@@ -1,22 +1,21 @@
 // React Imports
 import type { ReactNode } from 'react'
-import { Children, isValidElement } from 'react'
+import { isValidElement } from 'react'
 
 // Third-party Imports
 import type { CSSObject } from '@emotion/styled'
 
 // Type Imports
+import { ListItemIcon } from '@mui/material'
+
 import type { ChildrenType, RenderExpandedMenuItemIcon } from '../types'
 
 // Component Imports
-
-import { GenerateVerticalMenu } from '@components/GenerateMenu'
 
 // Util Imports
 import { menuClasses } from './menuClasses'
 
 // Styled Component Imports
-import { ListItemIcon } from '@mui/material'
 import StyledMenuIcon from '../styles/StyledMenuIcon'
 
 type RenderMenuIconParams = {
@@ -74,16 +73,16 @@ export const confirmUrlInChildren = (children: ChildrenType['children'], url: st
  * @param {Function} mapFunction - A function to transform each child that doesn't have menuData.
  * @returns {ReactNode} The processed children suitable for inclusion in a VerticalMenu.
  */
-const processMenuChildren = (children: ReactNode, mapFunction: (child: ReactNode) => ReactNode): ReactNode => {
-  return Children.map(children, child => {
-    // Skip processing for non-React elements
-    if (!isValidElement(child)) return child
+// const processMenuChildren = (children: ReactNode, mapFunction: (child: ReactNode) => ReactNode): ReactNode => {
+//   return Children.map(children, child => {
+//     // Skip processing for non-React elements
+//     if (!isValidElement(child)) return child
 
-    // If child has menuData prop, create a GenerateVerticalMenu component
-    // Otherwise, apply the transformation function to the child
-    return child.props?.menuData ? <GenerateVerticalMenu menuData={child.props.menuData} /> : mapFunction(child)
-  })
-}
+//     // If child has menuData prop, create a GenerateVerticalMenu component
+//     // Otherwise, apply the transformation function to the child
+//     return child.props?.menuData ? <GenerateVerticalMenu menuData={child.props.menuData} /> : mapFunction(child)
+//   })
+// }
 
 /**
  * Transforms a hierarchy of horizontal menu components (HorizontalMenuItem,

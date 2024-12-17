@@ -25,7 +25,8 @@ type props = {
 
 const FAQ = ({ faqData }: props) => {
   // States
-  const [activeTab, setActiveTab] = useState('pln')
+  const [activeTab] = useState('pln')
+
   return faqData && faqData.length > 0 ? (
     <TabContext value={activeTab}>
       <Grid container spacing={12}>

@@ -1,14 +1,16 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+
 // mui imports
-import { ListSubheader, styled, Theme } from '@mui/material';
+import type { Theme } from '@mui/material';
+import { ListSubheader, styled } from '@mui/material'
 
 type NavGroup = {
-  navlabel?: boolean;
-  subheader?: string;
-};
+  navlabel?: boolean
+  subheader?: string
+}
 
 interface ItemType {
-  item: NavGroup;
+  item: NavGroup
 }
 
 const NavGroup = ({ item }: ItemType) => {
@@ -20,16 +22,16 @@ const NavGroup = ({ item }: ItemType) => {
       marginBottom: theme.spacing(0),
       color: theme.palette.text.primary,
       lineHeight: '26px',
-      padding: '3px 12px',
-    }),
-  );
-  return (
-    <ListSubheaderStyle>{item.subheader}</ListSubheaderStyle>
-  );
-};
+      padding: '3px 12px'
+    })
+  )
+
+  
+return <ListSubheaderStyle>{item.subheader}</ListSubheaderStyle>
+}
 
 NavGroup.propTypes = {
-  item: PropTypes.object,
-};
+  item: PropTypes.object
+}
 
-export default NavGroup;
+export default NavGroup

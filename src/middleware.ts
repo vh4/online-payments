@@ -1,6 +1,7 @@
 // middleware.ts
-import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
+
+import { withAuth } from 'next-auth/middleware'
 
 export default withAuth(
   async function middleware(req) {
@@ -10,7 +11,9 @@ export default withAuth(
     if (!token) {
       return NextResponse.redirect(new URL('/login', url.origin))
     }
-    return NextResponse.next()
+
+    
+return NextResponse.next()
   },
   {
     callbacks: {

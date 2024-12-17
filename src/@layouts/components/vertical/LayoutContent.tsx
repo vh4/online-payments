@@ -4,6 +4,8 @@
 import classnames from 'classnames'
 
 // Type Imports
+import { Provider } from 'react-redux'
+
 import type { ChildrenType } from '@core/types'
 
 // Hook Imports
@@ -15,7 +17,6 @@ import { verticalLayoutClasses } from '@layouts/utils/layoutClasses'
 // Styled Component Imports
 import store from '@/app/store'
 import StyledMain from '@layouts/styles/shared/StyledMain'
-import { Provider } from 'react-redux'
 
 const LayoutContent = ({ children }: ChildrenType) => {
   // Hooks

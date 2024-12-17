@@ -1,12 +1,8 @@
 // Next Imports
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
 
 // Third-party Imports
 import classnames from 'classnames'
-
-// Type Imports
-import type { Locale } from '@configs/i18n'
 
 // Util Imports
 import { getLocalizedUrl } from '@/utils/i18n'
@@ -28,9 +24,10 @@ const defaultSuggestions: DefaultSuggestionsType[] = [
         label: 'PLN',
         href: '/dashboards/pln',
         icon: 'ri-bar-chart-line'
-      },
+      }
     ]
-  },
+  }
+
   // {
   //   sectionLabel: 'Categories',
   //   items: [
@@ -110,7 +107,6 @@ const defaultSuggestions: DefaultSuggestionsType[] = [
 
 const DefaultSuggestions = ({ setOpen }: { setOpen: (value: boolean) => void }) => {
   // Hooks
-  const { lang: locale } = useParams()
 
   return (
     <div className='flex grow flex-wrap gap-x-[48px] gap-y-8 plb-14 pli-16 overflow-y-auto overflow-x-hidden bs-full'>

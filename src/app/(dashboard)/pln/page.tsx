@@ -1,5 +1,15 @@
 'use client'
 
+import { useState } from 'react'
+
+import { CircularProgress, Grid } from '@mui/material'
+
+import Button from '@mui/material/Button'
+
+import { Controller, useForm } from 'react-hook-form'
+
+import { Form, Notification, useToaster } from 'rsuite'
+
 import PageContainer from '@/app/(dashboard)/components/container/PageContainer'
 import DashboardCard from '@/app/(dashboard)/components/shared/DashboardCard'
 import { Selection } from '@/app/(dashboard)/pln/components/Selection/index'
@@ -7,12 +17,10 @@ import { HitToApi } from '@/app/api/server/actions'
 import { db } from '@/app/fake-db/pages/faq'
 import { setInquiry } from '@/app/store'
 import { mailingLists } from '@/data/pln'
-import { ApiResponse } from '@/types/storeType'
-import { CircularProgress, Grid } from '@mui/material'
-import Button from '@mui/material/Button'
-import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { Form, Notification, useToaster } from 'rsuite'
+import type { ApiResponse } from '@/types/storeType'
+
+
+
 import FAQ from './components/Faq/index'
 import CardActionAll from './components/inquiry/Inquiry'
 
@@ -28,6 +36,7 @@ export default function Page() {
   } = useForm<FormData>()
 
   const [pilih, setPilih] = useState<number>(1)
+
   // const [nominal, setNominal] = useState<number>(20000)
   const [selectedMailingList, setSelectedMailingList] = useState<string>('Prepaid')
   const [loading, setLoading] = useState(false)

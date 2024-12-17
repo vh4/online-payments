@@ -1,11 +1,11 @@
 'use client'
 
 // React Imports
-import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 
 // Next Imports
-import { useParams, useRouter, usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 // MUI Imports
 import IconButton from '@mui/material/IconButton'
@@ -19,8 +19,8 @@ import DefaultSuggestions from './DefaultSuggestions'
 import NoResult from './NoResult'
 
 // Hook Imports
-import useVerticalNav from '@menu/hooks/useVerticalNav'
 import { useSettings } from '@core/hooks/useSettings'
+import useVerticalNav from '@menu/hooks/useVerticalNav'
 
 // Util Imports
 import { getLocalizedUrl } from '@/utils/i18n'
@@ -144,7 +144,6 @@ const NavSearch = () => {
   const router = useRouter()
   const pathName = usePathname()
   const { settings } = useSettings()
-  const { lang: locale } = useParams()
   const { isBreakpointReached } = useVerticalNav()
 
   // When an item is selected from the search results

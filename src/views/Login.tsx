@@ -4,8 +4,9 @@
 import { useRef, useState } from 'react'
 
 // Next Imports
-import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+
+import { signIn } from 'next-auth/react'
 
 // MUI Imports
 import Button from '@mui/material/Button'
@@ -13,13 +14,16 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import type { SubmitHandler} from 'react-hook-form';
+import { useForm } from 'react-hook-form'
 
 // Third-party Imports
 import classnames from 'classnames'
 import ReCAPTCHA from 'react-google-recaptcha'
 
 // Type Imports
+import { Alert, CircularProgress } from '@mui/material'
+
 import type { Mode } from '@core/types'
 
 // Component Imports
@@ -32,7 +36,6 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
-import { Alert, CircularProgress } from '@mui/material'
 
 interface LoginType {
   username: string
@@ -51,11 +54,13 @@ const Login = ({ mode }: { mode: Mode }) => {
   // Hooks
   const router = useRouter()
   const { settings } = useSettings()
+
   const authBackground = useImageVariant(
     mode,
     '/images/pages/auth-v2-mask-1-light.png',
     '/images/pages/auth-v2-mask-1-dark.png'
   )
+
   const characterIllustration = useImageVariant(
     mode,
     '/images/illustrations/auth/v2-login-light.png',
@@ -88,6 +93,7 @@ const Login = ({ mode }: { mode: Mode }) => {
     // }
 
     setLoading(true)
+
     try {
       const result = await signIn('credentials', {
         redirect: false,

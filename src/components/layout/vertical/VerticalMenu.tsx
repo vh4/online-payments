@@ -1,4 +1,5 @@
 // MUI Imports
+
 import { useTheme } from '@mui/material/styles'
 
 // Third-party Imports
@@ -19,7 +20,6 @@ import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNav
 // Style Imports
 import menuItemStyles from '@core/styles/vertical/menuItemStyles'
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
-import { usePathname } from 'next/navigation'
 
 import Menuitems from './menuItems'
 import NavGroup from './navGroup'
@@ -48,9 +48,6 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
   const { isBreakpointReached, transitionDuration } = verticalNavOptions
 
   const ScrollWrapper = isBreakpointReached ? 'div' : PerfectScrollbar
-
-  const pathname = usePathname()
-  const pathDirect = pathname
 
   return (
     // eslint-disable-next-line lines-around-comment

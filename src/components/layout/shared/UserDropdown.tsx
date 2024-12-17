@@ -22,8 +22,9 @@ import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 
 // Hook Imports
-import { useSettings } from '@core/hooks/useSettings'
 import { signOut } from 'next-auth/react'
+
+import { useSettings } from '@core/hooks/useSettings'
 
 // Styled component for badge content
 const BadgeContentSpan = styled('span')({

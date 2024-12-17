@@ -1,8 +1,9 @@
-import { ApiResponse } from '@/types/storeType'
 import type { InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
 import { uniqueId } from 'lodash'
 import { useSession } from 'next-auth/react'
+
+import type { ApiResponse } from '@/types/storeType'
 
 interface CheckPlnRequest {
   method: string
@@ -36,8 +37,9 @@ axiosInstance.interceptors.response.use(
   error => Promise.reject(error)
 )
 
-const apiRequest = async <T>(data: CheckPlnRequest): Promise<ApiResponse> => {
+const apiRequest = async (data: CheckPlnRequest): Promise<ApiResponse> => {
   const response = await axiosInstance.post<ApiResponse>('/api/', data)
+
   return response.data
 }
 

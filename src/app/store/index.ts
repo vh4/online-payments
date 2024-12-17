@@ -1,5 +1,10 @@
-import { ApiResponse, InitialMandatory } from '@/types/storeType'
-import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit';
+
+import { configureStore, createSlice } from '@reduxjs/toolkit'
+
+import type { ApiResponse} from '@/types/storeType';
+import { InitialMandatory } from '@/types/storeType'
+
 
 // Inquiry Slice
 const inquirySlice = createSlice({

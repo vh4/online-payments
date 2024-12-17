@@ -11,7 +11,6 @@ import { styled } from '@mui/material/styles'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // Type Imports
-import type { ChildrenType } from '@core/types'
 
 // Component Imports
 import Logo from '@components/layout/shared/Logo'
@@ -39,7 +38,7 @@ const StyledBoxForShadow = styled('div')(({ theme }) => ({
   }
 }))
 
-const VerticalNavContent = ({ children }: ChildrenType) => {
+const VerticalNavContent = () => {
   // Hooks
   const { isBreakpointReached } = useHorizontalNav()
 

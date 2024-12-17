@@ -1,5 +1,6 @@
 import axios from 'axios'
-import NextAuth, { NextAuthOptions } from 'next-auth'
+import type { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 const handler = NextAuth({
@@ -22,18 +23,23 @@ const handler = NextAuth({
             method: 'rajabiller.login_travel',
             username: credentials?.username,
             password: credentials?.password,
+
             // token: credentials?.recaptcha
             token: 'godModeTesting@bang'
           })
 
           const user = response.data
+
           if (user.responseCode !== '00') {
             return null
           }
-          return user
+
+          
+return user
         } catch (error) {
           console.error('Error during authorization:', error)
-          return null
+          
+return null
         }
       }
     })
@@ -51,7 +57,8 @@ const handler = NextAuth({
 
     async session({ session, token }) {
       session.user = token as any
-      return session
+      
+return session
     }
   }
 } as NextAuthOptions)

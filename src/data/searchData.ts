@@ -15,7 +15,7 @@ const data: SearchData[] = [
     url: '/dashboards/crm',
     icon: 'ri-pie-chart-2-line',
     section: 'Dashboards'
-  },
+  }
 ]
 
 export default data
