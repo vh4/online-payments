@@ -27,7 +27,7 @@ const CardActionAll = () => {
     setReload(true)
 
     setTimeout(() => {
-      setReload(false)
+      setReload(false) //
     }, 2000)
   }
 
