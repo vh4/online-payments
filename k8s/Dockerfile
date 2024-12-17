@@ -6,14 +6,15 @@ RUN apt-get update && apt-get install -y tzdata && \
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm cache clean --force
+RUN npm install --legacy-peer-deps
 COPY . .
 COPY envfile .env
 
 RUN npm run build
 RUN npm prune --production
 
-FROM node:18-alpine as runner
+FROM node:18-alpine AS runner
 
 RUN apk add --no-cache tzdata
 ENV TZ=Asia/Jakarta
