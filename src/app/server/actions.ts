@@ -1,9 +1,12 @@
+'use server'
+
 import type { InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
-import { uniqueId } from 'lodash'
-import { useSession } from 'next-auth/react'
 
 import type { ApiResponse } from '@/types/storeType'
+import { isOptions } from '@/utils/auth.options'
+import { getServerSession } from 'next-auth'
+import { v4 as uuid } from 'uuid'
 
 interface CheckPlnRequest {
   method: string
@@ -14,16 +17,14 @@ interface CheckPlnRequest {
 }
 
 const axiosInstance = axios.create({
-  baseURL: process.env.RB_URL
+  baseURL: 'http://localhost:5000'
 })
 
 axiosInstance.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
   try {
-    const { data: session }: any = useSession()
-    const accessToken = session?.user?.token
-
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`
+    const session: any = await getServerSession(isOptions)
+    if (session.token) {
+      config.headers.Authorization = `Bearer ${session.token}`
     }
   } catch (error) {
     return Promise.reject(error)
@@ -33,14 +34,21 @@ axiosInstance.interceptors.request.use(async (config: InternalAxiosRequestConfig
 })
 
 axiosInstance.interceptors.response.use(
-  response => response,
-  error => Promise.reject(error)
+  response => {
+    return response
+  },
+  error => {
+    return Promise.reject(error)
+  }
 )
 
 const apiRequest = async (data: CheckPlnRequest): Promise<ApiResponse> => {
-  const response = await axiosInstance.post<ApiResponse>('/api/', data)
-
-  return response.data
+  try {
+    const response = await axiosInstance.post<ApiResponse>(`/api/inquiry/${data.produk.toLowerCase()}`, data)
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response.data.responseMessage || error.message)
+  }
 }
 
 //data products filled in the below broww...
@@ -49,6 +57,6 @@ export const HitToApi = async ({ mti, product, idpel }: { mti: string; product: 
     method: mti,
     produk: product,
     idpel,
-    ref1: uniqueId()
+    ref1: uuid()
   })
 }

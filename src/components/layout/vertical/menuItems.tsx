@@ -17,7 +17,7 @@ const Menuitems = [
   },
   {
     navlabel: true,
-    subheader: 'Categories'
+    subheader: 'MENU'
   },
   {
     id: uniqueId(),

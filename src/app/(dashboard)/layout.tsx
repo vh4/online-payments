@@ -19,6 +19,7 @@ import Navigation from '@components/layout/vertical/Navigation'
 import ScrollToTop from '@core/components/scroll-to-top'
 
 // Util Imports
+import CustomToastContainer from '@/components/ToasterContainer'
 import { getMode, getSystemMode } from '@core/utils/serverHelpers'
 
 const Layout = async ({ children }: ChildrenType) => {
@@ -29,6 +30,7 @@ const Layout = async ({ children }: ChildrenType) => {
 
   return (
     <Providers direction={direction}>
+      <CustomToastContainer />
       <LayoutWrapper
         systemMode={systemMode}
         verticalLayout={

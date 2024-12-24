@@ -1,28 +1,21 @@
 'use client'
 
-import { useState } from 'react'
-
-import { CircularProgress, Grid } from '@mui/material'
-
-import Button from '@mui/material/Button'
-
-import { Controller, useForm } from 'react-hook-form'
-
-import { Form, Notification, useToaster } from 'rsuite'
-
 import PageContainer from '@/app/(dashboard)/components/container/PageContainer'
 import DashboardCard from '@/app/(dashboard)/components/shared/DashboardCard'
 import { Selection } from '@/app/(dashboard)/pln/components/Selection/index'
-import { HitToApi } from '@/app/api/server/actions'
 import { db } from '@/app/fake-db/pages/faq'
-import { setInquiry } from '@/app/store'
+import { HitToApi } from '@/app/server/actions'
+import { RootState, setInquiry } from '@/app/store'
 import { mailingLists } from '@/data/pln'
 import type { ApiResponse } from '@/types/storeType'
-
-
-
+import { CircularProgress, Grid, TextField, Typography } from '@mui/material'
+import Button from '@mui/material/Button'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import FAQ from './components/Faq/index'
-import CardActionAll from './components/inquiry/Inquiry'
+import Inquiry from './components/inquiry/Inquiry'
 
 interface FormData {
   registrationNumber: string
@@ -36,48 +29,46 @@ export default function Page() {
   } = useForm<FormData>()
 
   const [pilih, setPilih] = useState<number>(1)
-
-  // const [nominal, setNominal] = useState<number>(20000)
+  const inquiry = useSelector((state: RootState) => state.inquiry)
   const [selectedMailingList, setSelectedMailingList] = useState<string>('Prepaid')
   const [loading, setLoading] = useState(false)
 
-  const toaster = useToaster()
+  const dispatch = useDispatch()
 
   const onSubmit = async (formValue: FormData) => {
     setLoading(true)
-
     try {
       let result: ApiResponse | undefined
 
-      if (pilih === 1) {
-        // result = await HitToApi({ mti: 'cek', product: 'PLNPRA', idpel: formValue.registrationNumber });
-      } else if (pilih === 2) {
-        result = await HitToApi({ mti: 'cek', product: 'PLNPASCH', idpel: formValue.registrationNumber })
-      } else if (pilih === 3) {
-        result = await HitToApi({ mti: 'cek', product: 'PLNNON', idpel: formValue.registrationNumber })
+      const productMap: Record<number, string> = {
+        1: 'PLNPRA',
+        2: 'PLNPASCH',
+        3: 'PLNNON'
       }
+
+      result = await HitToApi({
+        mti: 'cek',
+        product: productMap[pilih],
+        idpel: formValue.registrationNumber
+      })
 
       if (!result) {
         throw new Error('No response from API')
       }
 
-      if (result.responseMessage !== '00') {
-        toaster.push(
-          <Notification type='error' title='Failed' header='Failed'>
-            {result.responseMessage}
-          </Notification>,
-          { placement: 'topEnd' }
-        )
+      if (result.responseCode !== '00') {
+        toast.error(`Error => ${result.responseMessage}`, {
+          position: 'top-right',
+          autoClose: 5000
+        })
       } else {
-        setInquiry(result)
+        dispatch(setInquiry(result))
       }
-    } catch (error) {
-      toaster.push(
-        <Notification type='error' title='Failed' header='Failed'>
-          {`An error occurred: ${error instanceof Error ? error.message : 'Unknown error'}`}
-        </Notification>,
-        { placement: 'topEnd' }
-      )
+    } catch (error: any) {
+      toast.error(`Error => ${error.message.toLowerCase()}`, {
+        position: 'top-right',
+        autoClose: 5000
+      })
     } finally {
       setLoading(false)
     }
@@ -86,18 +77,16 @@ export default function Page() {
   return (
     <PageContainer title='PLN categories' description='PLN categories'>
       <Grid container spacing={3}>
-        <Grid item sm={12} md={12} xl={12}>
+        <Grid item xs={12}>
           <DashboardCard title='Purchase Token or Pay Electricity Bill.'>
             <Grid container spacing={3}>
-              {/* Input Section - 7 Grid */}
-              <Grid item sm={12} md={7}>
-                <Form
-                  onSubmit={(formValue: Record<string, any> | null, event?: React.FormEvent<HTMLFormElement>) => {
-                    event?.preventDefault()
-                    handleSubmit(async data => {
-                      await onSubmit(data)
-                    })()
-                  }}
+              {/* Form Section */}
+              <Grid item xs={12} md={7}>
+                <form
+                  noValidate
+                  autoComplete='off'
+                  onSubmit={handleSubmit(onSubmit)}
+                  className='w-full flex flex-col gap-5'
                 >
                   <Selection
                     data={mailingLists}
@@ -105,10 +94,10 @@ export default function Page() {
                     setSelectedMailingList={setSelectedMailingList}
                     setPilih={setPilih}
                   />
-                  <Form.Group controlId='registrationNumber' className='mt-4'>
-                    <Form.ControlLabel className='block text-sm font-medium mb-2'>
+                  <div className='mt-4'>
+                    <Typography variant='h6' className='mb-2'>
                       {mailingLists.filter(x => x.name === selectedMailingList).map(x => x.title)}
-                    </Form.ControlLabel>
+                    </Typography>
                     <Controller
                       name='registrationNumber'
                       control={control}
@@ -120,24 +109,19 @@ export default function Page() {
                         }
                       }}
                       render={({ field }) => (
-                        <div className='relative'>
-                          <input
-                            {...field}
-                            type='number'
-                            inputMode='numeric'
-                            placeholder='Please input your ID'
-                            className={`block w-full p-3 border-b ${
-                              errors.registrationNumber ? 'border-red-500' : 'border-gray-300'
-                            } focus:outline-none hover:ring-blue-500 appearance-none`}
-                          />
-                        </div>
+                        <TextField
+                          {...field}
+                          fullWidth
+                          sx={{ maxWidth: { xs: '100%', md: '550px' } }} // Adjusts width based on screen size
+                          variant='standard'
+                          type='text'
+                          error={!!errors.registrationNumber}
+                          helperText={errors.registrationNumber?.message}
+                        />
                       )}
                     />
-                    {errors.registrationNumber && (
-                      <span className='text-red-500 text-sm mt-1'>{errors.registrationNumber.message}</span>
-                    )}
-                  </Form.Group>
-                  <div className='ww-full md:w-[300px] mt-8'>
+                  </div>
+                  <div className='w-full sm:w-full md:w-[300px] mt-8'>
                     <Button
                       fullWidth
                       variant='contained'
@@ -146,21 +130,20 @@ export default function Page() {
                       disabled={loading}
                       startIcon={loading ? <CircularProgress size={20} /> : null}
                     >
-                      {loading ? 'Logging in...' : 'Log In'}
+                      {loading ? 'Submitting...' : 'Inquiry'}
                     </Button>
                   </div>
-                </Form>
+                </form>
               </Grid>
-
-              {/* Detail Data Section - 5 Grid */}
-              <Grid item sm={12} md={5}>
-                <CardActionAll />
+              {/* Detail Inquiry Section */}
+              <Grid item xs={12} md={5}>
+                {!loading && inquiry?.responseCode === '00' ? <Inquiry /> : null}
+              </Grid>
+              <Grid item xs={12} className='my-12'>
+                <FAQ data={db} />
               </Grid>
             </Grid>
           </DashboardCard>
-        </Grid>
-        <Grid item sm={12}>
-          <FAQ data={db} />
         </Grid>
       </Grid>
     </PageContainer>
