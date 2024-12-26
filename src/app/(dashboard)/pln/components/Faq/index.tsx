@@ -11,7 +11,7 @@ import Faqs from './Faq'
 
 const FAQ = ({ data }: { data?: FaqType[] }) => {
   return (
-    <Grid container spacing={6} sx={{ marginTop: 2 }}>
+    <Grid container spacing={6} sx={{ marginTop: 0 }}>
       <Grid item xs={12}>
         <Faqs faqData={data} />
       </Grid>

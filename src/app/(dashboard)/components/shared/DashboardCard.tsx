@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Box, Card, CardContent, Stack, Typography } from '@mui/material'
 
 type Props = {
@@ -26,7 +24,14 @@ const DashboardCard = ({
   middlecontent
 }: Props) => {
   return (
-    <Card sx={{ padding: 0 }} elevation={9} variant={undefined}>
+    <Card
+      sx={{
+        px: { sm: 0, md: 8 },
+        py: 0
+      }}
+      elevation={9}
+      variant={undefined}
+    >
       {cardheading ? (
         <CardContent>
           <Typography variant='h5'>{headtitle}</Typography>

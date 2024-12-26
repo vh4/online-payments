@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 // Component Imports
 import InquiryCard from './Card'
 
-const InquiryPlnpasch = () => {
+const InquiryPlnnon = () => {
   return (
     <Box>
       <InquiryCard />
@@ -12,4 +12,4 @@ const InquiryPlnpasch = () => {
   )
 }
 
-export default InquiryPlnpasch
+export default InquiryPlnnon

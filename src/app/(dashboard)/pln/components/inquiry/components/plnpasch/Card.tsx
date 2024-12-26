@@ -27,9 +27,11 @@ import {
 import Icon from '@mui/material/Icon'
 
 // Third-party Imports
-import { RootState } from '@/app/store'
+import { HitToApi } from '@/app/server/actions'
+import { resetInquiry, RootState, setPayment } from '@/app/store'
 import classnames from 'classnames'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 const InquiryCard = () => {
   // States
@@ -38,6 +40,9 @@ const InquiryCard = () => {
   const [visibility, setVisibility] = useState(false)
   const inquiry = useSelector((state: RootState) => state.inquiry)
 
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+
   const handleBackDrop = () => {
     setReload(true)
     setTimeout(() => {
@@ -45,13 +50,45 @@ const InquiryCard = () => {
     }, 2000)
   }
 
+  const handlePayment = async () => {
+    setLoading(true)
+    setTimeout(async () => {
+      try {
+        const result = await HitToApi({
+          mti: 'bayar',
+          product: inquiry.kodeproduk,
+          idpel: inquiry.idpel1
+        })
+
+        if (!result) {
+          toast.error(`Failed => No response from API.`, {
+            position: 'top-right',
+            autoClose: 5000
+          })
+        }
+        if (result.responseCode !== '00') {
+          toast.error(`Failed => ${result.responseMessage}`, {
+            position: 'top-right',
+            autoClose: 5000
+          })
+        } else {
+          dispatch(resetInquiry())
+          dispatch(setPayment(result))
+        }
+      } catch (error) {
+      } finally {
+        setLoading(false)
+      }
+    }, 500)
+  }
+
   return (
     <Fade in={!visibility} timeout={300}>
       <Card
-        className='relative mt-0 xl:-mt-8'
+        className='relative mt-4 xl:-mt-8'
         sx={{
-          boxShadow: { xs: 'none', sm: 'inherit' }, // Hilangkan shadow pada mobile
-          border: { xs: 'none', sm: '1px' } // Hilangkan border pada mobile
+          boxShadow: { xs: 'none', sm: 'inherit' },
+          border: { xs: 'none', sm: '1px' }
         }}
       >
         <CardHeader
@@ -79,8 +116,8 @@ const InquiryCard = () => {
               <TableContainer
                 component={Paper}
                 sx={{
-                  boxShadow: 'none', // Tetap tanpa shadow
-                  borderRadius: 0 // Opsional: Menghapus radius sudut
+                  boxShadow: 'none',
+                  borderRadius: 0
                 }}
               >
                 <Table>
@@ -119,8 +156,15 @@ const InquiryCard = () => {
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                <Button variant='contained' color='success' sx={{ left: 0 }}>
-                  Proceed With Payment
+                <Button
+                  onClick={handlePayment}
+                  variant='contained'
+                  color='success'
+                  sx={{ left: 0 }}
+                  disabled={loading}
+                  startIcon={loading ? <CircularProgress size={20} /> : null}
+                >
+                  {loading ? 'Paying...' : 'Proceed With Payment'}
                 </Button>
               </Box>
               <Typography variant='body2' sx={{ p: 4, color: 'text.secondary' }}>

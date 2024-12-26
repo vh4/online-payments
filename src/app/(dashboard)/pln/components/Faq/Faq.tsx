@@ -33,7 +33,7 @@ const FAQ = ({ faqData }: props) => {
         <Grid item xs={12} sm={7} md={8} xl={9}>
           {faqData?.map((faq, index) => (
             <TabPanel key={index} value={faq.id} className='p-0'>
-              <div className='flex items-center gap-4 mbe-4'>
+              <div className='flex items-center gap-4 mb-4'>
                 <CustomAvatar color='primary' skin='light' variant='rounded' size={50}>
                   <i className={classnames(faq.icon, 'text-3xl')} />
                 </CustomAvatar>
@@ -42,9 +42,9 @@ const FAQ = ({ faqData }: props) => {
                   <Typography>{faq.subtitle}</Typography>
                 </div>
               </div>
-              <div>
+              <div className='mt-12'>
                 {faq.questionsAnswers.map((items, index) => (
-                  <Accordion key={index}>
+                  <Accordion key={index} defaultExpanded>
                     <AccordionSummary
                       expandIcon={<i className='ri-arrow-down-s-line' />}
                       aria-controls='panel1a-content'
