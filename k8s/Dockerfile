@@ -1,4 +1,4 @@
-FROM node:18 AS builder
+FROM node:20-alpine AS builder
 
 ENV TZ=Asia/Jakarta
 RUN apt-get update && apt-get install -y tzdata && \
@@ -13,7 +13,7 @@ COPY envfile .env
 RUN npm run build:icons
 RUN npm run build
 
-FROM node:18-alpine as runner
+FROM node:20-alpine as runner
 
 RUN apk add --no-cache tzdata
 ENV TZ=Asia/Jakarta
