@@ -1,8 +1,8 @@
 'use client'
 
 // React Imports
-import { useEffect, useRef } from 'react'
 import type { CSSProperties } from 'react'
+import { useEffect, useRef } from 'react'
 
 // Third-party Imports
 import styled from '@emotion/styled'
@@ -14,11 +14,10 @@ import type { VerticalNavContextProps } from '@menu/contexts/verticalNavContext'
 import MaterializeLogo from '@core/svg/Logo'
 
 // Config Imports
-import themeConfig from '@configs/themeConfig'
 
 // Hook Imports
-import useVerticalNav from '@menu/hooks/useVerticalNav'
 import { useSettings } from '@core/hooks/useSettings'
+import useVerticalNav from '@menu/hooks/useVerticalNav'
 
 type LogoTextProps = {
   isHovered?: VerticalNavContextProps['isHovered']
@@ -74,7 +73,7 @@ const Logo = ({ color }: { color?: CSSProperties['color'] }) => {
   return (
     <div className='flex items-center min-bs-[24px]'>
       <MaterializeLogo />
-      <LogoText
+      {/* <LogoText
         color={color}
         ref={logoTextRef}
         isHovered={isHovered}
@@ -83,7 +82,7 @@ const Logo = ({ color }: { color?: CSSProperties['color'] }) => {
         isBreakpointReached={isBreakpointReached}
       >
         {themeConfig.templateName}
-      </LogoText>
+      </LogoText> */}
     </div>
   )
 }

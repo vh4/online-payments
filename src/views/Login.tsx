@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import type { SubmitHandler} from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 
 // Third-party Imports
@@ -61,13 +61,7 @@ const Login = ({ mode }: { mode: Mode }) => {
     '/images/pages/auth-v2-mask-1-dark.png'
   )
 
-  const characterIllustration = useImageVariant(
-    mode,
-    '/images/illustrations/auth/v2-login-light.png',
-    '/images/illustrations/auth/v2-login-dark.png',
-    '/images/illustrations/auth/v2-login-light-border.png',
-    '/images/illustrations/auth/v2-login-dark-border.png'
-  )
+  const characterIllustration = useImageVariant(mode, '/login.svg', '/login2.svg')
 
   const {
     handleSubmit,
