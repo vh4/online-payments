@@ -19,7 +19,7 @@ spec:
       containers:
         - name: saas-ppob
           image: asia.gcr.io/partnerlink-h2h/saas-ppob:staging-latest
-          imagePullPolicy: "Always"
+          imagePullPolicy: 'Always'
           ports:
             - containerPort: 3000
           readinessProbe:
@@ -33,23 +33,21 @@ spec:
         node-pool: staging
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
   name: svc-saas-ppob
 spec:
   ports:
-  - name: svc-saas-ppob
-    port: 80
-    protocol: TCP
-    targetPort: 3000
+    - name: svc-saas-ppob
+      port: 80
+      protocol: TCP
+      targetPort: 3000
   selector:
     app: saas-ppob
   type: NodePort
 
 ---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -57,9 +55,9 @@ metadata:
 spec:
   tls:
     - hosts:
-      - saas-ppob.bmstaging.id
+        - h2h-saas-ppob.bmstaging.id
   rules:
-    - host: saas-ppob.bmstaging.id
+    - host: h2h-saas-ppob.bmstaging.id
       http:
         paths:
           - path: /
