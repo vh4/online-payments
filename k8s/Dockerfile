@@ -1,29 +1,33 @@
 FROM node:20-alpine AS builder
 
 ENV TZ=Asia/Jakarta
-RUN apt-get update && apt-get install -y tzdata && \
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /app
+
 COPY package*.json ./
 RUN npm install
+
 COPY . .
 COPY envfile .env
 
 RUN npm run build:icons
 RUN npm run build
 
-FROM node:20-alpine as runner
+# FROM node:20-alpine AS runner
 
-RUN apk add --no-cache tzdata
-ENV TZ=Asia/Jakarta
-RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# RUN apk add --no-cache tzdata
+# ENV TZ=Asia/Jakarta
+# RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-WORKDIR /app
-COPY --from=builder /app /app
+# WORKDIR /app
+
+# COPY --from=builder /app /app
 
 ENV NODE_ENV=production
 ENTRYPOINT ["npm", "start"]
+
 
 
 # FROM node:20-alpine AS builder
