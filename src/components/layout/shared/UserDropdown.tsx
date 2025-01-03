@@ -5,7 +5,6 @@ import { useRef, useState } from 'react'
 
 // MUI Imports
 import Avatar from '@mui/material/Avatar'
-import Avatar from '@mui/material/Avatar'
 import Badge from '@mui/material/Badge'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
