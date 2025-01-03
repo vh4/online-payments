@@ -1,13 +1,10 @@
 'use client'
 
 // React Imports
-import type { MouseEvent } from 'react'
 import { useRef, useState } from 'react'
 
-// Next Imports
-import { useRouter } from 'next/navigation'
-
 // MUI Imports
+import Avatar from '@mui/material/Avatar'
 import Avatar from '@mui/material/Avatar'
 import Badge from '@mui/material/Badge'
 import Button from '@mui/material/Button'
@@ -15,8 +12,6 @@ import { styled } from '@mui/material/styles'
 
 // Hook Imports
 import { signOut } from 'next-auth/react'
-
-import { useSettings } from '@core/hooks/useSettings'
 
 // Styled component for badge content
 const BadgeContentSpan = styled('span')({
@@ -36,24 +31,9 @@ const UserDropdown = () => {
   const anchorRef = useRef<HTMLDivElement>(null)
 
   // Hooks
-  const router = useRouter()
 
-  const { settings } = useSettings()
-
-  const handleDropdownOpen = () => {
+  const handleDropdownOpen = (): any => {
     !open ? setOpen(true) : setOpen(false)
-  }
-
-  const handleDropdownClose = (event?: MouseEvent<HTMLLIElement> | (MouseEvent | TouchEvent), url?: string) => {
-    if (url) {
-      router.push(url)
-    }
-
-    if (anchorRef.current && anchorRef.current.contains(event?.target as HTMLElement)) {
-      return
-    }
-
-    setOpen(false)
   }
 
   const handleUserLogout = async () => {

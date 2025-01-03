@@ -1,19 +1,26 @@
 'use client'
 
+import { useState } from 'react'
+
+import { Box, CircularProgress, Grid, TextField, Typography, useTheme } from '@mui/material'
+
+import Button from '@mui/material/Button'
+
+import { Controller, useForm } from 'react-hook-form'
+
+import { useDispatch, useSelector } from 'react-redux'
+
+import { toast } from 'react-toastify'
+
 import PageContainer from '@/app/(dashboard)/components/container/PageContainer'
 import DashboardCard from '@/app/(dashboard)/components/shared/DashboardCard'
 import { Selection } from '@/app/(dashboard)/pln/components/Selection/index'
 import { PLNGuide } from '@/app/fake-db/pages/faq'
 import { HitToApi } from '@/app/server/actions'
-import { resetInquiry, resetPayment, RootState, setInquiry } from '@/app/store'
+import type { RootState } from '@/app/store'
+import { resetInquiry, resetPayment, setInquiry } from '@/app/store'
 import { mailingLists } from '@/data/pln'
-import type { ApiResponse } from '@/types/storeType'
-import { Box, CircularProgress, Grid, TextField, Typography, useTheme } from '@mui/material'
-import Button from '@mui/material/Button'
-import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
+
 import FAQ from './components/Faq/index'
 import Inquiry from './components/inquiry/Inquiry'
 import Payment from './components/Payment/Payment'
@@ -44,19 +51,17 @@ export default function Page() {
     dispatch(resetPayment())
 
     try {
-      let result: ApiResponse | undefined
-
       const productMap: Record<number, string> = {
         1: 'PLNPRA',
         2: 'PLNPASCH',
         3: 'PLNNON'
       }
 
-      result = await HitToApi({
+      const result = (await HitToApi({
         mti: 'cek',
         product: productMap[pilih],
         idpel: formValue.registrationNumber
-      })
+      })) as ApiResponse
 
       if (!result) {
         toast.error(`Failed => No response from API.`, {

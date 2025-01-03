@@ -9,6 +9,7 @@ import '@/app/globals.css'
 
 // Generated Icon CSS Imports
 import '@assets/iconify-icons/generated-icons.css'
+
 export const metadata = {
   title: 'Dashboard PPOB Rajabiller'
 }

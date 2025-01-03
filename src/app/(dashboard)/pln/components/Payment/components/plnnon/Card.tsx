@@ -2,6 +2,7 @@
 
 // React Imports
 import { useState } from 'react'
+
 import { BsFillPatchCheckFill } from 'react-icons/bs'
 import { PiDownloadSimple } from 'react-icons/pi'
 
@@ -26,8 +27,9 @@ import {
 } from '@mui/material'
 
 // Third-party Imports
-import { RootState } from '@/app/store'
 import { useSelector } from 'react-redux'
+
+import type { RootState } from '@/app/store'
 
 const PaymentCard = () => {
   // States
@@ -38,6 +40,7 @@ const PaymentCard = () => {
 
   const handlePrint = (url: string) => {
     const printWindow = window.open(url, '_blank', 'width=800,height=600')
+
     if (printWindow) {
       printWindow.focus()
       printWindow.onload = () => printWindow.print()

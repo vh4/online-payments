@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { NextAuthOptions } from 'next-auth'
+import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const isOptions = {
@@ -32,10 +32,13 @@ export const isOptions = {
           if (user.responseCode !== '00') {
             return null
           }
-          return { ...user }
+
+          
+return { ...user }
         } catch (error) {
           console.error('Error during authorization:', error)
-          return null
+          
+return null
         }
       }
     })

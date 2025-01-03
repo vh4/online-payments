@@ -1,14 +1,18 @@
 'use client'
 
 import { Box } from '@mui/material'
+
+
 // Component Imports
-import { RootState } from '@/app/store'
 import { useSelector } from 'react-redux'
+
+import type { RootState } from '@/app/store'
 import InquiryPlnnon from './components/plnnon'
 import InquiryPlnpasch from './components/plnpasch'
 
 const Inquiry = () => {
   const product = useSelector((state: RootState) => state.inquiry.kodeproduk)?.toLowerCase()
+
   const MenuInquiry = () => {
     switch (product) {
       case 'plnpasch':

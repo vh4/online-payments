@@ -27,11 +27,15 @@ import {
 import Icon from '@mui/material/Icon'
 
 // Third-party Imports
-import { HitToApi } from '@/app/server/actions'
-import { resetInquiry, RootState, setPayment } from '@/app/store'
+
 import classnames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+
+import { resetInquiry, setPayment } from '@/app/store'
+import type { RootState} from '@/app/store';
+
+import { HitToApi } from '@/app/server/actions'
 
 const InquiryCard = () => {
   // States
@@ -66,6 +70,7 @@ const InquiryCard = () => {
             autoClose: 5000
           })
         }
+
         if (result.responseCode !== '00') {
           toast.error(`Failed => ${result.responseMessage}`, {
             position: 'top-right',

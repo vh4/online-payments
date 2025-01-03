@@ -1,5 +1,6 @@
-import { isOptions } from '@/utils/auth.options'
 import NextAuth from 'next-auth'
+
+import { isOptions } from '@/utils/auth.options'
 
 const handler = NextAuth(isOptions)
 

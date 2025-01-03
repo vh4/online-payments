@@ -40,6 +40,7 @@ const inquirySlice = createSlice({
     },
     resetInquiry: () => InitialMandatory
   }
+
   // extraReducers: builder => {
   //   builder.addCase(HitToInquiry.pending, state => {
   //     state.isLoading = true
@@ -66,6 +67,7 @@ const paymentSlice = createSlice({
     },
     resetPayment: () => InitialMandatory
   }
+
   // extraReducers: builder => {
   //   builder.addCase(HitToPayment.pending, state => {
   //     state.isLoading = true
