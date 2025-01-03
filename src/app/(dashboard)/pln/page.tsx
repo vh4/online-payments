@@ -57,11 +57,11 @@ export default function Page() {
         3: 'PLNNON'
       }
 
-      const result = (await HitToApi({
+      const result = await HitToApi({
         mti: 'cek',
         product: productMap[pilih],
         idpel: formValue.registrationNumber
-      })) as ApiResponse
+      })
 
       if (!result) {
         toast.error(`Failed => No response from API.`, {
