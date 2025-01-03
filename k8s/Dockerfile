@@ -10,8 +10,8 @@ RUN npm install
 COPY . .
 COPY envfile .env
 
+RUN npm run build:icons
 RUN npm run build
-RUN npm prune --production
 
 FROM node:18-alpine as runner
 
@@ -23,9 +23,6 @@ WORKDIR /app
 COPY --from=builder /app /app
 
 ENV NODE_ENV=production
-
-EXPOSE 3000
-
 ENTRYPOINT ["npm", "start"]
 
 
