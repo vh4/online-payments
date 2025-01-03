@@ -32,12 +32,17 @@
 
 FROM node:20-alpine AS builder
 
+ENV TZ=Asia/Jakarta
+RUN apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 WORKDIR /app
 COPY package*.json ./
 COPY src/assets/iconify-icons/bundle-icons-css.ts ./src/assets/iconify-icons/
 RUN npm i
 
+
 COPY . .
+COPY envfile .env
 
 RUN npm run build:icons
 RUN npm run build
