@@ -6,8 +6,8 @@ import { useRef, useState } from 'react'
 // MUI Imports
 import Avatar from '@mui/material/Avatar'
 import Badge from '@mui/material/Badge'
-import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
+import { IoIosLogOut } from 'react-icons/io'
 
 // Hook Imports
 import { signOut } from 'next-auth/react'
@@ -56,17 +56,8 @@ const UserDropdown = () => {
           className='cursor-pointer bs-[38px] is-[38px]'
         />
       </Badge>
-      <div className='flex items-center plb-1.5 pli-4'>
-        <Button
-          fullWidth
-          variant='outlined'
-          color='error'
-          size='small'
-          endIcon={<i className='ri-logout-box-r-line' />}
-          onClick={handleUserLogout}
-        >
-          Logout
-        </Button>
+      <div onClick={handleUserLogout} className='cursor-pointer flex items-center plb-1.5 pli-4'>
+        <IoIosLogOut size={24} />
       </div>
     </>
   )
