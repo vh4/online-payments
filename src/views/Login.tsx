@@ -100,7 +100,7 @@ const Login = ({ mode }: { mode: Mode }) => {
       if (result?.error) {
         setErr(true)
       } else {
-        router.push(result?.url || '/home')
+        router.push('/home')
       }
     } catch (error) {
       console.error('Unexpected error:', error)
