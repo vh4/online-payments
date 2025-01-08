@@ -1,5 +1,6 @@
-// MUI Imports
+// MUI Importsr
 import Button from '@mui/material/Button'
+import { Toaster } from 'react-hot-toast'
 
 // Type Imports
 import type { ChildrenType } from '@core/types'
@@ -17,7 +18,6 @@ import VerticalFooter from '@components/layout/vertical/Footer'
 import Navbar from '@components/layout/vertical/Navbar'
 import Navigation from '@components/layout/vertical/Navigation'
 import ScrollToTop from '@core/components/scroll-to-top'
-import { Toaster } from 'react-hot-toast'
 
 // Util Imports
 import CustomToastContainer from '@/components/ToasterContainer'
