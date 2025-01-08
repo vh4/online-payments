@@ -52,16 +52,18 @@ export default function Page() {
 
     try {
       const productMap: Record<number, string> = {
-        1: 'PLNPRA',
+        1: 'PLNPRA30',
         2: 'PLNPASCH',
         3: 'PLNNON'
       }
 
-      const result = await HitToApi({
+      const request = {
         mti: 'cek',
         product: productMap[pilih],
         idpel: formValue.registrationNumber
-      })
+      }
+
+      const result = await HitToApi(request)
 
       if (!result) {
         toast.error(`Failed => No response from API.`, {

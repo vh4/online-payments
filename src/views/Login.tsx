@@ -180,7 +180,7 @@ const Login = ({ mode }: { mode: Mode }) => {
             />
             <ReCAPTCHA
               ref={captchaRef}
-              sitekey='6Lfw15wqAAAAADr1DjqI_6DRldwUvYQDN6D-UPmk'
+              sitekey='6LdGRpEoAAAAAOqcTSI_5GvfV0_FwqiyOAarv9KM'
               onChange={handleCaptchaChange}
             />
             <Button

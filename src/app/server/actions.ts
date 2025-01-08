@@ -47,21 +47,46 @@ axiosInstance.interceptors.response.use(
 
 const apiRequest = async (data: CheckPlnRequest): Promise<ApiResponse> => {
   try {
-    const response = await axiosInstance.post<ApiResponse>(`/api/inquiry/${data.produk.toLowerCase()}`, data)
+    let mti = 'inquiry'
 
-    
-return response.data
+    if (data.method == 'bayar') {
+      mti = 'payment'
+    }
+
+    const response = await axiosInstance.post<ApiResponse>(`/api/${mti}/${data.produk.toLowerCase()}`, data)
+
+    return response.data
   } catch (error: any) {
-    throw new Error(error.response.data.responseMessage || error.message)
+    throw new Error((error.response?.data && error.response.data.responseMessage) || error.message)
   }
 }
 
 //data products filled in the below broww...
-export const HitToApi = async ({ mti, product, idpel }: { mti: string; product: string; idpel: string }) => {
-  return apiRequest({
+export const HitToApi = async ({
+  mti,
+  product,
+  idpel,
+  nominal = 0
+}: {
+  mti: string
+  product: string
+  idpel: string
+  nominal?: number
+}) => {
+  const request: CheckPlnRequest = {
     method: mti,
     produk: product,
     idpel,
     ref1: uuid()
-  })
+  }
+
+  if (product == 'PLNPRA30') {
+    if (mti == 'bayar') {
+      request['nominal'] = nominal
+    } else {
+      request['nominal'] = 0
+    }
+  }
+
+  return apiRequest(request)
 }

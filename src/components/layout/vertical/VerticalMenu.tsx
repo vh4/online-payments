@@ -75,7 +75,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         {Menuitems.map((item, i) => {
           // {/********SubHeader**********/}
           if (item.subheader) {
-            return <NavGroup item={item} key={item.subheader} />
+            return <NavGroup item={item} key={i} />
 
             // {/********If Sub Menu**********/}
             /* eslint no-else-return: "off" */
