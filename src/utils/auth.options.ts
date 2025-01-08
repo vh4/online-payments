@@ -33,12 +33,11 @@ export const isOptions = {
             return null
           }
 
-          
-return { ...user }
+          return { ...user }
         } catch (error) {
           console.error('Error during authorization:', error)
-          
-return null
+
+          return null
         }
       }
     })

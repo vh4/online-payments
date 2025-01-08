@@ -19,7 +19,7 @@ interface CheckPlnRequest {
 }
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000'
+  baseURL: process.env.RB_URL
 })
 
 axiosInstance.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
