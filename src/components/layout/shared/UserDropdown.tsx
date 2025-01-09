@@ -11,6 +11,7 @@ import { IoIosLogOut } from 'react-icons/io'
 
 // Hook Imports
 import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 // Styled component for badge content
 const BadgeContentSpan = styled('span')({
@@ -25,6 +26,7 @@ const BadgeContentSpan = styled('span')({
 const UserDropdown = () => {
   // States
   const [open, setOpen] = useState(false)
+  const router = useRouter()
 
   // Refs
   const anchorRef = useRef<HTMLDivElement>(null)
@@ -36,7 +38,8 @@ const UserDropdown = () => {
   }
 
   const handleUserLogout = async () => {
-    await signOut({ callbackUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://h2h-saas-ppob.bmstaging.id' })
+    await signOut()
+    router.push('/')
   }
 
   return (
