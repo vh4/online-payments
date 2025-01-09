@@ -36,7 +36,7 @@ const UserDropdown = () => {
   }
 
   const handleUserLogout = async () => {
-    await signOut({ callbackUrl: process.env.NEXT_PUBLIC_APP_URL })
+    await signOut({ callbackUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://h2h-saas-ppob.bmstaging.id' })
   }
 
   return (
