@@ -2,7 +2,6 @@
 import { useRef, useState } from 'react'
 
 // React Imports
-import { useRouter } from 'next/router'
 
 // MUI Imports
 import Avatar from '@mui/material/Avatar'
@@ -26,7 +25,6 @@ const BadgeContentSpan = styled('span')({
 const UserDropdown = () => {
   // States
   const [open, setOpen] = useState(false)
-  const router = useRouter()
 
   // Refs
   const anchorRef = useRef<HTMLDivElement>(null)
@@ -38,8 +36,9 @@ const UserDropdown = () => {
   }
 
   const handleUserLogout = async () => {
-    await signOut()
-    router.push('/')
+    await signOut({
+      callbackUrl: process.env.NEXTAUTH_URL
+    })
   }
 
   return (

@@ -101,8 +101,8 @@ const InquiryCard = () => {
         }}
       >
         <CardHeader
-          title='Detail Inquiry'
-          subheader="Click 'Pay' to proceed with your payment."
+          title='Info Pembayaran Tagihan'
+          subheader="Click 'Pay' untuk melanjutkan proses pembayaran."
           action={
             <Box>
               <Box sx={{ display: 'flex', gap: 1 }}>
@@ -130,36 +130,32 @@ const InquiryCard = () => {
                 }}
               >
                 <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
-                        Field
-                      </TableCell>
-                      <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
-                        Value
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
+                  <TableHead></TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Name</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.namapelanggan}</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>No Meter</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.idpel1}</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Customer Number</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.idpel1}</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Nama</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.namapelanggan}</TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tarif / Daya</TableCell>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                        {inquiry.data.tarif} / {parseInt(inquiry.data.daya, 10).toLocaleString()}
+                        {inquiry.data.tarif} / {parseInt(inquiry.data.daya, 10).toLocaleString()} VA
                       </TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
               </TableContainer>
-              <Box sx={{ display: 'flex', p: 2, justifyContent: 'center' }}>
-                <PrepaidList prepaidList={prepaidList} nominal={nominal} onNominalSelect={setNominal} />
+              <Box sx={{ p: 2 }}>
+                <Typography sx={{ px: 2 }} variant='body2'>
+                  Pilih Denom :
+                </Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <PrepaidList prepaidList={prepaidList} nominal={nominal} onNominalSelect={setNominal} />
+                </Box>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'end' }}>
                 <Button
@@ -170,11 +166,12 @@ const InquiryCard = () => {
                   disabled={loading}
                   startIcon={loading ? <CircularProgress size={20} /> : null}
                 >
-                  {loading ? 'Paying...' : 'Proceed With Payment'}
+                  {loading ? 'Paying...' : 'Proceed Payment'}
                 </Button>
               </Box>
-              <Typography variant='body2' sx={{ p: 4, color: 'text.secondary' }}>
-                By proceeding, you agree to our Terms and Privacy Policy. Payments are non-refundable.
+              <Typography variant='body2' sx={{ p: 4, color: 'text.primary' }}>
+                Dengan melanjutkan, Anda menyetujui Ketentuan dan Kebijakan Privasi kami. Pembayaran tidak dapat
+                dikembalikan.
               </Typography>
             </Box>
           </CardContent>
