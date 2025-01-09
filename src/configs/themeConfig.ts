@@ -1,6 +1,7 @@
 /*
- * If you change the following items in the config object, you will not see any effect in the local development server
- * as these are stored in the cookie (cookie has the highest priority over the themeConfig):
+ * Configuration Notes:
+ * Changes made to the following items in the `themeConfig` object won't affect the local development server directly
+ * as these values are stored in cookies (which have the highest priority over the `themeConfig`):
  * 1. mode
  * 2. skin
  * 3. semiDark
@@ -9,11 +10,10 @@
  * 6. contentWidth
  * 7. footer.contentWidth
  *
- * To see the effect of the above items, you can click on the reset button from the Customizer
- * which is on the top-right corner of the customizer besides the close button.
- * This will reset the cookie to the values provided in the config object below.
- *
- * Another way is to clear the cookie from the browser's Application/Storage tab and then reload the page.
+ * To apply these changes:
+ * - Click the reset button in the Customizer (top-right corner near the close button),
+ *   which resets the cookie to the `themeConfig` values.
+ * - Alternatively, clear the cookies via the browser's Application/Storage tab and reload the page.
  */
 
 // Type Imports
@@ -41,7 +41,10 @@ export type Config = {
   skin: Skin
   semiDark: boolean
   layout: Layout
-  layoutPadding: number
+  layoutPadding: {
+    mobile: number
+    desktop: number
+  }
   navbar: Navbar
   contentWidth: LayoutComponentWidth
   compactContentWidth: number
@@ -53,26 +56,29 @@ const themeConfig: Config = {
   templateName: 'Rajabiller',
   homePageUrl: '/home',
   settingsCookieName: 'materialize-mui-next-demo-1',
-  mode: 'light', // 'system', 'light', 'dark'
-  skin: 'bordered', // 'default', 'bordered'
-  semiDark: false, // true, false
-  layout: 'vertical', // 'vertical', 'collapsed', 'horizontal'
-  layoutPadding: 24, // Common padding for header, content, footer layout components (in px)
-  compactContentWidth: 1440, // in px
+  mode: 'light', // Options: 'system', 'light', 'dark'
+  skin: 'bordered', // Options: 'default', 'bordered'
+  semiDark: false,
+  layout: 'vertical', // Options: 'vertical', 'collapsed', 'horizontal'
+  layoutPadding: {
+    mobile: 0,
+    desktop: 12
+  },
+  compactContentWidth: 1440, // in pixels
   navbar: {
-    type: 'fixed', // 'fixed', 'static'
-    contentWidth: 'wide', // 'compact', 'wide'
-    floating: false, //! true, false (This will not work in the Horizontal Layout)
-    detached: true, //! true, false (This will not work in the Horizontal Layout or floating navbar is enabled)
-    blur: true // true, false
+    type: 'fixed', // Options: 'fixed', 'static'
+    contentWidth: 'wide', // Options: 'compact', 'wide'
+    floating: false, // Not applicable for Horizontal Layout
+    detached: true, // Not applicable for Horizontal Layout or when navbar is floating
+    blur: true
   },
-  contentWidth: 'wide', // 'compact', 'wide'
+  contentWidth: 'wide', // Options: 'compact', 'wide'
   footer: {
-    type: 'static', // 'fixed', 'static'
-    contentWidth: 'compact', // 'compact', 'wide'
-    detached: true //! true, false (This will not work in the Horizontal Layout)
+    type: 'static', // Options: 'fixed', 'static'
+    contentWidth: 'compact', // Options: 'compact', 'wide'
+    detached: true // Not applicable for Horizontal Layout
   },
-  disableRipple: false // true, false
+  disableRipple: false
 }
 
 export default themeConfig

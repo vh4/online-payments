@@ -32,8 +32,8 @@ import classnames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
+import type { RootState } from '@/app/store'
 import { resetInquiry, setPayment } from '@/app/store'
-import type { RootState} from '@/app/store';
 
 import { HitToApi } from '@/app/server/actions'
 
@@ -149,15 +149,16 @@ const InquiryCard = () => {
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Reff</TableCell>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.reff}</TableCell>
                     </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>Total</TableCell>
+                      <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>
+                        Rp. {parseInt(inquiry.total_bayar).toLocaleString()}
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 </Table>
               </TableContainer>
-              <Box sx={{ display: 'flex', p: 4, justifyContent: 'space-between' }}>
-                <Typography variant='subtitle1'>Total</Typography>
-                <Typography variant='subtitle1' fontWeight='bold'>
-                  Rp. {parseInt(inquiry.total_bayar).toLocaleString()}
-                </Typography>
-              </Box>
+
               <Box sx={{ display: 'flex', justifyContent: 'end' }}>
                 <Button
                   onClick={handlePayment}

@@ -9,7 +9,6 @@ import {
   Box,
   Button,
   Card,
-  CardContent,
   CardHeader,
   CircularProgress,
   Collapse,
@@ -32,8 +31,8 @@ import classnames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
+import type { RootState } from '@/app/store'
 import { resetInquiry, setPayment } from '@/app/store'
-import type { RootState} from '@/app/store';
 
 import { HitToApi } from '@/app/server/actions'
 
@@ -116,67 +115,65 @@ const InquiryCard = () => {
           }
         />
         <Collapse in={!collapse}>
-          <CardContent>
-            <Box>
-              <TableContainer
-                component={Paper}
-                sx={{
-                  boxShadow: 'none',
-                  borderRadius: 0
-                }}
+          <Box sx={{ p: 2 }}>
+            <TableContainer
+              component={Paper}
+              sx={{
+                boxShadow: 'none',
+                borderRadius: 0
+              }}
+            >
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
+                      Field
+                    </TableCell>
+                    <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
+                      Value
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Name</TableCell>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.namapelanggan}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Customer Number</TableCell>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.idpel1}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tarif / Daya</TableCell>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
+                      {inquiry.data.tarif} / {parseInt(inquiry.data.daya, 10).toLocaleString()}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>Total</TableCell>
+                    <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>
+                      Rp. {parseInt(inquiry.total_bayar).toLocaleString()}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Box sx={{ display: 'flex', justifyContent: 'end', mt: 2 }}>
+              <Button
+                onClick={handlePayment}
+                variant='contained'
+                color='success'
+                sx={{ left: 0 }}
+                disabled={loading}
+                startIcon={loading ? <CircularProgress size={20} /> : null}
               >
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
-                        Field
-                      </TableCell>
-                      <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
-                        Value
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Name</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.namapelanggan}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Customer Number</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.idpel1}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tarif / Daya</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                        {inquiry.data.tarif} / {parseInt(inquiry.data.daya, 10).toLocaleString()}
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <Box sx={{ display: 'flex', p: 4, justifyContent: 'space-between' }}>
-                <Typography variant='subtitle1'>Total</Typography>
-                <Typography variant='subtitle1' fontWeight='bold'>
-                  Rp. {parseInt(inquiry.total_bayar).toLocaleString()}
-                </Typography>
-              </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                <Button
-                  onClick={handlePayment}
-                  variant='contained'
-                  color='success'
-                  sx={{ left: 0 }}
-                  disabled={loading}
-                  startIcon={loading ? <CircularProgress size={20} /> : null}
-                >
-                  {loading ? 'Paying...' : 'Proceed With Payment'}
-                </Button>
-              </Box>
-              <Typography variant='body2' sx={{ p: 4, color: 'text.secondary' }}>
-                By proceeding, you agree to our Terms and Privacy Policy. Payments are non-refundable.
-              </Typography>
+                {loading ? 'Paying...' : 'Proceed With Payment'}
+              </Button>
             </Box>
-          </CardContent>
+            <Typography variant='body2' sx={{ p: 4, color: 'text.secondary' }}>
+              By proceeding, you agree to our Terms and Privacy Policy. Payments are non-refundable.
+            </Typography>
+          </Box>
           <Backdrop open={reload} sx={{ position: 'absolute', zIndex: 1301 }}>
             <CircularProgress color='inherit' />
           </Backdrop>

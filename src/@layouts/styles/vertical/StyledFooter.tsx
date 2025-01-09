@@ -2,8 +2,8 @@
 import type { Theme } from '@mui/material/styles'
 
 // Third-party Imports
-import styled from '@emotion/styled'
 import type { CSSObject } from '@emotion/styled'
+import styled from '@emotion/styled'
 
 // Config Imports
 import themeConfig from '@configs/themeConfig'
@@ -42,7 +42,7 @@ const StyledFooter = styled.footer<StyledFooterProps>`
 
     &.${verticalLayoutClasses.footerDetached} {
       pointer-events: none;
-      padding-inline: ${themeConfig.layoutPadding}px;
+      padding-inline: ${themeConfig.layoutPadding.desktop}px;
 
       & .${verticalLayoutClasses.footerContentWrapper} {
         pointer-events: auto;
@@ -70,7 +70,7 @@ const StyledFooter = styled.footer<StyledFooterProps>`
 
   & .${verticalLayoutClasses.footerContentWrapper} {
     padding-block: 16px;
-    padding-inline: ${themeConfig.layoutPadding}px;
+    padding-inline: ${themeConfig.layoutPadding.desktop}px;
   }
 
   ${({ overrideStyles }) => overrideStyles}

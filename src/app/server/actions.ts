@@ -57,7 +57,9 @@ const apiRequest = async (data: CheckPlnRequest): Promise<ApiResponse> => {
 
     return response.data
   } catch (error: any) {
-    throw new Error((error.response?.data && error.response.data.responseMessage) || error.message)
+    return error.response && error.response.data
+      ? error.response.data
+      : { responseCode: '68', responseMessage: error.message }
   }
 }
 

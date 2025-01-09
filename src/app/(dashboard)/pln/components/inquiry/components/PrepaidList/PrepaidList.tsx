@@ -9,7 +9,7 @@ interface PrepaidListProps {
 export const PrepaidList = ({ prepaidList, nominal, onNominalSelect }: PrepaidListProps) => {
   return (
     <div className='max-w-[60rem] py-4'>
-      <div className='grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-6'>
+      <div className='grid grid-cols-3 md:grid-cols-3 xl:grid-cols-3 gap-6'>
         {prepaidList.map(data => (
           <div
             key={data}

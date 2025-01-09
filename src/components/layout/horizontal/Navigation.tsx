@@ -24,7 +24,7 @@ const StyledDiv = styled.div<StyledDivProps>`
   ${({ isContentCompact, isBreakpointReached }) =>
     !isBreakpointReached &&
     `
-    padding: ${themeConfig.layoutPadding}px;
+    padding: ${themeConfig.layoutPadding.desktop}px;
 
     ${
       isContentCompact &&

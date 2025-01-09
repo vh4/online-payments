@@ -47,7 +47,7 @@ const InquiryCard = () => {
 
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
-  const [nominal, setNominal] = useState<number>(25000)
+  const [nominal, setNominal] = useState<number>(20000)
   const prepaidList = [20000, 50000, 100000, 200000, 500000, 1000000, 5000000, 10000000, 50000000]
 
   const handleBackDrop = () => {
@@ -158,7 +158,7 @@ const InquiryCard = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
-              <Box sx={{ display: 'flex', p: 2, justifyContent: 'space-between' }}>
+              <Box sx={{ display: 'flex', p: 2, justifyContent: 'center' }}>
                 <PrepaidList prepaidList={prepaidList} nominal={nominal} onNominalSelect={setNominal} />
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'end' }}>

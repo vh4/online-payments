@@ -4,6 +4,8 @@
 import classnames from 'classnames'
 
 // Type Imports
+import { useMediaQuery } from '@mui/material'
+
 import type { ChildrenType } from '@core/types'
 
 // Config Imports
@@ -25,6 +27,8 @@ const LayoutContent = ({ children }: ChildrenType) => {
   // Vars
   const contentCompact = settings.contentWidth === 'compact'
   const contentWide = settings.contentWidth === 'wide'
+  const isMobile = useMediaQuery('(max-width:600px)')
+  const padding = isMobile ? themeConfig.layoutPadding.mobile : themeConfig.layoutPadding.desktop
 
   return (
     <StyledMain
@@ -33,7 +37,7 @@ const LayoutContent = ({ children }: ChildrenType) => {
         [`${horizontalLayoutClasses.contentCompact} is-full`]: contentCompact,
         [horizontalLayoutClasses.contentWide]: contentWide
       })}
-      style={{ padding: themeConfig.layoutPadding }}
+      style={{ padding: padding }}
     >
       {children}
     </StyledMain>

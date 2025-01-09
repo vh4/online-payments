@@ -1,5 +1,4 @@
 // MUI Imports
-
 import { useTheme } from '@mui/material/styles'
 
 // Third-party Imports
@@ -63,7 +62,6 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
             onScrollY: container => scrollMenu(container, true)
           })}
     >
-      {/* Incase you also want to scroll NavHeader to scroll with Vertical Menu, remove NavHeader from above and paste it below this comment */}
       {/* Vertical Menu */}
       <Menu
         popoutMenuOffset={{ mainAxis: 17 }}
@@ -72,33 +70,19 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         renderExpandedMenuItemIcon={{ icon: <i className='ri-circle-fill' /> }}
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
-        {Menuitems.map((item, i) => {
-          // {/********SubHeader**********/}
+        {Menuitems.map(item => {
+          // Render subheader or menu item based on the item type
           if (item.subheader) {
-            return <NavGroup item={item} key={i} />
-
-            // {/********If Sub Menu**********/}
-            /* eslint no-else-return: "off" */
+            return <NavGroup item={item} key={item.id} /> // Use item.id for unique keys
           } else {
             return (
-              <>
-                <MenuItem href={`${item.href}`} icon={item.icon} key={i}>
-                  {item.title}
-                </MenuItem>
-              </>
+              <MenuItem href={item.href} icon={item.icon} key={item.id}>
+                {item.title}
+              </MenuItem>
             )
           }
         })}
       </Menu>
-      {/* <Menu
-        popoutMenuOffset={{ mainAxis: 17 }}
-        menuItemStyles={menuItemStyles(verticalNavOptions, theme)}
-        renderExpandIcon={({ open }) => <RenderExpandIcon open={open} transitionDuration={transitionDuration} />}
-        renderExpandedMenuItemIcon={{ icon: <i className='ri-circle-fill' /> }}
-        menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
-      >
-        <GenerateVerticalMenu menuData={menuData(dictionary, params)} />
-      </Menu> */}
     </ScrollWrapper>
   )
 }

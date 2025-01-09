@@ -2,8 +2,8 @@
 import type { Theme } from '@mui/material/styles'
 
 // Third-party Imports
-import styled from '@emotion/styled'
 import type { CSSObject } from '@emotion/styled'
+import styled from '@emotion/styled'
 
 // Config Imports
 import themeConfig from '@configs/themeConfig'
@@ -38,7 +38,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
       .${verticalLayoutClasses.navbar},
       &.${verticalLayoutClasses.headerFixed}.${verticalLayoutClasses.headerDetached}
       .${verticalLayoutClasses.navbar} {
-      max-inline-size: calc(${themeConfig.compactContentWidth}px - ${2 * themeConfig.layoutPadding}px);
+      max-inline-size: calc(${themeConfig.compactContentWidth}px - ${2 * themeConfig.layoutPadding.desktop}px);
     }
 
     .${verticalLayoutClasses.navbar} {
@@ -136,7 +136,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     .${verticalLayoutClasses.navbar},
     &:not(.${verticalLayoutClasses.headerFloating}).${verticalLayoutClasses.headerDetached}.scrolled
     .${verticalLayoutClasses.navbar} {
-    padding-inline: ${themeConfig.layoutPadding}px;
+    padding-inline: ${themeConfig.layoutPadding.desktop}px;
   }
 
   &.${verticalLayoutClasses.headerFloating} {
@@ -145,7 +145,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     .${verticalLayoutClasses.navbar} {
       background-color: var(--mui-palette-background-paper);
       border-radius: var(--border-radius);
-      padding-inline: ${themeConfig.layoutPadding}px;
+      padding-inline: ${themeConfig.layoutPadding.desktop}px;
       box-shadow: 0 4px 8px -4px rgb(var(--mui-mainColorChannels-shadow) / 0.42);
 
       [data-skin='bordered'] & {
@@ -158,12 +158,12 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     .${verticalLayoutClasses.navbar},
     &.${verticalLayoutClasses.headerFixed}.${verticalLayoutClasses.headerDetached}
     .${verticalLayoutClasses.navbar} {
-    inline-size: calc(100% - ${2 * themeConfig.layoutPadding}px);
+    inline-size: calc(100% - ${2 * themeConfig.layoutPadding.desktop}px);
   }
 
   &:not(.${verticalLayoutClasses.headerFloating}).${verticalLayoutClasses.headerStatic}
     .${verticalLayoutClasses.navbar} {
-    padding-inline: ${themeConfig.layoutPadding}px;
+    padding-inline: ${themeConfig.layoutPadding.desktop}px;
   }
 
   .${verticalLayoutClasses.navbar} {

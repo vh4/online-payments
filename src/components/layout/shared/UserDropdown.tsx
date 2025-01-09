@@ -36,7 +36,7 @@ const UserDropdown = () => {
   }
 
   const handleUserLogout = async () => {
-    signOut()
+    await signOut({ callbackUrl: process.env.NEXT_PUBLIC_APP_URL })
   }
 
   return (

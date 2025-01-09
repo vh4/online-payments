@@ -5,10 +5,10 @@ import { AiOutlineThunderbolt } from 'react-icons/ai'
 
 const Menuitems = [
   {
+    id: uniqueId(),
     navlabel: true,
     subheader: 'Home'
   },
-
   {
     id: uniqueId(),
     title: 'Dashboard',
@@ -16,6 +16,7 @@ const Menuitems = [
     href: '/home'
   },
   {
+    id: uniqueId(),
     navlabel: true,
     subheader: 'MENU'
   },
