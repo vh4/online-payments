@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 // Component Imports
 import InquiryCard from './Card'
 
-const InquiryPlnpra30 = () => {
+const InquiryPlnprah = () => {
   return (
     <Box>
       <InquiryCard />
@@ -13,4 +13,4 @@ const InquiryPlnpra30 = () => {
   )
 }
 
-export default InquiryPlnpra30
+export default InquiryPlnprah

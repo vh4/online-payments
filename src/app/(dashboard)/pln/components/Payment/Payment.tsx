@@ -19,7 +19,7 @@ const Payment = () => {
         return <PaymentPlnpasch />
       case 'plnnon':
         return <PaymentPlnnon />
-      case 'plnpra30':
+      case 'plnprah':
         return <PaymentPlnPrepaid />
       default:
         return <Box>No product found</Box>

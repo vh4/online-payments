@@ -82,7 +82,7 @@ export const HitToApi = async ({
     ref1: uuid()
   }
 
-  if (product == 'PLNPRA30') {
+  if (product == 'PLNPRAH') {
     if (mti == 'bayar') {
       request['nominal'] = nominal
     } else {

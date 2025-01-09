@@ -1,7 +1,8 @@
 'use client'
+import { useRef, useState } from 'react'
 
 // React Imports
-import { useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 
 // MUI Imports
 import Avatar from '@mui/material/Avatar'
@@ -11,7 +12,6 @@ import { IoIosLogOut } from 'react-icons/io'
 
 // Hook Imports
 import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/router'
 
 // Styled component for badge content
 const BadgeContentSpan = styled('span')({

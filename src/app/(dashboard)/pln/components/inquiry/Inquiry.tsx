@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '@/app/store'
 import InquiryPlnnon from './components/plnnon'
 import InquiryPlnpasch from './components/plnpasch'
-import InquiryPlnpra30 from './components/PrepaidList'
+import InquiryPlnprah from './components/PrepaidList'
 
 const Inquiry = () => {
   const product = useSelector((state: RootState) => state.inquiry.kodeproduk)?.toLowerCase()
@@ -19,8 +19,8 @@ const Inquiry = () => {
         return <InquiryPlnpasch />
       case 'plnnon':
         return <InquiryPlnnon />
-      case 'plnpra30':
-        return <InquiryPlnpra30 />
+      case 'plnprah':
+        return <InquiryPlnprah />
       default:
         return <Box>No product found</Box>
     }

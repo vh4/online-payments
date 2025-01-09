@@ -52,7 +52,7 @@ export default function Page() {
 
     try {
       const productMap: Record<number, string> = {
-        1: 'PLNPRA30',
+        1: 'PLNPRAH',
         2: 'PLNPASCH',
         3: 'PLNNON'
       }
