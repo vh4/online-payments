@@ -7,18 +7,18 @@ export interface ListPLN {
 export const mailingLists: ListPLN[] = [
   {
     name: 'Prepaid',
-    lastMessage: 'Enter the token number for Prepaid PLN.',
-    title: 'No.Meter/ID Pelanggan'
+    lastMessage: 'Masukkan nomor token untuk PLN Prabayar.',
+    title: 'No Meter/ID Pelanggan'
   },
   {
     name: 'Postpaid',
-    lastMessage: 'Make a payment for your Postpaid PLN bill.',
+    lastMessage: 'Lakukan pembayaran untuk tagihan PLN Pascabayar Anda.',
     title: 'ID Pelanggan'
   },
   {
     name: 'Non-Tag List',
-    lastMessage: 'Easily pay your Non-Tag List PLN bill.',
-    title: 'Registration Number'
+    lastMessage: 'Bayar tagihan PLN Non-Tagihan Listrik Anda dengan mudah.',
+    title: 'No Registrasi'
   }
 ]
 

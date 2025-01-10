@@ -94,7 +94,7 @@ const InquiryCard = () => {
   return (
     <Fade in={!visibility} timeout={300}>
       <Card
-        className='relative mt-4 xl:-mt-8'
+        className='mt-4 md:-mt-16'
         sx={{
           boxShadow: { xs: 'none', sm: 'inherit' },
           border: { xs: 'none', sm: '1px' }

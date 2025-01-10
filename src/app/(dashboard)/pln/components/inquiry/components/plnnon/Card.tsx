@@ -90,15 +90,15 @@ const InquiryCard = () => {
   return (
     <Fade in={!visibility} timeout={300}>
       <Card
-        className='relative mt-4 xl:-mt-8'
+        className='relative mt-4 md:-mt-16'
         sx={{
           boxShadow: { xs: 'none', sm: 'inherit' },
           border: { xs: 'none', sm: '1px' }
         }}
       >
         <CardHeader
-          title='Detail Inquiry'
-          subheader="Click 'Pay' to proceed with your payment."
+          title='Info Pembayaran Tagihan'
+          subheader="Click 'Pay' untuk melanjutkan proses pembayaran."
           action={
             <Box>
               <Box sx={{ display: 'flex', gap: 1 }}>
@@ -138,12 +138,12 @@ const InquiryCard = () => {
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Name</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.namapelanggan}</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>No Registrasi</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.idpel1}</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Customer Number</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.idpel1}</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Nama</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.namapelanggan}</TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Reff</TableCell>
@@ -168,11 +168,12 @@ const InquiryCard = () => {
                   disabled={loading}
                   startIcon={loading ? <CircularProgress size={20} /> : null}
                 >
-                  {loading ? 'Paying...' : 'Proceed With Payment'}
+                  {loading ? 'Paying...' : 'Proceed Payment'}
                 </Button>
               </Box>
               <Typography variant='body2' sx={{ p: 4, color: 'text.secondary' }}>
-                By proceeding, you agree to our Terms and Privacy Policy. Payments are non-refundable.
+                Dengan melanjutkan, Anda menyetujui Ketentuan dan Kebijakan Privasi kami. Pembayaran tidak dapat
+                dikembalikan.{' '}
               </Typography>
             </Box>
           </CardContent>

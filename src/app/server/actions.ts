@@ -18,6 +18,15 @@ interface CheckPlnRequest {
   nominal?: number
 }
 
+export interface globalSetting {
+  kunci: string
+  nilai: string
+  keterangan: string
+  data?: Record<string, string | any>[] | any
+  responseCode?: string
+  responseMessage?: string
+}
+
 const axiosInstance = axios.create({
   baseURL: process.env.RB_URL
 })
@@ -55,6 +64,17 @@ const apiRequest = async (data: CheckPlnRequest): Promise<ApiResponse> => {
 
     const response = await axiosInstance.post<ApiResponse>(`/api/${mti}/${data.produk.toLowerCase()}`, data)
 
+    return response.data
+  } catch (error: any) {
+    return error.response && error.response.data
+      ? error.response.data
+      : { responseCode: '68', responseMessage: error.message }
+  }
+}
+
+export const getProduct = async (): Promise<globalSetting> => {
+  try {
+    const response = await axiosInstance.get<globalSetting>(`/api/utility/list-product`)
     return response.data
   } catch (error: any) {
     return error.response && error.response.data

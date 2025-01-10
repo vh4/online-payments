@@ -1,25 +1,19 @@
 'use client'
 
-import { useState } from 'react'
-
-import { Box, CircularProgress, Grid, TextField, Typography, useTheme } from '@mui/material'
-
-import Button from '@mui/material/Button'
-
-import { Controller, useForm } from 'react-hook-form'
-
-import { useDispatch, useSelector } from 'react-redux'
-
-import { toast } from 'react-toastify'
-
 import PageContainer from '@/app/(dashboard)/components/container/PageContainer'
 import DashboardCard from '@/app/(dashboard)/components/shared/DashboardCard'
 import { Selection } from '@/app/(dashboard)/pln/components/Selection/index'
 import { PLNGuide } from '@/app/fake-db/pages/faq'
-import { HitToApi } from '@/app/server/actions'
+import { getProduct, globalSetting, HitToApi } from '@/app/server/actions'
 import type { RootState } from '@/app/store'
 import { resetInquiry, resetPayment, setInquiry } from '@/app/store'
 import { mailingLists } from '@/data/pln'
+import { Box, CircularProgress, Grid, TextField, Typography, useTheme } from '@mui/material'
+import Button from '@mui/material/Button'
+import { useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import FAQ from './components/Faq/index'
 import Inquiry from './components/inquiry/Inquiry'
@@ -41,9 +35,24 @@ export default function Page() {
   const payment = useSelector((state: RootState) => state.payment)
   const [selectedMailingList, setSelectedMailingList] = useState<string>('Prepaid')
   const [loading, setLoading] = useState(false)
+  const [product, setProduct] = useState<globalSetting[]>([])
   const theme = useTheme()
   const isMdUp = theme.breakpoints.up('xl')
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    const fetchProduct = async (): Promise<void> => {
+      try {
+        const response = await getProduct()
+        const products = response.data
+        setProduct(products)
+      } catch (error) {
+        console.error('Error fetching product:', error)
+      }
+    }
+
+    fetchProduct()
+  }, [])
 
   const onSubmit = async (formValue: FormData) => {
     setLoading(true)
@@ -51,11 +60,10 @@ export default function Page() {
     dispatch(resetPayment())
 
     try {
-      const productMap: Record<number, string> = {
-        1: 'PLNPRAH',
-        2: 'PLNPASCH',
-        3: 'PLNNON'
-      }
+      const productMap = product.reduce<Record<number, any>>((acc, item, index) => {
+        acc[index + 1] = item.nilai
+        return acc
+      }, {})
 
       const request = {
         mti: 'cek',
@@ -95,7 +103,7 @@ export default function Page() {
       <Box sx={{ p: { sm: 0, md: 4 } }}>
         <Grid {...(isMdUp ? { container: true } : {})} spacing={3}>
           <Grid item xs={12}>
-            <DashboardCard title='Purchase Token or Pay Electricity Bill.'>
+            <DashboardCard title='Beli Token atau Bayar Tagihan Listrik.'>
               <Grid {...(isMdUp ? { container: true } : {})} spacing={3}>
                 {/* Form Section */}
                 <Grid item xs={12} md={7}>

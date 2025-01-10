@@ -6,37 +6,37 @@ export const PLNGuide: FaqType[] = [
     id: 'pln',
     title: 'PLN Payment',
     icon: 'ri-questionnaire-fill',
-    subtitle: 'Get help with PLN payment',
+    subtitle: 'Dapatkan bantuan untuk pembayaran PLN',
     questionsAnswers: [
       {
         id: 'order-payment',
-        question: 'When is payment taken for my order?',
+        question: 'Kapan pembayaran untuk pesanan saya dilakukan?',
         answer:
-          'Payment is taken during the checkout process when you pay for your order. The order number that appears on the confirmation screen indicates payment has been successfully processed.'
+          'Pembayaran dilakukan selama proses checkout saat Anda membayar pesanan Anda. Nomor pesanan yang muncul di layar konfirmasi menunjukkan bahwa pembayaran telah berhasil diproses.'
       },
       {
         id: 'order',
-        question: 'How do I pay for my order?',
+        question: 'Bagaimana cara membayar pesanan saya?',
         answer:
-          'Before proceeding with the payment, ensure you have sufficient balance in your account. If your balance is insufficient, you need to deposit funds first using methods like bank transfer, e-wallets (e.g., OVO, GoPay, Dana), or credit/debit card. Once your balance is sufficient, you can proceed to checkout and complete your payment.'
+          'Sebelum melanjutkan pembayaran, pastikan saldo di akun Anda mencukupi. Jika saldo Anda tidak mencukupi, Anda perlu mengisi saldo terlebih dahulu menggunakan metode seperti transfer bank, e-wallet (misalnya, OVO, GoPay, Dana), atau kartu kredit/debit. Setelah saldo Anda mencukupi, Anda dapat melanjutkan ke proses checkout dan menyelesaikan pembayaran.'
       },
       {
         id: 'placing-order',
-        question: "What should I do if I'm having trouble placing an order?",
+        question: 'Apa yang harus saya lakukan jika mengalami kesulitan saat melakukan pemesanan?',
         answer:
-          'For any technical difficulties you are experiencing with our website, please contact us at our support portal, or you can call us via email us at admin@rajabiller.com.'
+          'Jika Anda mengalami kesulitan teknis dengan situs web kami, silakan hubungi kami melalui portal dukungan kami, atau Anda dapat mengirimkan email ke admin@rajabiller.com.'
       },
       {
         id: 'users-license',
-        question: 'Which license do I need for an end product that is only accessible to paying users?',
+        question: 'Lisensi apa yang saya butuhkan untuk produk akhir yang hanya dapat diakses oleh pengguna berbayar?',
         answer:
-          'If you have paying users or you are developing any SaaS products, you need an Extended License. For each product, you need a license. You can get free lifetime updates as well.'
+          'Jika Anda memiliki pengguna berbayar atau sedang mengembangkan produk SaaS apa pun, Anda memerlukan Lisensi Diperluas. Untuk setiap produk, Anda memerlukan lisensi. Anda juga bisa mendapatkan pembaruan gratis seumur hidup.'
       },
       {
         id: 'subscription-review',
-        question: 'Does my subscription automatically renew?',
+        question: 'Apakah langganan saya akan diperpanjang secara otomatis?',
         answer:
-          'No, this is not a subscription-based item. Payments are processed individually and do not renew automatically.'
+          'Tidak, ini bukan item berbasis langganan. Pembayaran dilakukan secara individu dan tidak diperpanjang secara otomatis.'
       }
     ]
   }

@@ -11,13 +11,18 @@ import PaymentPlnpasch from './components/plnpasch'
 import PaymentPlnPrepaid from './components/prepaid'
 
 const Payment = () => {
-  const product = useSelector((state: RootState) => state.payment.kodeproduk)?.toLowerCase()
+  let products = useSelector((state: RootState) => state.payment.kodeproduk)?.toLowerCase()
 
   const MenuPayment = () => {
-    switch (product) {
+    if (products.substring(0, 6) === 'plnpra') {
+      products = 'plnprah'
+    } else if (products.substring(0, 6) === 'plnnon') {
+      products = 'plnnonh'
+    }
+    switch (products) {
       case 'plnpasch':
         return <PaymentPlnpasch />
-      case 'plnnon':
+      case 'plnnonh':
         return <PaymentPlnnon />
       case 'plnprah':
         return <PaymentPlnPrepaid />

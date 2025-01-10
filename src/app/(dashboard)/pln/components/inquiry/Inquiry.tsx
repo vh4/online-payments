@@ -11,13 +11,18 @@ import InquiryPlnpasch from './components/plnpasch'
 import InquiryPlnprah from './components/PrepaidList'
 
 const Inquiry = () => {
-  const product = useSelector((state: RootState) => state.inquiry.kodeproduk)?.toLowerCase()
+  let products = useSelector((state: RootState) => state.inquiry.kodeproduk)?.toLowerCase()
 
   const MenuInquiry = () => {
-    switch (product) {
+    if (products.substring(0, 6) === 'plnpra') {
+      products = 'plnprah'
+    } else if (products.substring(0, 6) === 'plnnon') {
+      products = 'plnnonh'
+    }
+    switch (products) {
       case 'plnpasch':
         return <InquiryPlnpasch />
-      case 'plnnon':
+      case 'plnnonh':
         return <InquiryPlnnon />
       case 'plnprah':
         return <InquiryPlnprah />

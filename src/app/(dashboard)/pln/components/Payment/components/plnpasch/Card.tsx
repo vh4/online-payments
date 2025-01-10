@@ -106,17 +106,17 @@ const PaymentCard = () => {
                   </TableHead> */}
                   <TableBody>
                     <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Name</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.data.namapelanggan}</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>ID Pelanggan</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.idpel1}</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Customer Number</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.idpel1}</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Nama</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.data.namapelanggan}</TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tarif / Daya</TableCell>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                        {payment.data.tarif} / {parseInt(payment.data.daya, 10).toLocaleString()}
+                        {payment.data.tarif} / {parseInt(payment.data.daya, 10).toLocaleString()} VA
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -156,8 +156,8 @@ const PaymentCard = () => {
                 </Button>
               </Box>
               <Typography variant='body2' sx={{ px: 4, py: 6, color: 'text.secondary' }}>
-                By proceeding with this payment, you agree to our Terms and Privacy Policy. Please note that all
-                payments are final and non-refundable.
+                Dengan melanjutkan pembayaran ini, Anda menyetujui Ketentuan dan Kebijakan Privasi kami. semua
+                pembayaran bersifat final dan tidak dapat dikembalikan.
               </Typography>
             </Box>
           </CardContent>
