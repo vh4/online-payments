@@ -37,7 +37,7 @@ const UserDropdown = () => {
 
   const handleUserLogout = async () => {
     await signOut({
-      callbackUrl: 'https://h2h-saas-ppob.bmstaging.id'
+      callbackUrl: process.env.NEXTAUTH_URL
     })
   }
 
