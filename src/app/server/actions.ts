@@ -75,7 +75,9 @@ const apiRequest = async (data: CheckPlnRequest): Promise<ApiResponse> => {
 export const getProduct = async (): Promise<globalSetting> => {
   try {
     const response = await axiosInstance.get<globalSetting>(`/api/utility/list-product`)
-    return response.data
+
+    
+return response.data
   } catch (error: any) {
     return error.response && error.response.data
       ? error.response.data

@@ -1,19 +1,28 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+
+import { Box, CircularProgress, Grid, TextField, Typography, useTheme } from '@mui/material'
+
+import Button from '@mui/material/Button'
+
+import { Controller, useForm } from 'react-hook-form'
+
+import { useDispatch, useSelector } from 'react-redux'
+
+import { toast } from 'react-toastify'
+
 import PageContainer from '@/app/(dashboard)/components/container/PageContainer'
 import DashboardCard from '@/app/(dashboard)/components/shared/DashboardCard'
 import { Selection } from '@/app/(dashboard)/pln/components/Selection/index'
 import { PLNGuide } from '@/app/fake-db/pages/faq'
-import { getProduct, globalSetting, HitToApi } from '@/app/server/actions'
+import type { globalSetting} from '@/app/server/actions';
+import { getProduct, HitToApi } from '@/app/server/actions'
 import type { RootState } from '@/app/store'
 import { resetInquiry, resetPayment, setInquiry } from '@/app/store'
 import { mailingLists } from '@/data/pln'
-import { Box, CircularProgress, Grid, TextField, Typography, useTheme } from '@mui/material'
-import Button from '@mui/material/Button'
-import { useEffect, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
+
+
 
 import FAQ from './components/Faq/index'
 import Inquiry from './components/inquiry/Inquiry'
@@ -45,6 +54,7 @@ export default function Page() {
       try {
         const response = await getProduct()
         const products = response.data
+
         setProduct(products)
       } catch (error) {
         console.error('Error fetching product:', error)
@@ -62,7 +72,8 @@ export default function Page() {
     try {
       const productMap = product.reduce<Record<number, any>>((acc, item, index) => {
         acc[index + 1] = item.nilai
-        return acc
+        
+return acc
       }, {})
 
       const request = {

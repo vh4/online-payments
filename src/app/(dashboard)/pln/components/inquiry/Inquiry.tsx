@@ -19,6 +19,7 @@ const Inquiry = () => {
     } else if (products.substring(0, 6) === 'plnnon') {
       products = 'plnnonh'
     }
+
     switch (products) {
       case 'plnpasch':
         return <InquiryPlnpasch />
