@@ -6,7 +6,7 @@ export const isOptions = {
   debug: true,
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    maxAge: 60 * 60 * 1000
+    maxAge: 60 * 60
   },
   providers: [
     CredentialsProvider({
