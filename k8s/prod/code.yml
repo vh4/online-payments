@@ -47,10 +47,10 @@ metadata:
   name: svc-saas-ppob
 spec:
   ports:
-  - name: svc-saas-ppob
-    port: 80
-    protocol: TCP
-    targetPort: 3000
+    - name: svc-saas-ppob
+      port: 80
+      protocol: TCP
+      targetPort: 3000
   selector:
     app: saas-ppob
   type: NodePort
@@ -64,7 +64,7 @@ metadata:
 spec:
   tls:
     - hosts:
-      - saas-ppob.rajabiller.com
+        - saas-ppob.rajabiller.com
   rules:
     - host: saas-ppob.rajabiller.com
       http:
