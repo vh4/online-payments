@@ -153,7 +153,7 @@ const InquiryCard = () => {
                 <Typography sx={{ px: 2 }} variant='body2'>
                   Pilih Denom :
                 </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'start' }}>
                   <PrepaidList prepaidList={prepaidList} nominal={nominal} onNominalSelect={setNominal} />
                 </Box>
               </Box>

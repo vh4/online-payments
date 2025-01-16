@@ -20,7 +20,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
   Typography
 } from '@mui/material'
@@ -126,7 +125,7 @@ const InquiryCard = () => {
                 }}
               >
                 <Table>
-                  <TableHead>
+                  {/* <TableHead>
                     <TableRow>
                       <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
                         Field
@@ -135,22 +134,34 @@ const InquiryCard = () => {
                         Value
                       </TableCell>
                     </TableRow>
-                  </TableHead>
+                  </TableHead> */}
                   <TableBody>
                     <TableRow>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Jenis Transaksi</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.transaksi}</TableCell>
+                    </TableRow>
+                    <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>No Registrasi</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.idpel1}</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.noregistration}</TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Nama</TableCell>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.namapelanggan}</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Reff</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.reff}</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tagihan</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
+                        Rp. {parseInt(inquiry.data.biaya_pln).toLocaleString()}
+                      </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>Total</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Biaya Admin</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
+                        Rp. {parseInt(inquiry.data.admin_bank).toLocaleString()}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>Total Tagihan</TableCell>
                       <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>
                         Rp. {parseInt(inquiry.total_bayar).toLocaleString()}
                       </TableCell>

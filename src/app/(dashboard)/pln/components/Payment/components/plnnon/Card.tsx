@@ -4,18 +4,14 @@
 import { useState } from 'react'
 
 import { BsFillPatchCheckFill } from 'react-icons/bs'
-import { PiDownloadSimple } from 'react-icons/pi'
 
 // MUI Imports
 import {
-  Backdrop,
   Box,
   Button,
   Card,
   CardContent,
   CardHeader,
-  CircularProgress,
-  Collapse,
   Fade,
   Paper,
   Table,
@@ -30,6 +26,7 @@ import {
 import { useSelector } from 'react-redux'
 
 import type { RootState } from '@/app/store'
+import { PiDownloadSimple } from 'react-icons/pi'
 
 const PaymentCard = () => {
   // States
@@ -52,15 +49,15 @@ const PaymentCard = () => {
   return (
     <Fade in={!visibility} timeout={300}>
       <Card
-        className='relative mt-0 xl:-mt-20'
+        className='relative mt-0 xl:-mt-10'
         sx={{
-          boxShadow: { xs: 'none', sm: 'inherit' },
-          border: { xs: 'none', sm: '1px' }
+          borderRadius: 2, // Rounded corners
+          overflow: 'hidden' // Ensure the footer aligns perfectly with the Card
         }}
       >
         <CardHeader
           sx={{
-            textAlign: 'center' // Mengatur header agar di tengah
+            textAlign: 'center' // Center-align the header
           }}
           title={
             <Box
@@ -69,100 +66,134 @@ const PaymentCard = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: 2, // Jarak antar elemen
-                mt: 2
+                gap: 2, // Space between elements
+                mt: -2
               }}
             >
-              <BsFillPatchCheckFill size={42} className='text-green-500 my-2' />
+              <BsFillPatchCheckFill size={24} className='text-green-500 my-2' />
               <Typography sx={{ my: 0 }} variant='h5'>
-                Payment Success!
+                Pembayaran anda berhasil!
               </Typography>
-              <Typography variant='h3' sx={{ fontWeight: 'bold', my: 0 }}>
-                Rp. {parseInt(payment.total_bayar).toLocaleString()}
+              <Typography sx={{ my: 0 }} variant='subtitle2'>
+                {payment.tanggal}
               </Typography>
             </Box>
           }
         />
-        <Collapse in={!collapse}>
-          <CardContent>
-            <Box>
-              <TableContainer
-                component={Paper}
-                sx={{
-                  boxShadow: 'none',
-                  borderRadius: 0
-                }}
-              >
-                <Table>
-                  {/* <TableHead>
-                    <TableRow>
-                      <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
-                        Field
-                      </TableCell>
-                      <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
-                        Value
-                      </TableCell>
-                    </TableRow>
-                  </TableHead> */}
-                  <TableBody>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>No Registrasi</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.idpel1}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Nama</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.data.namapelanggan}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Reff</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.data.reff}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tanggal Registrasi</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.data.registrationdate}</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
+        <CardContent>
+          <TableContainer
+            component={Paper}
+            sx={{
+              boxShadow: 'none',
+              borderRadius: 0
+            }}
+          >
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>Jenis Transaksi</TableCell>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>{payment.data.transaksi}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>No Registrasi</TableCell>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>
+                    {payment.data.noregistration}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>Tanggal Registrasi</TableCell>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>
+                    {payment.data.registrationdate}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>Nama</TableCell>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>
+                    {payment.data.namapelanggan}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>ID Pelanggan</TableCell>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3 }}>{payment.data.idpel}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3, color: '#9ca3af' }}>Tagihan</TableCell>
+                  <TableCell sx={{ borderBottom: '0.1px solid #f3f4f6', py: 3, color: '#9ca3af' }}>
+                    Rp. {parseInt(payment.data.biaya_pln).toLocaleString()}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ borderBottom: '2px solid #030712', py: 3, color: '#9ca3af' }}>Biaya Admin</TableCell>
+                  <TableCell sx={{ borderBottom: '2px solid #030712', py: 3, color: '#9ca3af' }}>
+                    Rp. {parseInt(payment.data.admin_bank).toLocaleString()}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ borderBottom: '2px solid #030712', fontWeight: 'bold' }}>Total Tagihan</TableCell>
+                  <TableCell sx={{ borderBottom: '2px solid #030712', fontWeight: 'bold' }}>
+                    Rp. {parseInt(payment.total_bayar).toLocaleString()}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Box>
+            <Typography
+              variant='body2'
+              sx={{
+                display: 'flex',
+                justifyContent: 'start',
+                px: 4,
+                pt: 6,
+                color: 'text.secondary'
+              }}
+            >
+              ~{payment.data.kata1}.~
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              flexWrap: 'wrap',
+              gap: 2,
+              my: 4
+            }}
+          >
+            <Button
+              variant='outlined'
+              color='success'
+              sx={{
+                minWidth: '120px'
+              }}
+              onClick={() => handlePrint(payment.struk)}
+            >
               <Box
                 sx={{
                   display: 'flex',
-                  justifyContent: 'flex-end',
-                  flexWrap: 'wrap',
-                  gap: 2,
-                  mt: 8
+                  alignItems: 'center',
+                  gap: 1
                 }}
               >
-                <Button
-                  variant='outlined'
-                  color='success'
-                  sx={{
-                    minWidth: '120px'
-                  }}
-                  onClick={() => handlePrint(payment.struk)}
-                >
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1
-                    }}
-                  >
-                    <PiDownloadSimple size={24} />
-                    <Typography>Download</Typography>
-                  </Box>
-                </Button>
+                <PiDownloadSimple size={24} />
+                <Typography>Download</Typography>
               </Box>
-              <Typography variant='body2' sx={{ px: 4, py: 6, color: 'text.secondary' }}>
-                Dengan melanjutkan pembayaran ini, Anda menyetujui Ketentuan dan Kebijakan Privasi kami. semua
-                pembayaran bersifat final dan tidak dapat dikembalikan.
-              </Typography>
-            </Box>
-          </CardContent>
-          <Backdrop open={reload} sx={{ position: 'absolute', zIndex: 1301 }}>
-            <CircularProgress color='inherit' />
-          </Backdrop>
-        </Collapse>
+            </Button>
+          </Box>
+        </CardContent>
+        {/* Footer Section */}
+        <Box
+          sx={{
+            backgroundColor: '#4ade80', // Green background for the footer
+            color: 'white', // White text for contrast
+            textAlign: 'center', // Center the footer text
+            padding: '16px' // Add padding for spacing
+          }}
+        >
+          <Typography variant='body2' sx={{}}>
+            {payment.data.footer}
+          </Typography>
+        </Box>
       </Card>
     </Fade>
   )
