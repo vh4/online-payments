@@ -23,15 +23,13 @@ import {
 } from '@mui/material'
 
 // Third-party Imports
+import { PiDownloadSimple } from 'react-icons/pi'
 import { useSelector } from 'react-redux'
 
 import type { RootState } from '@/app/store'
-import { PiDownloadSimple } from 'react-icons/pi'
 
 const PaymentCard = () => {
   // States
-  const [collapse] = useState(false)
-  const [reload] = useState(false)
   const [visibility] = useState(false)
   const payment = useSelector((state: RootState) => state.payment)
 
