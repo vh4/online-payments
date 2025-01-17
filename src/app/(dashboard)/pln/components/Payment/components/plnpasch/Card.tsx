@@ -1,21 +1,16 @@
 'use client'
 
-// React Imports
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import { BsFillPatchCheckFill } from 'react-icons/bs'
-import { PiDownloadSimple } from 'react-icons/pi'
+import gsap from 'gsap'
+import { useSelector } from 'react-redux'
 
-// MUI Imports
 import {
-  Backdrop,
   Box,
   Button,
   Card,
   CardContent,
   CardHeader,
-  CircularProgress,
-  Collapse,
   Fade,
   Paper,
   Table,
@@ -26,17 +21,39 @@ import {
   Typography
 } from '@mui/material'
 
-// Third-party Imports
-import { useSelector } from 'react-redux'
+import { BsFillPatchCheckFill } from 'react-icons/bs'
+import { PiDownloadSimple } from 'react-icons/pi'
+import { RxChevronDown, RxChevronUp } from 'react-icons/rx'
 
 import type { RootState } from '@/app/store'
 
 const PaymentCard = () => {
   // States
-  const [collapse] = useState(false)
-  const [reload] = useState(false)
   const [visibility] = useState(false)
   const payment = useSelector((state: RootState) => state.payment)
+
+  const [showMore, setShowMore] = useState(false)
+  const detailsRef = useRef(null)
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    if (showMore) {
+      gsap.to(detailsRef.current, {
+        height: 'auto',
+        duration: 0.5,
+        opacity: 1,
+        y: 0,
+        scrollBehavior: 'true'
+      })
+      gsap.to(containerRef.current, { y: 0, duration: 0.5 })
+    } else {
+      gsap.to(detailsRef.current, { height: 0, duration: 0.5, opacity: 0 })
+    }
+  }, [showMore])
+
+  const toggleShowMore = () => {
+    setShowMore(!showMore)
+  }
 
   const handlePrint = (url: string) => {
     const printWindow = window.open(url, '_blank', 'width=800,height=600')
@@ -52,15 +69,16 @@ const PaymentCard = () => {
   return (
     <Fade in={!visibility} timeout={300}>
       <Card
-        className='relative mt-0 xl:-mt-20'
+        ref={containerRef}
+        className='relative mt-8 xl:-mt-10'
         sx={{
-          boxShadow: { xs: 'none', sm: 'inherit' },
-          border: { xs: 'none', sm: '1px' }
+          borderRadius: 2, // Rounded corners
+          overflow: 'hidden' // Ensure the footer aligns perfectly with the Card
         }}
       >
         <CardHeader
           sx={{
-            textAlign: 'center' // Mengatur header agar di tengah
+            textAlign: 'center' // Center-align the header
           }}
           title={
             <Box
@@ -69,102 +87,200 @@ const PaymentCard = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: 2, // Jarak antar elemen
-                mt: 2
+                gap: 2, // Space between elements
+                mt: -2
               }}
             >
-              <BsFillPatchCheckFill size={42} className='text-green-500 my-2' />
+              <BsFillPatchCheckFill size={28} className='text-green-500' />
               <Typography sx={{ my: 0 }} variant='h5'>
-                Payment Success!
+                Pembayaran anda berhasil!
               </Typography>
-              <Typography variant='h3' sx={{ fontWeight: 'bold', my: 0 }}>
-                Rp. {parseInt(payment.total_bayar).toLocaleString()}
+              <Typography sx={{ my: 0 }} variant='subtitle2'>
+                {payment.tanggal}
               </Typography>
             </Box>
           }
         />
-        <Collapse in={!collapse}>
-          <CardContent>
-            <Box>
-              <TableContainer
-                component={Paper}
-                sx={{
-                  boxShadow: 'none',
-                  borderRadius: 0
-                }}
-              >
-                <Table>
-                  {/* <TableHead>
-                    <TableRow>
-                      <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
-                        Field
-                      </TableCell>
-                      <TableCell align='left' sx={{ borderBottom: '1px solid #ccc', fontWeight: 'bold' }}>
-                        Value
-                      </TableCell>
-                    </TableRow>
-                  </TableHead> */}
-                  <TableBody>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>ID Pelanggan</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.idpel1}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Nama</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.data.namapelanggan}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tarif / Daya</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                        {payment.data.tarif} / {parseInt(payment.data.daya, 10).toLocaleString()} VA
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Bulan / Tahun</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{payment.data.blth}</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
+        <CardContent>
+          <TableContainer
+            component={Paper}
+            sx={{
+              boxShadow: 'none',
+              borderRadius: 0
+            }}
+          >
+            <Table>
+              <TableBody>
+                {[
+                  { label: 'ID Pelanggan', value: payment.data.idpel },
+                  { label: 'Nama', value: payment.data.namapelanggan },
+                  {
+                    label: 'Tarif / Daya',
+                    value: `${payment.data.tarif} / ${parseInt(payment.data.daya).toLocaleString()} VA`
+                  },
+                  {
+                    label: 'BL / TH',
+                    value: payment.data.blth
+                  },
+                  { label: 'SReff', value: payment.data.no_ref },
+                  { label: 'Stand Meter', value: payment.data.stan_meter }
+                ].map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell
+                      sx={{
+                        borderBottom: '0.1px solid #f3f4f6',
+                        width: '40%',
+                        textAlign: 'left', // Align text for labels
+                        padding: '8px'
+                      }}
+                    >
+                      {row.label}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        borderBottom: '0.1px solid #f3f4f6',
+                        width: '60%',
+                        textAlign: 'right', // Align text for values
+                        padding: '8px'
+                      }}
+                    >
+                      {row.value}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <Box
+              onClick={toggleShowMore}
+              sx={{ display: 'flex', cursor: 'pointer', justifyContent: 'center', alignItems: 'center' }}
+            >
+              {showMore ? <RxChevronUp size={24} /> : <RxChevronDown size={24} />}
+            </Box>
+          </TableContainer>
+          <TableContainer
+            component={Paper}
+            sx={{
+              boxShadow: 'none',
+              borderRadius: 0,
+              overflow: 'hidden',
+              opacity: 0
+            }}
+            ref={detailsRef}
+          >
+            <Table>
+              <TableBody>
+                {[
+                  { label: 'RP Tag PLN', value: `Rp. ${parseInt(payment.data.rp_tag_pln).toLocaleString()}` },
+                  {
+                    label: 'Admin Bank',
+                    value: `Rp. ${parseInt(payment.data.admin_bank).toLocaleString()}`,
+                    py: 3,
+                    color: '#9ca3af'
+                  },
+                  { label: 'Total Bayar', value: `Rp. ${parseInt(payment.total_bayar).toLocaleString()}`, bold: true }
+                ].map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell
+                      sx={{
+                        borderBottom: row.bold || row.color == '#9ca3af' ? '2px solid #030712' : '0.1px solid #f3f4f6',
+                        fontWeight: row.bold ? 'bold' : 'normal',
+                        width: '40%',
+                        textAlign: 'left',
+                        padding: '8px',
+                        py: row.py ? row.py : '',
+                        color: row.color ? row.color : ''
+                      }}
+                    >
+                      {row.label}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        borderBottom: row.bold || row.color == '#9ca3af' ? '2px solid #030712' : '0.1px solid #f3f4f6',
+                        fontWeight: row.bold ? 'bold' : 'normal',
+                        width: '60%',
+                        textAlign: 'right',
+                        padding: '8px',
+                        py: row.py ? row.py : '',
+                        color: row.color ? row.color : ''
+                      }}
+                    >
+                      {row.value}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Box>
+            <Typography
+              variant='body2'
+              sx={{
+                display: 'flex',
+                justifyContent: 'start',
+                px: 4,
+                pt: 6,
+                color: 'text.secondary'
+              }}
+            >
+              ~{payment.data.kata1}.~
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              flexWrap: 'wrap',
+              gap: 2,
+              my: 4
+            }}
+          >
+            <Button
+              variant='outlined'
+              color='success'
+              sx={{
+                minWidth: '120px'
+              }}
+              onClick={() => handlePrint(payment.struk)}
+            >
               <Box
                 sx={{
                   display: 'flex',
-                  justifyContent: 'flex-end',
-                  flexWrap: 'wrap',
-                  gap: 2,
-                  mt: 8
+                  alignItems: 'center',
+                  gap: 1
                 }}
               >
-                <Button
-                  variant='outlined'
-                  color='success'
-                  sx={{
-                    minWidth: '120px'
-                  }}
-                  onClick={() => handlePrint(payment.struk)}
-                >
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1
-                    }}
-                  >
-                    <PiDownloadSimple size={24} />
-                    <Typography>Download</Typography>
-                  </Box>
-                </Button>
+                <PiDownloadSimple size={24} />
+                <Typography>Download</Typography>
               </Box>
-              <Typography variant='body2' sx={{ px: 4, py: 6, color: 'text.secondary' }}>
-                Dengan melanjutkan pembayaran ini, Anda menyetujui Ketentuan dan Kebijakan Privasi kami. semua
-                pembayaran bersifat final dan tidak dapat dikembalikan.
-              </Typography>
-            </Box>
-          </CardContent>
-          <Backdrop open={reload} sx={{ position: 'absolute', zIndex: 1301 }}>
-            <CircularProgress color='inherit' />
-          </Backdrop>
-        </Collapse>
+            </Button>
+          </Box>
+        </CardContent>
+
+        {/* Footer Section */}
+        <Box
+          onClick={toggleShowMore}
+          sx={{
+            backgroundColor: '#4ade80', // Green background
+            color: 'white', // White text for contrast
+            textAlign: 'center', // Center the content
+            padding: '16px', // Padding for spacing
+            borderTopLeftRadius: '20px', // Rounded top-left corner
+            borderTopRightRadius: '20px', // Rounded top-right corner
+            cursor: 'pointer'
+          }}
+        >
+          <Typography variant='body2'>{payment.data.footer}</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: '24px'
+            }}
+          >
+            <div className='p-1 px-16 bg-white rounded-full'></div>
+          </Box>
+        </Box>
       </Card>
     </Fade>
   )

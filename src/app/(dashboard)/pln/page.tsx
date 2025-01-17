@@ -16,13 +16,11 @@ import PageContainer from '@/app/(dashboard)/components/container/PageContainer'
 import DashboardCard from '@/app/(dashboard)/components/shared/DashboardCard'
 import { Selection } from '@/app/(dashboard)/pln/components/Selection/index'
 import { PLNGuide } from '@/app/fake-db/pages/faq'
-import type { globalSetting} from '@/app/server/actions';
+import type { globalSetting } from '@/app/server/actions'
 import { getProduct, HitToApi } from '@/app/server/actions'
 import type { RootState } from '@/app/store'
 import { resetInquiry, resetPayment, setInquiry } from '@/app/store'
 import { mailingLists } from '@/data/pln'
-
-
 
 import FAQ from './components/Faq/index'
 import Inquiry from './components/inquiry/Inquiry'
@@ -72,8 +70,8 @@ export default function Page() {
     try {
       const productMap = product.reduce<Record<number, any>>((acc, item, index) => {
         acc[index + 1] = item.nilai
-        
-return acc
+
+        return acc
       }, {})
 
       const request = {

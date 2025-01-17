@@ -150,10 +150,10 @@ const InquiryCard = () => {
                 </Table>
               </TableContainer>
               <Box sx={{ p: 2 }}>
-                <Typography sx={{ px: 2 }} variant='body2'>
+                <Typography sx={{ px: 2, mt: 2 }} variant='body2'>
                   Pilih Denom :
                 </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'start' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'start', px: 2 }}>
                   <PrepaidList prepaidList={prepaidList} nominal={nominal} onNominalSelect={setNominal} />
                 </Box>
               </Box>

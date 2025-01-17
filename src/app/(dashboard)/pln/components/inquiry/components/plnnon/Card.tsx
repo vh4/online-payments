@@ -89,10 +89,11 @@ const InquiryCard = () => {
   return (
     <Fade in={!visibility} timeout={300}>
       <Card
-        className='relative mt-4 md:-mt-16'
+        className='relative mt-4 md:-mt-10'
         sx={{
-          boxShadow: { xs: 'none', sm: 'inherit' },
-          border: { xs: 'none', sm: '1px' }
+          // boxShadow: { xs: 'none', sm: 'inherit' },
+          // border: { xs: 'none', sm: '1px' }
+          p: 4
         }}
       >
         <CardHeader
@@ -170,12 +171,12 @@ const InquiryCard = () => {
                 </Table>
               </TableContainer>
 
-              <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'end', mt: 4 }}>
                 <Button
                   onClick={handlePayment}
                   variant='contained'
                   color='success'
-                  sx={{ left: 0 }}
+                  sx={{ mx: 4 }}
                   disabled={loading}
                   startIcon={loading ? <CircularProgress size={20} /> : null}
                 >
