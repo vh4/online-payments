@@ -122,7 +122,6 @@ const PaymentCard = () => {
                     label: 'BL / TH',
                     value: payment.data.blth
                   },
-                  { label: 'SReff', value: payment.data.no_ref },
                   { label: 'Stand Meter', value: payment.data.stan_meter }
                 ].map((row, index) => (
                   <TableRow key={index}>
@@ -171,6 +170,7 @@ const PaymentCard = () => {
               <TableBody>
                 {[
                   { label: 'RP Tag PLN', value: `Rp. ${parseInt(payment.data.rp_tag_pln).toLocaleString()}` },
+                  { label: 'No Ref', value: payment.data.no_ref },
                   {
                     label: 'Admin Bank',
                     value: `Rp. ${parseInt(payment.data.admin_bank).toLocaleString()}`,
@@ -270,6 +270,7 @@ const PaymentCard = () => {
           }}
         >
           <Typography variant='body2'>{payment.data.footer}</Typography>
+          <Typography variant='body2'>{payment.data.kata2}.</Typography>
           <Box
             sx={{
               display: 'flex',

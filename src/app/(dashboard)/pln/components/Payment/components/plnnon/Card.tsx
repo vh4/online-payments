@@ -116,15 +116,14 @@ const PaymentCard = () => {
             <Table>
               <TableBody>
                 {[
-                  { label: 'Jenis Transaksi', value: payment.data.transaksi },
+                  { label: 'Transaksi', value: payment.data.transaksi },
                   { label: 'No Registrasi', value: payment.data.noregistration },
                   { label: 'Tanggal Registrasi', value: payment.data.registrationdate },
                   {
                     label: 'Nama',
                     value: payment.data.namapelanggan
                   },
-                  { label: 'ID Pelanggan', value: payment.data.idpel },
-                  { label: 'SReff', value: payment.data.noref }
+                  { label: 'ID Pelanggan', value: payment.data.idpel }
                 ].map((row, index) => (
                   <TableRow key={index}>
                     <TableCell
@@ -172,6 +171,7 @@ const PaymentCard = () => {
               <TableBody>
                 {[
                   { label: 'Biaya PLN', value: `Rp. ${parseInt(payment.data.biaya_pln).toLocaleString()}` },
+                  { label: 'No Ref', value: payment.data.noref },
                   {
                     label: 'Admin Bank',
                     value: `Rp. ${parseInt(payment.data.admin_bank).toLocaleString()}`,
@@ -271,6 +271,7 @@ const PaymentCard = () => {
           }}
         >
           <Typography variant='body2'>{payment.data.footer}</Typography>
+          <Typography variant='body2'>{payment.data.kata2}</Typography>
           <Box
             sx={{
               display: 'flex',

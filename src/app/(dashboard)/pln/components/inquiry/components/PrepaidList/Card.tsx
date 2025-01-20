@@ -73,6 +73,9 @@ const InquiryCard = () => {
             position: 'top-right',
             autoClose: 5000
           })
+          setLoading(false)
+
+          return ''
         }
 
         if (result.responseCode !== '00') {
@@ -134,7 +137,11 @@ const InquiryCard = () => {
                   <TableBody>
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>No Meter</TableCell>
-                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.idpel1}</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.nomormeter}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Idpel</TableCell>
+                      <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.idpel}</TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Nama</TableCell>
@@ -143,7 +150,7 @@ const InquiryCard = () => {
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tarif / Daya</TableCell>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                        {inquiry.data.tarif} / {parseInt(inquiry.data.daya, 10).toLocaleString()} VA
+                        {inquiry.data.tarif} / {inquiry.data.daya} VA
                       </TableCell>
                     </TableRow>
                   </TableBody>

@@ -91,13 +91,15 @@ const InquiryCard = () => {
         className='relative mt-4 md:-mt-10'
         sx={{
           // boxShadow: { xs: 'none', sm: 'inherit' },
-          // border: { xs: 'none', sm: '1px' }
+          // borderRight: { xs: 'none' },
+          // borderLeft: { xs: 'none' },
+          // borderBottom: { xs: 'none' },
+          // borderTop: { xs: 'none' },
           p: 4
         }}
       >
         <CardHeader
           title='Info Pembayaran Tagihan'
-          subheader="Click 'Pay' untuk melanjutkan proses pembayaran."
           action={
             <Box>
               <Box sx={{ display: 'flex', gap: 1 }}>
@@ -115,7 +117,7 @@ const InquiryCard = () => {
           }
         />
         <Collapse in={!collapse}>
-          <Box sx={{ p: 2 }}>
+          <Box sx={{ px: 2 }}>
             <TableContainer
               component={Paper}
               sx={{
@@ -144,7 +146,7 @@ const InquiryCard = () => {
                     <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.namapelanggan}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Total Tagihan</TableCell>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Total Lembar Tag</TableCell>
                     <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.total_lembar_tag}</TableCell>
                   </TableRow>
                   <TableRow>
@@ -152,19 +154,23 @@ const InquiryCard = () => {
                     <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.blth}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tagihan</TableCell>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Stand Meter</TableCell>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>{inquiry.data.stan_meter}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>RP Tag PLN</TableCell>
                     <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
                       Rp. {parseInt(inquiry.data.rp_tag_pln).toLocaleString()}
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Biaya Admin</TableCell>
+                    <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Admin Bank</TableCell>
                     <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
                       Rp. {parseInt(inquiry.data.admin_bank).toLocaleString()}
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>Total Tagihan</TableCell>
+                    <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>Total Bayar</TableCell>
                     <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>
                       Rp. {parseInt(inquiry.total_bayar).toLocaleString()}
                     </TableCell>

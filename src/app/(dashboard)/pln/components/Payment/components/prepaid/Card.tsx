@@ -120,7 +120,7 @@ const PaymentCard = () => {
                     label: 'Tarif / Daya',
                     value: `${payment.data.tarif} / ${parseInt(payment.data.daya).toLocaleString()} VA`
                   },
-                  { label: 'SReff', value: payment.data.noref },
+                  { label: 'No Ref', value: payment.data.noref },
                   { label: 'RP Bayar', value: `Rp. ${parseInt(payment.data.rp_bayar).toLocaleString()}` }
                 ].map((row, index) => (
                   <TableRow key={index}>
@@ -168,13 +168,12 @@ const PaymentCard = () => {
             <Table>
               <TableBody>
                 {[
-                  { label: 'Admin Bank', value: `Rp. ${parseInt(payment.data.admin_bank).toLocaleString()}` },
+                  // { label: 'Admin Bank', value: `Rp. ${parseInt(payment.data.admin_bank).toLocaleString()}` },
                   { label: 'Materai', value: `Rp. ${parseInt(payment.data.materai).toLocaleString()}` },
                   { label: 'Ppn', value: `Rp. ${parseInt(payment.data.ppn).toLocaleString()}` },
                   { label: 'Pbjt-TL', value: `Rp. ${parseInt(payment.data.pbjttl).toLocaleString()}` },
                   { label: 'Angsuran', value: `Rp. ${parseInt(payment.data.angsuran).toLocaleString()}` },
                   { label: 'Rp Token', value: `Rp. ${parseInt(payment.data.rp_token).toLocaleString()}` },
-                  { label: 'Biaya Admin', value: `Rp. ${parseInt(payment.data.admin_bank).toLocaleString()}` },
                   { label: 'Jumlah Kwh', value: parseInt(payment.data.totalkwh).toLocaleString(), bold: true },
                   { label: 'Token', value: payment.data.tokenpln, bold: true }
                 ].map((row, index) => (
@@ -265,6 +264,7 @@ const PaymentCard = () => {
           }}
         >
           <Typography variant='body2'>{payment.data.footer}</Typography>
+          <Typography variant='body2'>{payment.data.kata2}.</Typography>
           <Box
             sx={{
               display: 'flex',
