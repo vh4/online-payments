@@ -59,7 +59,7 @@ const Login = ({ mode }: { mode: Mode }) => {
     '/images/pages/auth-v2-mask-1-dark.png'
   )
 
-  const characterIllustration = useImageVariant(mode, '/login.svg', '/login2.svg')
+  const characterIllustration = useImageVariant(mode, '/login.svg', '/login.svg')
 
   const {
     handleSubmit,
@@ -98,7 +98,7 @@ const Login = ({ mode }: { mode: Mode }) => {
       if (result?.error) {
         setErr(true)
       } else {
-        router.push('/home')
+        router.push('/pln')
       }
     } catch (error) {
       console.error('Unexpected error:', error)

@@ -1,47 +1,47 @@
 'use client'
 
-// Next Imports
-import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 
-// MUI Imports
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
+import Menuitems from '@/components/layout/vertical/menuItems'
 
-// Type Imports
-import type { Mode } from '@core/types'
-
-// Hook Imports
-import { useImageVariant } from '@core/hooks/useImageVariant'
-
-const NotFound = ({ mode }: { mode: Mode }) => {
-  // Vars
-  const darkImg = '/images/pages/misc-mask-1-dark.png'
-  const lightImg = '/images/pages/misc-mask-1-light.png'
-
+const NotFound = () => {
   // Hooks
-  const miscBackground = useImageVariant(mode, lightImg, darkImg)
+  const router = useRouter()
+  const path = usePathname()
+
+  // Find the menu item that matches the current path
+  const menu = Menuitems.find(x => x.href === path)
+
+  // Dynamic content based on the existence of the menu item
+  const isMaintenance = !!menu
+  const statusCode = isMaintenance ? '503' : '404'
+  const message = isMaintenance ? 'Maaf, produk ini masih dalam maintenance.' : 'Maaf, halaman tidak ditemukan.'
 
   return (
-    <div className='flex items-center justify-center min-bs-[100dvh] relative p-6 overflow-x-hidden'>
-      <div className='flex items-center flex-col text-center gap-10'>
-        <div className='flex flex-col gap-2 is-[90vw] sm:is-[unset]'>
-          <Typography className='font-medium text-8xl' color='text.primary'>
-            404
-          </Typography>
-          <Typography variant='h4'>Page Not Found ⚠️</Typography>
-          <Typography>We couldn&#39;t find the page you are looking for.</Typography>
+    <main className='flex flex-col min-h-screen justify-center items-center'>
+      <section className='container flex flex-col md:flex-row items-center justify-center px-5 text-center md:text-left'>
+        {/* Status Code and Message */}
+        <div className='max-w-md'>
+          <h1 className={`text-6xl font-bold ${isMaintenance ? 'text-gray-500' : 'text-blue-600'}`}>{statusCode}</h1>
+          <p className='mt-4 text-lg md:text-xl font-light leading-relaxed'>{message}</p>
+          <button
+            onClick={() => router.back()}
+            className={`mt-6 px-6 py-3 ${
+              isMaintenance
+                ? 'bg-gray-500 hover:bg-gray-700 focus:ring-gray-300 active:bg-gray-800'
+                : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 active:bg-blue-800'
+            } text-white text-sm font-medium leading-5 rounded-lg shadow focus:outline-none focus:ring`}
+          >
+            Kembali
+          </button>
         </div>
-        <img
-          alt='error-illustration'
-          src='/images/illustrations/characters/3.png'
-          className='object-cover bs-[400px] md:bs-[450px] lg:bs-[500px]'
-        />
-        <Button href='/' component={Link} variant='contained'>
-          Back to Home
-        </Button>
-      </div>
-      <img src={miscBackground} className='absolute bottom-0 z-[-1] is-full max-md:hidden' />
-    </div>
+
+        {/* 404 Image */}
+        <div className='max-w-md mt-10 md:mt-0 md:ml-10'>
+          <img src='/404.png' alt='Page not found illustration' className='w-full h-auto object-contain' />
+        </div>
+      </section>
+    </main>
   )
 }
 

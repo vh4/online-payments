@@ -15,12 +15,12 @@ import NavSearch from '../shared/search'
 const NavbarContent = () => {
   return (
     <div className={classnames(verticalLayoutClasses.navbarContent, 'flex items-center justify-between is-full')}>
-      <div className='flex items-center gap-4'>
+      <div className='flex items-center'>
+        <ModeDropdown />
         <NavSearch />
         <NavToggle />
       </div>
       <div className='flex items-center'>
-        <ModeDropdown />
         <UserDropdown />
       </div>
     </div>

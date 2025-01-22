@@ -5,11 +5,11 @@ import type { ReactNode } from 'react'
 import { createContext, useMemo, useState } from 'react'
 
 // Type Imports
-import type { Mode, Skin, Layout, LayoutComponentWidth } from '@core/types'
+import type { Layout, LayoutComponentWidth, Mode, Skin } from '@core/types'
 
 // Config Imports
-import themeConfig from '@configs/themeConfig'
 import primaryColorConfig from '@configs/primaryColorConfig'
+import themeConfig from '@configs/themeConfig'
 
 // Hook Imports
 import { useObjectCookie } from '@core/hooks/useObjectCookie'
@@ -105,10 +105,10 @@ export const SettingsProvider = (props: Props) => {
    * }, []);
    */
   const updatePageSettings = (settings: Partial<Settings>): (() => void) => {
-    updateSettings(settings, { updateCookie: false })
+    updateSettings(settings, { updateCookie: true })
 
     // Returns a function to reset the page settings
-    return () => updateSettings(settingsCookie, { updateCookie: false })
+    return () => updateSettings(settingsCookie, { updateCookie: true })
   }
 
   const resetSettings = () => {

@@ -1,19 +1,18 @@
 'use client'
 
 // React Imports
+import type { CSSProperties, ForwardRefRenderFunction, ReactElement, ReactNode } from 'react'
 import { forwardRef } from 'react'
-import type { ForwardRefRenderFunction, CSSProperties, ReactElement, ReactNode } from 'react'
 
 // Third-party Imports
-import classnames from 'classnames'
 import type { CSSObject } from '@emotion/styled'
+import classnames from 'classnames'
 
 // Type Imports
-import type { MenuSectionStyles } from './Menu'
 import type { ChildrenType, RootStylesType } from '../../types'
+import type { MenuSectionStyles } from './Menu'
 
 // Hook Imports
-import useVerticalNav from '../../hooks/useVerticalNav'
 import useVerticalMenu from '../../hooks/useVerticalMenu'
 
 // Util Imports
@@ -21,9 +20,6 @@ import { menuClasses } from '../../utils/menuClasses'
 
 // Styled Component Imports
 import StyledMenuIcon from '../../styles/StyledMenuIcon'
-import StyledMenuPrefix from '../../styles/StyledMenuPrefix'
-import StyledMenuSuffix from '../../styles/StyledMenuSuffix'
-import StyledMenuSectionLabel from '../../styles/StyledMenuSectionLabel'
 import StyledVerticalMenuSection from '../../styles/vertical/StyledVerticalMenuSection'
 
 export type MenuSectionProps = Partial<ChildrenType> &
@@ -62,11 +58,10 @@ const menuSectionContentStyles: CSSProperties = {
 
 const MenuSection: ForwardRefRenderFunction<HTMLLIElement, MenuSectionProps> = (props, ref) => {
   // Props
-  const { children, icon, className, prefix, suffix, label, rootStyles, ...rest } = props
+  const { children, icon, className, rootStyles, ...rest } = props
 
   // Hooks
-  const { isCollapsed, isHovered } = useVerticalNav()
-  const { menuSectionStyles, collapsedMenuSectionLabel, textTruncate } = useVerticalMenu()
+  const { menuSectionStyles } = useVerticalMenu()
 
   const getMenuSectionStyles = (element: MenuSectionElement): CSSObject | undefined => {
     // If the menuSectionStyles prop is provided, get the styles for the element from the prop
@@ -92,47 +87,6 @@ const MenuSection: ForwardRefRenderFunction<HTMLLIElement, MenuSectionProps> = (
             <StyledMenuIcon className={menuClasses.icon} rootStyles={getMenuSectionStyles('icon')}>
               {icon}
             </StyledMenuIcon>
-          )}
-          {prefix && (
-            <StyledMenuPrefix
-              isCollapsed={isCollapsed}
-              className={menuClasses.prefix}
-              rootStyles={getMenuSectionStyles('prefix')}
-            >
-              {prefix}
-            </StyledMenuPrefix>
-          )}
-          {collapsedMenuSectionLabel && isCollapsed && !isHovered ? (
-            <StyledMenuSectionLabel
-              isCollapsed={isCollapsed}
-              isHovered={isHovered}
-              className={menuClasses.menuSectionLabel}
-              rootStyles={getMenuSectionStyles('label')}
-              textTruncate={textTruncate}
-            >
-              {collapsedMenuSectionLabel}
-            </StyledMenuSectionLabel>
-          ) : (
-            label && (
-              <StyledMenuSectionLabel
-                isCollapsed={isCollapsed}
-                isHovered={isHovered}
-                className={menuClasses.menuSectionLabel}
-                rootStyles={getMenuSectionStyles('label')}
-                textTruncate={textTruncate}
-              >
-                {label}
-              </StyledMenuSectionLabel>
-            )
-          )}
-          {suffix && (
-            <StyledMenuSuffix
-              isCollapsed={isCollapsed}
-              className={menuClasses.suffix}
-              rootStyles={getMenuSectionStyles('suffix')}
-            >
-              {suffix}
-            </StyledMenuSuffix>
           )}
         </li>
         {/* Render Child */}

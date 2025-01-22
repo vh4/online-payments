@@ -1,5 +1,11 @@
+'use client'
+
 // React Imports
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
+
+import { usePathname } from 'next/navigation'
+
+import { useDispatch } from 'react-redux'
 
 // Third-party Imports
 import classnames from 'classnames'
@@ -14,6 +20,8 @@ import LayoutContent from './components/vertical/LayoutContent'
 import { verticalLayoutClasses } from './utils/layoutClasses'
 
 // Styled Component Imports
+import { resetInquiry, resetPayment } from '@/app/store'
+
 import StyledContentWrapper from './styles/vertical/StyledContentWrapper'
 
 type VerticalLayoutProps = ChildrenType & {
@@ -25,6 +33,23 @@ type VerticalLayoutProps = ChildrenType & {
 const VerticalLayout = (props: VerticalLayoutProps) => {
   // Props
   const { navbar, footer, navigation, children } = props
+
+  const dispatch = useDispatch()
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      dispatch(resetInquiry())
+      dispatch(resetPayment())
+    }
+
+    // App Router doesn't have router.events; monitor router.push or navigation changes differently
+    handleRouteChange() // Call the function when the component renders
+
+    return () => {
+      // Cleanup logic if necessary
+    }
+  }, [dispatch, pathname])
 
   return (
     <div className={classnames(verticalLayoutClasses.root, 'flex flex-auto')}>

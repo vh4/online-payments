@@ -56,7 +56,7 @@ const themeConfig: Config = {
   templateName: 'Rajabiller',
   homePageUrl: '/home',
   settingsCookieName: 'materialize-mui-next-demo-1',
-  mode: 'light', // Options: 'system', 'light', 'dark'
+  mode: 'dark', // Options: 'system', 'light', 'dark'
   skin: 'bordered', // Options: 'default', 'bordered'
   semiDark: false,
   layout: 'vertical', // Options: 'vertical', 'collapsed', 'horizontal'

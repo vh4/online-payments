@@ -1,6 +1,10 @@
 'use client'
 
+import { useDispatch } from 'react-redux'
+
 import { FaCheckCircle } from 'react-icons/fa'
+
+import { resetInquiry, resetPayment } from '@/app/store'
 
 interface SelectionProps {
   data: { name: string; lastMessage: string }[]
@@ -10,6 +14,8 @@ interface SelectionProps {
 }
 
 export const Selection = ({ data, selectedMailingList, setSelectedMailingList, setPilih }: SelectionProps) => {
+  const dispatch = useDispatch()
+
   return (
     <div className='max-w-screen-2xl xl:max-w-xl w-full mt-2 py-4'>
       <div className='flex flex-col space-y-4 w-full'>
@@ -17,6 +23,8 @@ export const Selection = ({ data, selectedMailingList, setSelectedMailingList, s
           <div
             key={list.name}
             onClick={() => {
+              dispatch(resetInquiry())
+              dispatch(resetPayment())
               setSelectedMailingList(list.name)
               setPilih(i + 1)
             }}

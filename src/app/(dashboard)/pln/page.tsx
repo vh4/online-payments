@@ -108,80 +108,82 @@ export default function Page() {
   }
 
   return (
-    <PageContainer title='PLN categories' description='PLN categories'>
-      <Box sx={{ p: { sm: 0, md: 4 } }}>
-        <Grid {...(isMdUp ? { container: true } : {})} spacing={3}>
-          <Grid item xs={12}>
-            <DashboardCard title='Beli Token atau Bayar Tagihan Listrik.'>
-              <Grid {...(isMdUp ? { container: true } : {})} spacing={3}>
-                {/* Form Section */}
-                <Grid item xs={12} md={7}>
-                  <form
-                    noValidate
-                    autoComplete='off'
-                    onSubmit={handleSubmit(onSubmit)}
-                    className='w-full flex flex-col gap-5'
-                  >
-                    <Selection
-                      data={mailingLists}
-                      selectedMailingList={selectedMailingList}
-                      setSelectedMailingList={setSelectedMailingList}
-                      setPilih={setPilih}
-                    />
-                    <div className='mt-4'>
-                      <Typography variant='h6' className='mb-2'>
-                        {mailingLists.filter(x => x.name === selectedMailingList).map(x => x.title)}
-                      </Typography>
-                      <Controller
-                        name='registrationNumber'
-                        control={control}
-                        rules={{
-                          required: 'Registration number is required.',
-                          pattern: {
-                            value: /^[0-9]+$/,
-                            message: 'Registration number must be a valid number.'
-                          }
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            {...field}
-                            fullWidth
-                            sx={{ maxWidth: { xs: '100%', md: '550px' } }} // Adjusts width based on screen size
-                            variant='standard'
-                            type='text'
-                            error={!!errors.registrationNumber}
-                            helperText={errors.registrationNumber?.message}
-                          />
-                        )}
+    <div className='mx-8'>
+      <PageContainer title='PLN categories' description='PLN categories'>
+        <Box sx={{ p: { sm: 0, md: 4 } }}>
+          <Grid {...(isMdUp ? { container: true } : {})} spacing={3}>
+            <Grid item xs={12}>
+              <DashboardCard title='Beli Token atau Bayar Tagihan Listrik.'>
+                <Grid {...(isMdUp ? { container: true } : {})} spacing={3}>
+                  {/* Form Section */}
+                  <Grid item xs={12} md={7}>
+                    <form
+                      noValidate
+                      autoComplete='off'
+                      onSubmit={handleSubmit(onSubmit)}
+                      className='w-full flex flex-col gap-5'
+                    >
+                      <Selection
+                        data={mailingLists}
+                        selectedMailingList={selectedMailingList}
+                        setSelectedMailingList={setSelectedMailingList}
+                        setPilih={setPilih}
                       />
-                    </div>
-                    <div className='w-full sm:w-full md:w-[300px] mt-8'>
-                      <Button
-                        fullWidth
-                        variant='contained'
-                        type='submit'
-                        color='primary'
-                        disabled={loading}
-                        startIcon={loading ? <CircularProgress size={20} /> : null}
-                      >
-                        {loading ? 'Submitting...' : 'Inquiry'}
-                      </Button>
-                    </div>
-                  </form>
+                      <div className='mt-4'>
+                        <Typography variant='h6' className='mb-2'>
+                          {mailingLists.filter(x => x.name === selectedMailingList).map(x => x.title)}
+                        </Typography>
+                        <Controller
+                          name='registrationNumber'
+                          control={control}
+                          rules={{
+                            required: 'Registration number is required.',
+                            pattern: {
+                              value: /^[0-9]+$/,
+                              message: 'Registration number must be a valid number.'
+                            }
+                          }}
+                          render={({ field }) => (
+                            <TextField
+                              {...field}
+                              fullWidth
+                              sx={{ maxWidth: { xs: '100%', md: '550px' } }} // Adjusts width based on screen size
+                              variant='standard'
+                              type='text'
+                              error={!!errors.registrationNumber}
+                              helperText={errors.registrationNumber?.message}
+                            />
+                          )}
+                        />
+                      </div>
+                      <div className='w-full sm:w-full md:w-[300px] mt-8'>
+                        <Button
+                          fullWidth
+                          variant='contained'
+                          type='submit'
+                          color='primary'
+                          disabled={loading}
+                          startIcon={loading ? <CircularProgress size={20} /> : null}
+                        >
+                          {loading ? 'Submitting...' : 'Inquiry'}
+                        </Button>
+                      </div>
+                    </form>
+                  </Grid>
+                  {/* Detail Inquiry Section */}
+                  <Grid item xs={12} md={5}>
+                    {!loading && inquiry?.responseCode === '00' ? <Inquiry /> : null}
+                    {payment?.responseCode === '00' ? <Payment /> : null}
+                  </Grid>
+                  <Grid item xs={12} className='mt-4 mb-12'>
+                    <FAQ data={PLNGuide} />
+                  </Grid>
                 </Grid>
-                {/* Detail Inquiry Section */}
-                <Grid item xs={12} md={5}>
-                  {!loading && inquiry?.responseCode === '00' ? <Inquiry /> : null}
-                  {payment?.responseCode === '00' ? <Payment /> : null}
-                </Grid>
-                <Grid item xs={12} className='mt-4 mb-12'>
-                  <FAQ data={PLNGuide} />
-                </Grid>
-              </Grid>
-            </DashboardCard>
+              </DashboardCard>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-    </PageContainer>
+        </Box>
+      </PageContainer>
+    </div>
   )
 }

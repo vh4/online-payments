@@ -1,137 +1,109 @@
 // Next Imports
 import Link from 'next/link'
 
-// Third-party Imports
-import classnames from 'classnames'
-
 // Util Imports
+import { renderMenuIcon } from '@/@menu/utils/menuUtils'
 import { getLocalizedUrl } from '@/utils/i18n'
+import Menuitems from '../../vertical/menuItems'
+
+// Type Definitions
+type MenuItem = {
+  id: string
+  navlabel?: boolean
+  subheader?: string
+  title?: string
+  icon?: React.ComponentType<any>
+  href?: string
+}
 
 type DefaultSuggestionsType = {
   sectionLabel: string
   items: {
-    label: string
-    href: string
-    icon?: string
+    label?: string
+    href?: string
+    icon?: React.ComponentType<any>
   }[]
 }
 
-const defaultSuggestions: DefaultSuggestionsType[] = [
-  {
-    sectionLabel: 'Popular Searches',
-    items: [
-      {
-        label: 'PLN',
-        href: '/dashboards/pln',
-        icon: 'ri-bar-chart-line'
+// Helper Function to Convert MenuItems to Suggestions
+const convertToSuggestions = (items: MenuItem[]): DefaultSuggestionsType[] =>
+  items
+    .filter(item => !item.navlabel && item.title && item.href)
+    .reduce<DefaultSuggestionsType[]>((acc, item) => {
+      const sectionLabel = item.subheader || 'Other'
+      const sectionIndex = acc.findIndex(section => section.sectionLabel === sectionLabel)
+
+      if (sectionIndex >= 0) {
+        acc[sectionIndex].items.push({
+          label: item.title,
+          href: item.href,
+          icon: item.icon
+        })
+      } else {
+        acc.push({
+          sectionLabel,
+          items: [
+            {
+              label: item.title,
+              href: item.href,
+              icon: item.icon
+            }
+          ]
+        })
       }
-    ]
-  }
 
-  // {
-  //   sectionLabel: 'Categories',
-  //   items: [
-  //     {
-  //       label: 'Calendar',
-  //       href: '/apps/calendar',
-  //       icon: 'ri-calendar-line'
-  //     },
-  //     {
-  //       label: 'Invoice List',
-  //       href: '/apps/invoice/list',
-  //       icon: 'ri-file-list-3-line'
-  //     },
-  //     {
-  //       label: 'User List',
-  //       href: '/apps/user/list',
-  //       icon: 'ri-file-user-line'
-  //     },
-  //     {
-  //       label: 'Roles & Permissions',
-  //       href: '/apps/roles',
-  //       icon: 'ri-lock-unlock-line'
-  //     }
-  //   ]
-  // },
-  // {
-  //   sectionLabel: 'Pages',
-  //   items: [
-  //     {
-  //       label: 'User Profile',
-  //       href: '/pages/user-profile',
-  //       icon: 'ri-user-3-line'
-  //     },
-  //     {
-  //       label: 'Account Settings',
-  //       href: '/pages/account-settings',
-  //       icon: 'ri-settings-4-line'
-  //     },
-  //     {
-  //       label: 'Pricing',
-  //       href: '/pages/pricing',
-  //       icon: 'ri-money-dollar-circle-line'
-  //     },
-  //     {
-  //       label: 'FAQ',
-  //       href: '/pages/faq',
-  //       icon: 'ri-question-line'
-  //     }
-  //   ]
-  // },
-  // {
-  //   sectionLabel: 'Forms & Charts',
-  //   items: [
-  //     {
-  //       label: 'Form Layouts',
-  //       href: '/forms/form-layouts',
-  //       icon: 'ri-file-text-line'
-  //     },
-  //     {
-  //       label: 'Form Validation',
-  //       href: '/forms/form-validation',
-  //       icon: 'ri-checkbox-multiple-line'
-  //     },
-  //     {
-  //       label: 'Form Wizard',
-  //       href: '/forms/form-wizard',
-  //       icon: 'ri-equalizer-line'
-  //     },
-  //     {
-  //       label: 'Apex Charts',
-  //       href: '/charts/apex-charts',
-  //       icon: 'ri-line-chart-line'
-  //     }
-  //   ]
-  // }
-]
+      return acc
+    }, [])
 
-const DefaultSuggestions = ({ setOpen }: { setOpen: (value: boolean) => void }) => {
-  // Hooks
+// DefaultSuggestions Component
+interface DefaultSuggestionsProps {
+  setOpen: (value: boolean) => void
+  searchQuery: string // Add the searchQuery prop
+}
+
+const DefaultSuggestions: React.FC<DefaultSuggestionsProps> = ({ setOpen, searchQuery }) => {
+  const filteredSuggestions = searchQuery
+    ? Menuitems.filter(item => item.title?.toLowerCase().includes(searchQuery.toLowerCase()))
+    : Menuitems
+
+  const suggestions = convertToSuggestions(filteredSuggestions)
 
   return (
-    <div className='flex grow flex-wrap gap-x-[48px] gap-y-8 plb-14 pli-16 overflow-y-auto overflow-x-hidden bs-full'>
-      {defaultSuggestions.map((section, index) => (
-        <div
-          key={index}
-          className='flex flex-col justify-center overflow-x-hidden gap-4 basis-full sm:basis-[calc((100%-3rem)/2)]'
-        >
-          <p className='text-xs uppercase text-textDisabled tracking-[0.8px]'>{section.sectionLabel}</p>
-          <ul className='flex flex-col gap-4'>
-            {section.items.map((item, i) => (
-              <li key={i} className='flex'>
-                <Link
-                  href={getLocalizedUrl(item.href)}
-                  className='flex items-center overflow-x-hidden cursor-pointer gap-2 hover:text-primary focus-visible:text-primary focus-visible:outline-0'
-                  onClick={() => setOpen(false)}
-                >
-                  {item.icon && <i className={classnames(item.icon, 'flex text-xl')} />}
-                  <p className='text-[15px] overflow-hidden whitespace-nowrap overflow-ellipsis'>{item.label}</p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div className='flex mt-8 pli-8'>
+      {suggestions.length > 0 ? (
+        suggestions.map((section, index) => (
+          <div
+            key={index}
+            className='flex flex-col justify-center overflow-x-hidden gap-4 basis-full sm:basis-[calc((100%-3rem)/2)]'
+          >
+            <p className='text-xs uppercase text-textDisabled tracking-[0.8px]'>{section.sectionLabel}</p>
+            <ul className='flex flex-col gap-4'>
+              {section.items.map((item, i) => (
+                <li key={i} className='flex'>
+                  <Link
+                    href={getLocalizedUrl(item.href || '/')}
+                    className='flex items-center overflow-x-hidden cursor-pointer gap-2 hover:text-primary focus-visible:text-primary focus-visible:outline-0'
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.icon &&
+                      renderMenuIcon({
+                        icon: item.icon,
+                        level: 0,
+                        active: false,
+                        disabled: false,
+                        styles: {},
+                        isBreakpointReached: false
+                      })}
+                    <p className='text-[15px] overflow-hidden whitespace-nowrap overflow-ellipsis'>{item.label}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      ) : (
+        <p className='text-center text-sm text-gray-500'>No results found.</p>
+      )}
     </div>
   )
 }

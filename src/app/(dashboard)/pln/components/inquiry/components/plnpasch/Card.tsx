@@ -67,6 +67,8 @@ const InquiryCard = () => {
             position: 'top-right',
             autoClose: 5000
           })
+
+          return ''
         }
 
         if (result.responseCode !== '00') {
@@ -160,19 +162,19 @@ const InquiryCard = () => {
                   <TableRow>
                     <TableCell sx={{ borderBottom: '1px solid #ddd' }}>RP Tag PLN</TableCell>
                     <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                      Rp. {parseInt(inquiry.data.rp_tag_pln).toLocaleString()}
+                      Rp{parseInt(inquiry.data.rp_tag_pln).toLocaleString('id-ID')}
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Admin Bank</TableCell>
                     <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                      Rp. {parseInt(inquiry.data.admin_bank).toLocaleString()}
+                      Rp{parseInt(inquiry.data.admin_bank).toLocaleString('id-ID')}
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>Total Bayar</TableCell>
                     <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>
-                      Rp. {parseInt(inquiry.total_bayar).toLocaleString()}
+                      Rp{parseInt(inquiry.total_bayar).toLocaleString('id-ID')}
                     </TableCell>
                   </TableRow>
                 </TableBody>

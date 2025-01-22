@@ -13,13 +13,13 @@ import { styled, useColorScheme, useTheme } from '@mui/material/styles'
 import type { Mode, SystemMode } from '@core/types'
 
 // Component Imports
-import VerticalNav, { NavHeader, NavCollapseIcons } from '@menu/vertical-menu'
-import VerticalMenu from './VerticalMenu'
 import Logo from '@components/layout/shared/Logo'
+import VerticalNav, { NavCollapseIcons, NavHeader } from '@menu/vertical-menu'
+import VerticalMenu from './VerticalMenu'
 
 // Hook Imports
-import useVerticalNav from '@menu/hooks/useVerticalNav'
 import { useSettings } from '@core/hooks/useSettings'
+import useVerticalNav from '@menu/hooks/useVerticalNav'
 
 // Style Imports
 import navigationCustomStyles from '@core/styles/vertical/navigationCustomStyles'

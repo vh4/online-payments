@@ -4,17 +4,17 @@
 import { useMemo } from 'react'
 
 // MUI Imports
-import { deepmerge } from '@mui/utils'
-import {
-  Experimental_CssVarsProvider as CssVarsProvider,
-  experimental_extendTheme as extendTheme,
-  lighten,
-  darken
-} from '@mui/material/styles'
+import type {} from '@mui/lab/themeAugmentation' //! Do not remove this import otherwise you will get type errors while making a production build
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 import CssBaseline from '@mui/material/CssBaseline'
+import {
+  Experimental_CssVarsProvider as CssVarsProvider,
+  darken,
+  experimental_extendTheme as extendTheme,
+  lighten
+} from '@mui/material/styles'
 import type {} from '@mui/material/themeCssVarsAugmentation' //! Do not remove this import otherwise you will get type errors while making a production build
-import type {} from '@mui/lab/themeAugmentation' //! Do not remove this import otherwise you will get type errors while making a production build
+import { deepmerge } from '@mui/utils'
 
 // Third-party Imports
 import { useMedia } from 'react-use'
@@ -81,6 +81,14 @@ const ThemeProvider = (props: Props) => {
               main: settings.primaryColor,
               light: lighten(settings.primaryColor as string, 0.2),
               dark: darken(settings.primaryColor as string, 0.1)
+            },
+            background: {
+              default: '#111827', // Dark mode background
+              paper: '#111827' // Dark mode paper background
+            },
+            text: {
+              primary: '#ffffff',
+              secondary: '#d1d5db'
             }
           }
         }

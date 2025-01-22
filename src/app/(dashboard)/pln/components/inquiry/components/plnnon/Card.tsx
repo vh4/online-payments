@@ -151,19 +151,19 @@ const InquiryCard = () => {
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Biaya PLN</TableCell>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                        Rp. {parseInt(inquiry.data.biaya_pln).toLocaleString()}
+                        Rp{parseInt(inquiry.data.biaya_pln).toLocaleString('id-ID')}
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Admin Bank</TableCell>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                        Rp. {parseInt(inquiry.data.admin_bank).toLocaleString()}
+                        Rp{parseInt(inquiry.data.admin_bank).toLocaleString('id-ID')}
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>Total Bayar</TableCell>
                       <TableCell sx={{ borderBottom: '0px solid #ddd', fontWeight: 'bold' }}>
-                        Rp. {parseInt(inquiry.total_bayar).toLocaleString()}
+                        Rp{parseInt(inquiry.total_bayar).toLocaleString('id-ID')}
                       </TableCell>
                     </TableRow>
                   </TableBody>

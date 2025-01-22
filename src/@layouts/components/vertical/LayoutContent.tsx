@@ -4,7 +4,6 @@
 import classnames from 'classnames'
 
 // Type Imports
-import { Provider } from 'react-redux'
 
 import type { ChildrenType } from '@core/types'
 
@@ -15,7 +14,6 @@ import { useSettings } from '@core/hooks/useSettings'
 import { verticalLayoutClasses } from '@layouts/utils/layoutClasses'
 
 // Styled Component Imports
-import store from '@/app/store'
 import StyledMain from '@layouts/styles/shared/StyledMain'
 
 const LayoutContent = ({ children }: ChildrenType) => {
@@ -34,7 +32,7 @@ const LayoutContent = ({ children }: ChildrenType) => {
         [verticalLayoutClasses.contentWide]: contentWide
       })}
     >
-      <Provider store={store}>{children}</Provider>
+      {children}
     </StyledMain>
   )
 }

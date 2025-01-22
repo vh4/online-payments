@@ -1,12 +1,12 @@
 'use client'
 
 // React Imports
-import { useEffect, useRef } from 'react'
 import type { HTMLAttributes } from 'react'
+import { useEffect, useRef } from 'react'
 
 // Third-party Imports
-import classnames from 'classnames'
 import type { CSSObject } from '@emotion/styled'
+import classnames from 'classnames'
 
 // Type Imports
 import type { BreakpointType } from '../../types'
@@ -24,8 +24,8 @@ import { verticalNavClasses } from '../../utils/menuClasses'
 // Styled Component Imports
 import StyledBackdrop from '../../styles/StyledBackdrop'
 import StyledVerticalNav from '../../styles/vertical/StyledVerticalNav'
-import StyledVerticalNavContainer from '../../styles/vertical/StyledVerticalNavContainer'
 import StyledVerticalNavBgColorContainer from '../../styles/vertical/StyledVerticalNavBgColorContainer'
+import StyledVerticalNavContainer from '../../styles/vertical/StyledVerticalNavContainer'
 
 // Style Imports
 import styles from '../../styles/vertical/verticalNavBgImage.module.css'
@@ -51,7 +51,7 @@ export type VerticalNavProps = HTMLAttributes<HTMLHtmlElement> & {
 const VerticalNav = (props: VerticalNavProps) => {
   // Props
   const {
-    width = 260,
+    width = 280,
     collapsedWidth = 80,
     defaultCollapsed = false,
     backgroundColor = 'white',

@@ -1,35 +1,30 @@
 // Next Imports
 import Link from 'next/link'
 
+import { uniqueId } from 'lodash'
+
 // Third-party Imports
-import classnames from 'classnames'
+import { AiOutlineThunderbolt } from 'react-icons/ai'
+import { MdOutlineWaterDrop } from 'react-icons/md'
 
 // Type Imports
 
 // Util Imports
+import { renderMenuIcon } from '@/@menu/utils/menuUtils'
 import { getLocalizedUrl } from '@/utils/i18n'
 
-type NoResultData = {
-  label: string
-  href: string
-  icon: string
-}
-
-const noResultData: NoResultData[] = [
+const noResultData = [
   {
-    label: 'Analytics',
-    href: '/dashboards/analytics',
-    icon: 'ri-bar-chart-line'
+    id: uniqueId(),
+    title: 'Tagihan PLN',
+    icon: AiOutlineThunderbolt,
+    href: '/pln'
   },
   {
-    label: 'User Profile',
-    href: '/pages/user-profile',
-    icon: 'ri-user-3-line'
-  },
-  {
-    label: 'CRM',
-    href: '/dashboards/crm',
-    icon: 'ri-pie-chart-2-line'
+    id: uniqueId(),
+    title: 'Tagihan PDAM',
+    icon: MdOutlineWaterDrop,
+    href: '/pdam'
   }
 ]
 
@@ -41,7 +36,7 @@ const NoResult = ({ searchValue, setOpen }: { searchValue: string; setOpen: (val
       <div className='flex flex-col items-center'>
         <i className='ri-file-forbid-line text-[64px] mbe-2.5' />
         <p className='text-xl mbe-11'>{`No result for "${searchValue}"`}</p>
-        <p className='mbe-[18px] text-textDisabled'>Try searching for</p>
+        <p className='mbe-[18px] text-textDisabled'>Try searching for...</p>
         <ul className='flex flex-col gap-4'>
           {noResultData.map((item, index) => (
             <li key={index} className='flex items-center'>
@@ -50,8 +45,16 @@ const NoResult = ({ searchValue, setOpen }: { searchValue: string; setOpen: (val
                 className='flex items-center gap-2 hover:text-primary focus-visible:text-primary focus-visible:outline-0'
                 onClick={() => setOpen(false)}
               >
-                <i className={classnames(item.icon, 'text-xl')} />
-                <p className='overflow-hidden whitespace-nowrap overflow-ellipsis'>{item.label}</p>
+                {item.icon &&
+                  renderMenuIcon({
+                    icon: item.icon,
+                    level: 0,
+                    active: false,
+                    disabled: false,
+                    styles: {},
+                    isBreakpointReached: false
+                  })}
+                <p className='overflow-hidden whitespace-nowrap overflow-ellipsis'>{item.title}</p>
               </Link>
             </li>
           ))}

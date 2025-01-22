@@ -19,7 +19,7 @@ export const PrepaidList = ({ prepaidList, nominal, onNominalSelect }: PrepaidLi
             }`}
           >
             <div className='flex justify-center items-center text-center'>
-              <span className='text-xs'>{data.toLocaleString()}</span>
+              <span className='text-xs'>{data.toLocaleString('id-ID')}</span>
             </div>
           </div>
         ))}

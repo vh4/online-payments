@@ -1,4 +1,5 @@
 'use client'
+
 import { useRef, useState } from 'react'
 
 // React Imports
@@ -6,11 +7,12 @@ import { useRef, useState } from 'react'
 // MUI Imports
 import Avatar from '@mui/material/Avatar'
 import Badge from '@mui/material/Badge'
-import { styled } from '@mui/material/styles'
+import { styled, useColorScheme } from '@mui/material/styles'
 import { IoIosLogOut } from 'react-icons/io'
 
 // Hook Imports
-import { signOut } from 'next-auth/react'
+import Typography from '@mui/material/Typography'
+import { signOut, useSession } from 'next-auth/react'
 
 // Styled component for badge content
 const BadgeContentSpan = styled('span')({
@@ -29,37 +31,60 @@ const UserDropdown = () => {
   // Refs
   const anchorRef = useRef<HTMLDivElement>(null)
 
-  // Hooks
+  const { data: session } = useSession()
 
-  const handleDropdownOpen = (): any => {
-    !open ? setOpen(true) : setOpen(false)
+  const handleDropdownOpen = (): void => {
+    // Toggle the dropdown state
+    if (!open) {
+      setOpen(true)
+    } else {
+      setOpen(false)
+    }
   }
 
-  const handleUserLogout = async () => {
+  const handleUserLogout = async (): Promise<void> => {
     await signOut({
       callbackUrl: process.env.NEXTAUTH_URL
     })
   }
 
+  const { mode: muiMode, systemMode: muiSystemMode } = useColorScheme()
+  const currentMode = muiMode === 'system' ? muiSystemMode : muiMode
+
+  const isDarkMode = currentMode === 'dark'
+
   return (
     <>
-      <Badge
-        ref={anchorRef}
-        overlap='circular'
-        badgeContent={<BadgeContentSpan onClick={handleDropdownOpen} />}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        className='mis-1'
-      >
-        <Avatar
+      <div className='flex items-center space-x-2'>
+        <div className='text-right'>
+          <Typography>{session?.username}</Typography>
+          <Typography variant='caption'>{session?.login_date}</Typography>
+        </div>
+
+        <Badge
           ref={anchorRef}
-          alt='John Doe'
-          src='/images/avatars/1.png'
-          onClick={handleDropdownOpen}
-          className='cursor-pointer bs-[38px] is-[38px]'
-        />
-      </Badge>
-      <div onClick={handleUserLogout} className='cursor-pointer flex items-center plb-1.5 pli-4'>
-        <IoIosLogOut size={24} />
+          overlap='circular'
+          badgeContent={<BadgeContentSpan onClick={handleDropdownOpen} />}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          className='mis-1'
+        >
+          <Avatar
+            ref={anchorRef}
+            alt='John Doe'
+            src='/images/avatars/1.png'
+            onClick={handleDropdownOpen}
+            className='cursor-pointer bs-[38px] is-[38px]'
+          />
+        </Badge>
+
+        <div
+          onClick={handleUserLogout}
+          className={`flex items-center px-4 bg-gray-50 ${
+            isDarkMode && 'bg-gray-800'
+          } py-[8px] rounded-full cursor-pointer`}
+        >
+          <IoIosLogOut size={20} />
+        </div>
       </div>
     </>
   )

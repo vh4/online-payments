@@ -8,6 +8,7 @@ import { VerticalNavProvider } from '@menu/contexts/verticalNavContext'
 
 // Util Imports
 import { getMode, getSettingsFromCookie, getSystemMode } from '@core/utils/serverHelpers'
+import SessionProviders from './SessionProvider'
 
 type Props = ChildrenType & {
   direction: Direction
@@ -23,13 +24,15 @@ const Providers = (props: Props) => {
   const systemMode = getSystemMode()
 
   return (
-    <VerticalNavProvider>
-      <SettingsProvider settingsCookie={settingsCookie} mode={mode}>
-        <ThemeProvider direction={direction} systemMode={systemMode}>
-          {children}
-        </ThemeProvider>
-      </SettingsProvider>
-    </VerticalNavProvider>
+    <SessionProviders>
+      <VerticalNavProvider>
+        <SettingsProvider settingsCookie={settingsCookie} mode={mode}>
+          <ThemeProvider direction={direction} systemMode={systemMode}>
+            {children}
+          </ThemeProvider>
+        </SettingsProvider>
+      </VerticalNavProvider>
+    </SessionProviders>
   )
 }
 

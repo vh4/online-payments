@@ -97,15 +97,15 @@ const InquiryCard = () => {
   return (
     <Fade in={!visibility} timeout={300}>
       <Card
-        className='mt-4 md:-mt-16'
+        className='mt-4 md:-mt-10'
         sx={{
-          boxShadow: { xs: 'none', sm: 'inherit' },
-          border: { xs: 'none', sm: '1px' }
+          // boxShadow: { xs: 'none', sm: 'inherit' },
+          // border: { xs: 'none', sm: '1px' },
+          p: 4
         }}
       >
         <CardHeader
           title='Info Pembayaran Tagihan'
-          subheader="Click 'Pay' untuk melanjutkan proses pembayaran."
           action={
             <Box>
               <Box sx={{ display: 'flex', gap: 1 }}>
@@ -150,7 +150,7 @@ const InquiryCard = () => {
                     <TableRow>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>Tarif / Daya</TableCell>
                       <TableCell sx={{ borderBottom: '1px solid #ddd' }}>
-                        {inquiry.data.tarif} / {inquiry.data.daya} VA
+                        {inquiry.data.tarif} / {parseInt(inquiry.data.daya)} VA
                       </TableCell>
                     </TableRow>
                   </TableBody>
@@ -164,18 +164,19 @@ const InquiryCard = () => {
                   <PrepaidList prepaidList={prepaidList} nominal={nominal} onNominalSelect={setNominal} />
                 </Box>
               </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Button
                   onClick={handlePayment}
                   variant='contained'
                   color='success'
-                  sx={{ left: 0 }}
+                  sx={{ width: '100%', mx: { sm: 0, md: 4 } }} // Full width button
                   disabled={loading}
                   startIcon={loading ? <CircularProgress size={20} /> : null}
                 >
                   {loading ? 'Paying...' : 'Proceed Payment'}
                 </Button>
               </Box>
+
               <Typography variant='body2' sx={{ p: 4, color: 'text.primary' }}>
                 Dengan melanjutkan, Anda menyetujui Ketentuan dan Kebijakan Privasi kami. Pembayaran tidak dapat
                 dikembalikan.

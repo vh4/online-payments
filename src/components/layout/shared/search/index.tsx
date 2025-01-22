@@ -5,14 +5,17 @@ import type { ReactNode } from 'react'
 import { useEffect, useState } from 'react'
 
 // Next Imports
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 // MUI Imports
+import { useColorScheme } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 
 // Third-party Imports
 import classnames from 'classnames'
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from 'cmdk'
+
+import type { IconType } from 'react-icons/lib'
 
 // Component Imports
 import DefaultSuggestions from './DefaultSuggestions'
@@ -22,22 +25,21 @@ import NoResult from './NoResult'
 import { useSettings } from '@core/hooks/useSettings'
 import useVerticalNav from '@menu/hooks/useVerticalNav'
 
-// Util Imports
-import { getLocalizedUrl } from '@/utils/i18n'
-
 // Style Imports
 import './styles.css'
 
 // Data Imports
+import { renderMenuIcon } from '@/@menu/utils/menuUtils'
 import data from '@/data/searchData'
+import { getLocalizedUrl } from '@/utils/i18n'
 
 type Item = {
   id: string
-  name: string
-  url: string
-  excludeLang?: boolean
-  icon: string
-  shortcut?: string
+  navlabel?: boolean
+  subheader?: string
+  title?: string
+  icon?: IconType // Type for React Icons
+  href?: string
 }
 
 type Section = {
@@ -56,27 +58,26 @@ type SearchItemProps = {
 
 // Transform the data to group items by their sections
 const transformedData = data.reduce((acc: Section[], item) => {
-  const existingSection = acc.find(section => section.title === item.section)
+  const existingSection = acc.find(section => section.title === item.title)
 
   const newItem = {
     id: item.id,
-    name: item.name,
-    url: item.url,
+    title: item.title,
+    href: item.href,
     excludeLang: item.excludeLang,
-    icon: item.icon,
-    shortcut: item.shortcut
+    icon: item.icon
   }
 
   if (existingSection) {
     existingSection.items.push(newItem)
   } else {
-    acc.push({ title: item.section, items: [newItem] })
+    acc.push({ title: item.title, items: [newItem] })
   }
 
   return acc
 }, [])
 
-// SearchItem Component for introduce the shortcut keys
+// SearchItem Component to introduce shortcut keys
 const SearchItem = ({ children, shortcut, value, currentPath, url, onSelect = () => {} }: SearchItemProps) => {
   return (
     <CommandItem
@@ -89,9 +90,9 @@ const SearchItem = ({ children, shortcut, value, currentPath, url, onSelect = ()
       {children}
       {shortcut && (
         <div cmdk-vercel-shortcuts=''>
-          {shortcut.split(' ').map(key => {
-            return <kbd key={key}>{key}</kbd>
-          })}
+          {shortcut.split(' ').map(key => (
+            <kbd key={key}>{key}</kbd>
+          ))}
         </div>
       )}
     </CommandItem>
@@ -141,16 +142,12 @@ const NavSearch = () => {
   const [searchValue, setSearchValue] = useState('')
 
   // Hooks
-  const router = useRouter()
   const pathName = usePathname()
   const { settings } = useSettings()
   const { isBreakpointReached } = useVerticalNav()
 
   // When an item is selected from the search results
-  const onSearchItemSelect = (item: Item) => {
-    item.url.startsWith('http')
-      ? window.open(item.url, '_blank')
-      : router.push(item.excludeLang ? item.url : getLocalizedUrl(item.url))
+  const onSearchItemSelect = () => {
     setOpen(false)
   }
 
@@ -159,25 +156,10 @@ const NavSearch = () => {
     const searchQuery = query.trim().toLowerCase()
 
     return sections
-      .filter(section => {
-        const sectionMatches = section.title.toLowerCase().includes(searchQuery)
-
-        const itemsMatch = section.items.some(
-          item =>
-            item.name.toLowerCase().includes(searchQuery) ||
-            (item.shortcut && item.shortcut.toLowerCase().includes(searchQuery))
-        )
-
-        return sectionMatches || itemsMatch
-      })
+      .filter(section => section.title.toLowerCase().includes(searchQuery))
       .map(section => ({
         ...section,
-        items: section.items.filter(
-          item =>
-            section.title.toLowerCase().includes(searchQuery) ||
-            item.name.toLowerCase().includes(searchQuery) ||
-            (item.shortcut && item.shortcut.toLowerCase().includes(searchQuery))
-        )
+        items: section.items.filter(item => item?.title?.toLowerCase().includes(searchQuery) || '')
       }))
   }
 
@@ -202,8 +184,11 @@ const NavSearch = () => {
     if (!open && searchValue !== '') {
       setSearchValue('')
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open])
+
+  const { mode: muiMode, systemMode: muiSystemMode } = useColorScheme()
+  const currentMode = muiMode === 'system' ? muiSystemMode : muiMode
+  const isDarkMode = currentMode === 'dark'
 
   return (
     <>
@@ -212,11 +197,15 @@ const NavSearch = () => {
           <i className='ri-search-line' />
         </IconButton>
       ) : (
-        <div className='flex items-center gap-2 cursor-pointer' onClick={() => setOpen(true)}>
-          <IconButton className='text-textPrimary' onClick={() => setOpen(true)}>
-            <i className='ri-search-line' />
-          </IconButton>
-          <div className='whitespace-nowrap select-none text-textDisabled'>Search ⌘K</div>
+        <div
+          className={`flex items-center cursor-pointer 
+        ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'} 
+        space-x-2 py-2 px-4 rounded-full 
+        active:outline-1 active:outline-gray-300`}
+          onClick={() => setOpen(true)}
+        >
+          <i className='ri-search-line text-[20px]' />
+          <div className='whitespace-nowrap select-none text-textDisabled'>⌘K</div>
         </div>
       )}
       <CommandDialog open={open} onOpenChange={setOpen}>
@@ -231,25 +220,29 @@ const NavSearch = () => {
             limitedData.length > 0 ? (
               limitedData.map((section, index) => (
                 <CommandGroup key={index} heading={section.title.toUpperCase()} className='text-xs'>
-                  {section.items.map((item, index) => {
-                    return (
-                      <SearchItem
-                        shortcut={item.shortcut}
-                        key={index}
-                        currentPath={pathName}
-                        url={getLocalizedUrl(item.url)}
-                        value={`${item.name} ${section.title} ${item.shortcut}`}
-                        onSelect={() => onSearchItemSelect(item)}
-                      >
-                        {item.icon && (
-                          <div className='flex text-xl'>
-                            <i className={item.icon} />
-                          </div>
-                        )}
-                        {item.name}
-                      </SearchItem>
-                    )
-                  })}
+                  {section.items.map((item, index) => (
+                    <SearchItem
+                      key={index}
+                      currentPath={pathName}
+                      url={getLocalizedUrl(item.href || '')}
+                      value={item?.title || ''}
+                      onSelect={() => onSearchItemSelect()}
+                    >
+                      {item.icon && (
+                        <div className='flex text-xl'>
+                          {renderMenuIcon({
+                            icon: item.icon,
+                            level: 0,
+                            active: false,
+                            disabled: false,
+                            styles: {},
+                            isBreakpointReached: false
+                          })}
+                        </div>
+                      )}
+                      {item.title}
+                    </SearchItem>
+                  ))}
                 </CommandGroup>
               ))
             ) : (
@@ -258,9 +251,10 @@ const NavSearch = () => {
               </CommandEmpty>
             )
           ) : (
-            <DefaultSuggestions setOpen={setOpen} />
+            <DefaultSuggestions setOpen={setOpen} searchQuery={searchValue} />
           )}
         </CommandList>
+
         <CommandFooter />
       </CommandDialog>
     </>
